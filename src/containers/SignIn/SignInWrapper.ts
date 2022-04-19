@@ -1,20 +1,25 @@
 import styled from "styled-components";
+import { desktop, tablette, mobile } from "../../styles/responsive";
 
 const SignInWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  /* justify-content: center; */
-  width: 80%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /* background-color: red; */
+  ${tablette({
+    display: "flex",
+    alignItems: "center",
+    width: "80%",
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  })};
 
   .left {
     flex: 1;
 
-    img {
+    ${mobile({
+      display: "none",
+    })}
+
+    .bigimagebg {
       width: 100%;
       height: 90vh;
     }
@@ -26,11 +31,31 @@ const SignInWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 50vh;
+
+    /* min-height: 50vh; */
+
+    .smallimagebg {
+      display: none;
+
+      ${mobile({
+        display: "block",
+        width: "15wh",
+        height: "15vh",
+        marginBottom: "40px",
+      })}
+    }
+
+    /* img {
+      width: 100%;
+    } */
 
     .logo {
       width: 40%;
+      max-width: 210px;
       margin-bottom: 10px;
+      ${mobile({
+        width: "60%",
+      })}
     }
 
     .title {
@@ -41,10 +66,18 @@ const SignInWrapper = styled.div`
     .subtitle {
       color: ${({ theme }) => theme.colors.LightBlueBg};
       margin-bottom: 30px;
+      ${mobile({
+        fontSize: "22px",
+      })}
     }
 
     form {
       width: 350px;
+
+      ${mobile({
+        width: "250px",
+      })}
+
       .input-box {
         display: flex;
         flex-direction: column;
@@ -66,6 +99,12 @@ const SignInWrapper = styled.div`
       .btn {
         margin-bottom: 20px;
         padding: 3px 30px;
+        text-transform: capitalize;
+
+        ${mobile({
+          width: "100%",
+          padding: "10px 30px",
+        })}
       }
 
       .messageInfo {

@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import SignInWrapper from "./SignInWrapper";
 import whiteLogo from "../../assets/img/logo-nttdata-blue.png";
 import BgImage from "../../assets/img/squares-white.jpg";
+import BgImageSmall from "../../assets/img/squares-white-small.jpg";
+import BgImageTablet from "../../assets/img/squares-white-tablette.png";
 import {
   Button,
   FormControl,
@@ -18,7 +20,6 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { ValuesType } from "./types";
 
 const SignIn = () => {
-  const [value, setValue] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const initialValues = { email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
@@ -40,18 +41,24 @@ const SignIn = () => {
   const validateForm = (values: ValuesType) => {
     const errors: any = {};
     // const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
-    const regex = /^[^\s@]+@[^\s@]+\.emeal.nttdata[^\s@]{2,}$/i;
+    const regex = /^[^\s@]+@+emeal.nttdata.com$/i;
+    const regexb = /^[^\s@]+@+nttdata.com$/i;
+    const regexc = /^[^\s@]+@+everis.nttdata.com$/i;
 
     if (!values.email) {
-      errors.email = "Veuillez saisir un Email";
-    } else if (!regex.test(values.email)) {
-      errors.email = "Ce n'est pas un format d'email valide !!!";
+      errors.email = "Email is required";
+    } else if (
+      !regex.test(values.email) &&
+      !regexb.test(values.email) &&
+      !regexc.test(values.email)
+    ) {
+      errors.email = "This is not a valid email format!!!";
     }
 
     if (!values.password) {
-      errors.password = "Veuillez saisir un mot de passe";
+      errors.password = "Password is required";
     } else if (values.password.length < 6) {
-      errors.password = "Mot de passe doit avoir plus de 5 caractères";
+      errors.password = "Password must be more than 5 characters";
     }
 
     return errors;
@@ -73,10 +80,11 @@ const SignIn = () => {
   return (
     <SignInWrapper>
       <div className="left">
-        <img src={BgImage} />
+        <img src={BgImage} className="bigimagebg" />
       </div>
 
       <div className="right">
+        <img src={BgImageSmall} className="smallimagebg" />
         <img src={whiteLogo} className="logo" />
         <h2 className="title">Internal Network</h2>
         <h3 className="subtitle">Sign In</h3>
