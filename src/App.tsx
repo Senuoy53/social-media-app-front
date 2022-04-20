@@ -1,12 +1,19 @@
 import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import "./App.css";
+import Signup from "./test/Signup"
 
 const App = () => {
-  return <div>Hello</div>;
+  return (
+    <>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Signup/>} />
+            <Route path="signin" element={<Signup/>} />
+          </Routes>
+        </BrowserRouter>
+    </>
+  );
 };
 
 export default App;
-
-
-//checkid test 222
