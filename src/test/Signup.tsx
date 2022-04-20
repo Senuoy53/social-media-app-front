@@ -22,7 +22,7 @@ const Signup = () => {
     }
     
     const checkId = (id:any) => {
-        return fetch(`${API}/readUID/${id}`, {
+        return fetch(`${API}/checkUID/${id}`, {
             method: 'GET',
         })
         .then( res => {
@@ -41,13 +41,19 @@ const Signup = () => {
                 Accept: 'application/json',
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify({
+                _id: user.id,
+                name: user.name,
+                email: user.email,
+                password: user.password
+            })
         })
         .then( res => {
             return res.json()
         })
         .catch(err => {
             console.log(err)
+            return err
         })
     }
 
@@ -62,7 +68,6 @@ const Signup = () => {
             }else {
                 setValues({
                     ...values,
-                    id: data.id,
                     name: data.name,
                     email: data.email,
                     error: '',
