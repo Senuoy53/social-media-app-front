@@ -21,16 +21,43 @@ import { ValuesType } from "./types";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const initialValues = { email: "", password: "" };
+  const initialValues = {
+    name: "",
+    surname: "",
+    email: "",
+    password: "",
+    error: "",
+    signinSuccess: false,
+  };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState<ValuesType>({
     email: "",
     password: "",
   });
 
+  const API = "http://localhost:8000/api";
+
+  // Call Sign In API
+  const signin = (user: any) => {
+    return fetch(`${API}/signin`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value });
+    setFormValues({ ...formValues, error: "", [name]: value });
   };
 
   const handleClickShowPassword = (e: any) => {
@@ -57,15 +84,15 @@ const SignIn = () => {
 
     if (!values.password) {
       errors.password = "Password is required";
-    } else if (values.password.length < 6) {
-      errors.password = "Password must be more than 5 characters";
+    } else if (values.password.length < 8) {
+      errors.password = "Password must be more than 7 characters";
     }
 
     return errors;
   };
 
   // Button HandleClick
-  const handleClick = (e: any) => {
+  const clickSignin = (e: any) => {
     //  to stop loading the page
     e.preventDefault();
 
@@ -75,6 +102,30 @@ const SignIn = () => {
     if (email || password) {
       //   toast.warn("Veuillez remplir tous les champs");
     } else {
+      setFormValues({ ...formValues, error: "" });
+      console.log("email", formValues.email);
+      signin({ email: formValues.email, password: formValues.password }).then(
+        (data) => {
+          console.log(data);
+          if (data.error) {
+            setFormValues({
+              ...formValues,
+              error: data.error,
+              signinSuccess: false,
+            });
+            console.log(formValues.error);
+            return "";
+          } else {
+            setFormValues({
+              ...formValues,
+              name: data.name,
+              email: data.email,
+              error: "",
+              signinSuccess: true,
+            });
+          }
+        }
+      );
     }
   };
   return (
@@ -91,6 +142,9 @@ const SignIn = () => {
 
         {/* Form */}
         <form>
+          <h3 className="noteMessage">
+            Please login with your <span id="red">nttdata email</span>
+          </h3>
           <div className="input-box">
             <div className="input-container">
               <TextField
@@ -103,6 +157,7 @@ const SignIn = () => {
                 onChange={handleChange}
               />
               {formErrors.email && <p className="errors">{formErrors.email}</p>}
+              {formValues.error && <p className="errors">{formValues.error}</p>}
             </div>
 
             <div className="input-container">
@@ -135,7 +190,7 @@ const SignIn = () => {
             </div>
           </div>
           {/* <button className="btn">Sign In</button> */}
-          <Button variant="contained" className="btn" onClick={handleClick}>
+          <Button variant="contained" className="btn" onClick={clickSignin}>
             Sign In{" "}
           </Button>
           <p className="messageInfo">

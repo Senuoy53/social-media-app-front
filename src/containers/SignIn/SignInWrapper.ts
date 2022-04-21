@@ -78,6 +78,16 @@ const SignInWrapper = styled.div`
         width: "250px",
       })}
 
+      .noteMessage {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 30px;
+
+        #red {
+          color: red;
+        }
+      }
+
       .input-box {
         display: flex;
         flex-direction: column;
