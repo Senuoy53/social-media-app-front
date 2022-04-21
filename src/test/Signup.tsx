@@ -44,6 +44,7 @@ const Signup = () => {
             body: JSON.stringify({
                 _id: user.id,
                 name: user.name,
+                surname: user.surname,
                 email: user.email,
                 password: user.password
             })
@@ -80,7 +81,7 @@ const Signup = () => {
     const clickSignup = (event:any) => {
         event.preventDefault();
         setValues({ ...values, signupSuccess: false });
-        signup({ id, name, email, password }).then(data => {
+        signup({ id, name, surname, email, password }).then(data => {
             console.log(data)
             if (data.error) {
                 setValues({ ...values, error: data.error, signupSuccess: false });
