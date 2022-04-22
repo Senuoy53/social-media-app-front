@@ -2,10 +2,7 @@ import { useState } from "react";
 
 import { Link } from "react-router-dom";
 import SignInWrapper from "./SignInWrapper";
-import whiteLogo from "../../assets/img/logo-nttdata-blue.png";
-import BgImage from "../../assets/img/squares-white.jpg";
-import BgImageSmall from "../../assets/img/squares-white-small.jpg";
-import BgImageTablet from "../../assets/img/squares-white-tablette.png";
+
 import {
   Button,
   FormControl,
@@ -16,8 +13,8 @@ import {
   TextField,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-
 import { ValuesType } from "./types";
+import Layout from "../../components/Layout";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -129,79 +126,69 @@ const SignIn = () => {
     }
   };
   return (
-    <SignInWrapper>
-      <div className="left">
-        <img src={BgImage} className="bigimagebg" />
-      </div>
-
-      <div className="right">
-        <img src={BgImageSmall} className="smallimagebg" />
-        <img src={whiteLogo} className="logo" />
-        <h2 className="title">Internal Network</h2>
-        <h3 className="subtitle">Sign In</h3>
-
-        {/* Form */}
-        <form>
-          <h3 className="noteMessage">
-            Please login with your <span id="red">nttdata email</span>
-          </h3>
-          <div className="input-box">
-            <div className="input-container">
-              <TextField
-                id="outlined-basic"
-                label="Email"
-                variant="outlined"
-                className="input"
-                name="email"
-                value={formValues.email}
-                onChange={handleChange}
-              />
-              {formErrors.email && <p className="errors">{formErrors.email}</p>}
-              {formValues.error && <p className="errors">{formValues.error}</p>}
-            </div>
-
-            <div className="input-container">
-              <FormControl variant="outlined" className="input">
-                <InputLabel htmlFor="password">Password</InputLabel>
-                <OutlinedInput
-                  id="password"
-                  type={showPassword ? "text" : "password"}
-                  value={formValues.password}
-                  name="password"
-                  onChange={handleChange}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        edge="end"
-                      >
-                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                  label="Password"
-                />
-              </FormControl>
-
-              {formErrors.password && (
-                <p className="errors">{formErrors.password}</p>
-              )}
-            </div>
+    <Layout subtitle="Sign In">
+      {/* Form */}
+      <SignInWrapper>
+        <h3 className="noteMessage">
+          Please login with your <span id="red">nttdata email</span>
+        </h3>
+        <div className="input-box">
+          <div className="input-container">
+            <TextField
+              id="outlined-basic"
+              label="Email"
+              variant="outlined"
+              className="input"
+              name="email"
+              value={formValues.email}
+              onChange={handleChange}
+            />
+            {formErrors.email && <p className="errors">{formErrors.email}</p>}
+            {formValues.error && <p className="errors">{formValues.error}</p>}
           </div>
-          {/* <button className="btn">Sign In</button> */}
-          <Button variant="contained" className="btn" onClick={clickSignin}>
-            Sign In{" "}
-          </Button>
-          <p className="messageInfo">
-            Don't Have An Account? <Link to="#">Create One</Link>
-          </p>
-          <p className="messageInfo">
-            Forgotten Password? <Link to="#">Reset It</Link>
-          </p>
-        </form>
-      </div>
-    </SignInWrapper>
+
+          <div className="input-container">
+            <FormControl variant="outlined" className="input">
+              <InputLabel htmlFor="password">Password</InputLabel>
+              <OutlinedInput
+                id="password"
+                type={showPassword ? "text" : "password"}
+                value={formValues.password}
+                name="password"
+                onChange={handleChange}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      edge="end"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label="Password"
+              />
+            </FormControl>
+
+            {formErrors.password && (
+              <p className="errors">{formErrors.password}</p>
+            )}
+          </div>
+        </div>
+        {/* <button className="btn">Sign In</button> */}
+        <Button variant="contained" className="btn" onClick={clickSignin}>
+          Sign In{" "}
+        </Button>
+        <p className="messageInfo">
+          Don't Have An Account? <Link to="#">Create One</Link>
+        </p>
+        <p className="messageInfo">
+          Forgotten Password? <Link to="#">Reset It</Link>
+        </p>
+        {/* </form> */}
+      </SignInWrapper>
+    </Layout>
   );
 };
 

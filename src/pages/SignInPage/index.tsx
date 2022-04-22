@@ -1,3 +1,4 @@
+import Layout from "../../components/Layout";
 import SignIn from "../../containers/SignIn";
 
 const SignInPage = () => {

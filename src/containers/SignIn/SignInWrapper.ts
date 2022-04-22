@@ -1,131 +1,59 @@
 import styled from "styled-components";
 import { desktop, tablette, mobile } from "../../styles/responsive";
 
-const SignInWrapper = styled.div`
-  ${tablette({
-    display: "flex",
-    alignItems: "center",
-    width: "80%",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-  })};
+const SignInWrapper = styled.form`
+  width: 350px;
 
-  .left {
-    flex: 1;
+  ${mobile({
+    width: "250px",
+  })}
 
-    ${mobile({
-      display: "none",
-    })}
+  .noteMessage {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 30px;
 
-    .bigimagebg {
-      width: 100%;
-      height: 90vh;
+    #red {
+      color: red;
     }
   }
 
-  .right {
-    flex: 2;
-    padding: 20px;
+  .input-box {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    margin-bottom: 30px;
+  }
+  .input {
+    width: 100%;
+  }
 
-    /* min-height: 50vh; */
+  .input-container {
+    margin-bottom: 20px;
+  }
 
-    .smallimagebg {
-      display: none;
+  .errors {
+    font-size: 12px;
+    color: ${({ theme }) => theme.colors.ErrorColor};
+  }
 
-      ${mobile({
-        display: "block",
-        width: "15wh",
-        height: "15vh",
-        marginBottom: "40px",
-      })}
-    }
+  .btn {
+    margin-bottom: 20px;
+    padding: 3px 30px;
+    text-transform: capitalize;
 
-    /* img {
-      width: 100%;
-    } */
+    ${mobile({
+      width: "100%",
+      padding: "10px 30px",
+    })}
+  }
 
-    .logo {
-      width: 40%;
-      max-width: 210px;
-      margin-bottom: 10px;
-      ${mobile({
-        width: "60%",
-      })}
-    }
+  .messageInfo {
+    color: ${({ theme }) => theme.colors.LightBlueBg};
+    text-align: center;
+  }
 
-    .title {
-      font-weight: 500;
-      margin-bottom: 30px;
-    }
-
-    .subtitle {
-      color: ${({ theme }) => theme.colors.LightBlueBg};
-      margin-bottom: 30px;
-      ${mobile({
-        fontSize: "22px",
-      })}
-    }
-
-    form {
-      width: 350px;
-
-      ${mobile({
-        width: "250px",
-      })}
-
-      .noteMessage {
-        font-size: 14px;
-        font-weight: 500;
-        margin-bottom: 30px;
-
-        #red {
-          color: red;
-        }
-      }
-
-      .input-box {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 30px;
-      }
-      .input {
-        width: 100%;
-      }
-
-      .input-container {
-        margin-bottom: 20px;
-      }
-
-      .errors {
-        font-size: 12px;
-        color: ${({ theme }) => theme.colors.ErrorColor};
-      }
-
-      .btn {
-        margin-bottom: 20px;
-        padding: 3px 30px;
-        text-transform: capitalize;
-
-        ${mobile({
-          width: "100%",
-          padding: "10px 30px",
-        })}
-      }
-
-      .messageInfo {
-        color: ${({ theme }) => theme.colors.LightBlueBg};
-        text-align: center;
-      }
-
-      a {
-        color: ${({ theme }) => theme.colors.LightBlueBg};
-      }
-    }
+  a {
+    color: ${({ theme }) => theme.colors.LightBlueBg};
   }
 `;
 
