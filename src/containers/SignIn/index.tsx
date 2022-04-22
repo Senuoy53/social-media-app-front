@@ -15,6 +15,8 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { ValuesType } from "./types";
 import Layout from "../../components/Layout";
+// import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -33,6 +35,9 @@ const SignIn = () => {
   });
 
   const API = "http://localhost:8000/api";
+
+  // useNavigate
+  const history = useNavigate();
 
   // Call Sign In API
   const signin = (user: any) => {
@@ -100,7 +105,7 @@ const SignIn = () => {
       //   toast.warn("Veuillez remplir tous les champs");
     } else {
       setFormValues({ ...formValues, error: "" });
-      console.log("email", formValues.email);
+
       signin({ email: formValues.email, password: formValues.password }).then(
         (data) => {
           console.log(data);
@@ -120,6 +125,8 @@ const SignIn = () => {
               error: "",
               signinSuccess: true,
             });
+            // history.push("/home");
+            history("/home");
           }
         }
       );
