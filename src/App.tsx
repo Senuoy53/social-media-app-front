@@ -1,10 +1,11 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-
-import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
 import GlobalStyle from "./styles/global-styles";
 import { theme } from "./styles/global-styles";
+import Signup from "./test/Signup";
+import SignUpPageTest from "./test";
 
 const App = () => {
   return (
@@ -12,8 +13,10 @@ const App = () => {
       <ThemeProvider theme={theme}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<SignInPage />} />
-            <Route path="signin" element={<SignInPage />} />
+            <Route path="/" element={<Signup />} />
+            <Route path="/test" element={<SignUpPageTest />} />
+            <Route path="signup" element={<SignUpPage />} />
+            <Route path="signin" element={<Signup />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>
