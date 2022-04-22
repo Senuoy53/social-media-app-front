@@ -17,6 +17,7 @@ import { ValuesType } from "./types";
 import Layout from "../../components/Layout";
 // import { useHistory } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import {signin} from "../../apiCall/auth"
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,28 +35,8 @@ const SignIn = () => {
     password: "",
   });
 
-  const API = "http://localhost:8000/api";
-
   // useNavigate
   const history = useNavigate();
-
-  // Call Sign In API
-  const signin = (user: any) => {
-    return fetch(`${API}/signin`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;

@@ -17,6 +17,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 // Password confirmation error
 import { useForm } from "react-hook-form";
 import Layout from "../../components/Layout";
+import {signup} from "../../apiCall/auth"
 
 const SignUp = ({
   checkedId,
@@ -24,10 +25,8 @@ const SignUp = ({
   checkedSurname,
   checkedEmail,
 }: SignUpProps) => {
-  const API = "http://localhost:8000/api";
+
   const history = useNavigate();
-
-
   const [values, setValues] = useState({
     id: checkedId,
     error: "",
@@ -64,24 +63,6 @@ const SignUp = ({
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  // Sign Up API
-  const signup = (user: any) => {
-    return fetch(`${API}/signup`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
   //Add user to database
   // clickSignup
   const clickSignup = (data: any) => {
@@ -93,7 +74,7 @@ const SignUp = ({
       name: data.name,
       email: data.email,
       password: data.password,
-    }).then((data) => {
+    }).then((data:any) => {
       if (data.error) {
         setValues({ ...values, error: data.error, signupSuccess: false });
         return "";

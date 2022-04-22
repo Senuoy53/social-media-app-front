@@ -10,13 +10,13 @@ const Layout = ({ subtitle, children }: LayoutProps) => {
     <LayoutWrapper>
       {/* Left side */}
       <div className="left">
-        <img src={BgImage} className="bigimagebg" />
+        <img src={BgImage} alt='NTT SIDE LOGO' className="bigimagebg" />
       </div>
 
       {/* Right side */}
       <div className="right">
-        <img src={BgImageSmall} className="smallimagebg" />
-        <img src={whiteLogo} className="logo" />
+        <img src={BgImageSmall} alt='NTT SMALL LOGO' className="smallimagebg" />
+        <img src={whiteLogo} alt='NTT WHITE LOGO' className="logo" />
         <h2 className="title">Internal Network</h2>
         <h3 className="subtitle">{subtitle}</h3>
 

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import CheckId from "../../containers/CheckId";
 import SignUp from "../../containers/SignUp";
+import {checkUid} from "../../apiCall/auth"
 
 const SignUpPage = () => {
-  const API = "http://localhost:8000/api";
 
   const [values, setValues] = useState({
     id: "",
@@ -30,19 +30,6 @@ const SignUpPage = () => {
     setValues({ ...values, error: "", [val]: event.target.value });
   };
 
-  const checkId = (id: any) => {
-    return fetch(`${API}/checkUID/${id}`, {
-      method: "GET",
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .catch((err) => {
-        console.log(err);
-        return err;
-      });
-  };
-
   const clickCheckId = (event: any) => {
     event.preventDefault();
     setValues({ ...values, error: "" });
@@ -50,7 +37,7 @@ const SignUpPage = () => {
     if (!values.id) {
       setValues({ ...values, error: "Please enter a User ID!!!" });
     } else {
-      checkId(id).then((data) => {
+      checkUid(id).then((data) => {
         if (data.error) {
           setValues({ ...values, error: data.error, checkIdSuccess: false });
           return "";
