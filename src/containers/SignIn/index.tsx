@@ -188,7 +188,7 @@ const SignIn = () => {
           Sign In{" "}
         </Button>
         <p className="messageInfo">
-          Don't Have An Account? <Link to="#">Create One</Link>
+          Don't Have An Account? <Link to="/signup">Create One</Link>
         </p>
         <p className="messageInfo">
           Forgotten Password? <Link to="#">Reset It</Link>

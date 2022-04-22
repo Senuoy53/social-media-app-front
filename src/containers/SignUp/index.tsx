@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 
 import {
   Button,
@@ -25,6 +25,8 @@ const SignUp = ({
   checkedEmail,
 }: SignUpProps) => {
   const API = "http://localhost:8000/api";
+  const history = useNavigate();
+
 
   const [values, setValues] = useState({
     id: checkedId,
@@ -104,6 +106,7 @@ const SignUp = ({
           error: "",
           signupSuccess: true,
         });
+        history("/signin");
       }
     });
   };

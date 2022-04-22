@@ -1,8 +1,4 @@
 import { Link } from "react-router-dom";
-import whiteLogo from "../../assets/img/logo-nttdata-blue.png";
-import BgImage from "../../assets/img/squares-white.jpg";
-import BgImageSmall from "../../assets/img/squares-white-small.jpg";
-
 import { Button, TextField } from "@mui/material";
 import CheckIdWrapper from "./CheckIdrapper";
 import Layout from "../../components/Layout";
@@ -31,7 +27,7 @@ const CheckId = ({ value, error, onChange, onClick }: CheckIdProps) => {
           Check user ID
         </Button>
         <p className="messageInfo">
-          Already Signed Up? <Link to="#">Login Now</Link>
+          Already Signed Up? <Link to="/signin">Login Now</Link>
         </p>
       </CheckIdWrapper>
     </Layout>

@@ -31,7 +31,7 @@ const SignUpPage = () => {
   };
 
   const checkId = (id: any) => {
-    return fetch(`${API}/readUID/${id}`, {
+    return fetch(`${API}/checkUID/${id}`, {
       method: "GET",
     })
       .then((res) => {
