@@ -17,7 +17,7 @@ import { ValuesType } from "./types";
 import Layout from "../../components/Layout";
 // import { useHistory } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import {signin} from "../../apiCall/auth"
+import {signin, authenticate } from "../../apiCall/auth"
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -99,15 +99,16 @@ const SignIn = () => {
             console.log(formValues.error);
             return "";
           } else {
-            setFormValues({
-              ...formValues,
-              name: data.name,
-              email: data.email,
-              error: "",
-              signinSuccess: true,
-            });
-            // history.push("/home");
-            history("/");
+            authenticate(data, () => {
+                setFormValues({
+                  ...formValues,
+                  name: data.name,
+                  email: data.email,
+                  error: "",
+                  signinSuccess: true,
+                })
+                history("/")
+            })
           }
         }
       );
