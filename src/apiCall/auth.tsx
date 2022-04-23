@@ -54,6 +54,13 @@ export const signin = (user: any) => {
         next()
     }
   }
+
+  export const signout = () => {
+    if(typeof window.localStorage !== 'undefined'){
+        localStorage.removeItem('jwt')
+    }
+    return
+}
   
   export const isAuthenticated = () => {
     if(typeof window.localStorage == 'undefined'){

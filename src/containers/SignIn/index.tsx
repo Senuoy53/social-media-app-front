@@ -99,6 +99,7 @@ const SignIn = () => {
             console.log(formValues.error);
             return "";
           } else {
+            console.log(data)
             authenticate(data, () => {
                 setFormValues({
                   ...formValues,
