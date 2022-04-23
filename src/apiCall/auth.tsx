@@ -26,6 +26,7 @@ export const signup = (user: any) => {
       })
       .catch((err) => {
         console.log(err);
+        return err;
       });
   };
 
@@ -43,5 +44,18 @@ export const signin = (user: any) => {
       })
       .catch((err) => {
         console.log(err);
+        return err;
       });
   };
+
+  export const isAuthenticated = () => {
+    if(typeof window.localStorage == 'undefined'){
+        return false
+    }
+    if(localStorage.getItem('jwt')) {
+        if(localStorage.getItem('jwt') == null ) {return false} // typescript non-null assertion operator
+        return JSON.parse(localStorage.getItem('jwt')!)
+    } else {
+        return false;
+    }
+}

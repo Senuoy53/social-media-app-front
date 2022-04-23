@@ -107,7 +107,7 @@ const SignIn = () => {
               signinSuccess: true,
             });
             // history.push("/home");
-            history("/home");
+            history("/");
           }
         }
       );
