@@ -49,7 +49,7 @@ export const signin = (user: any) => {
   };
 
   export const authenticate = (data: any, next: () => any) => {
-    if(typeof window.localStorage !== 'undefined'){
+    if(typeof window.localStorage !== 'undefined' ){
         localStorage.setItem('jwt', JSON.stringify(data))
         next()
     }
@@ -61,15 +61,16 @@ export const signin = (user: any) => {
     }
     return
 }
+
   
-  export const isAuthenticated = () => {
+/*   export const isAuthenticated = () => {
     if(typeof window.localStorage == 'undefined'){
         return false
     }
     if(localStorage.getItem('jwt')) {
-        if(localStorage.getItem('jwt') == null ) {return false} // typescript non-null assertion operator
+        if(localStorage.getItem('jwt') == null) {return false} // typescript non-null assertion operator
         return JSON.parse(localStorage.getItem('jwt')!)
     } else {
         return false;
     }
-}
+} */

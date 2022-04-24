@@ -82,6 +82,7 @@ const SignUp = ({
         setValues({ ...values, error: data.errors, signupSuccess: false });
         return "";
       } else {
+        if(data.id){
         setValues({
           ...values,
           error: "",
@@ -89,6 +90,7 @@ const SignUp = ({
         });
         history("/signin");
       }
+    }
     });
   };
 

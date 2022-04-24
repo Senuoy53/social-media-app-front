@@ -99,7 +99,7 @@ const SignIn = () => {
             console.log(formValues.error);
             return "";
           } else {
-            console.log(data)
+            if(data.token){
             authenticate(data, () => {
                 setFormValues({
                   ...formValues,
@@ -108,8 +108,9 @@ const SignIn = () => {
                   error: "",
                   signinSuccess: true,
                 })
-                history("/")
             })
+            history("/")
+          }   
           }
         }
       );

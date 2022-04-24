@@ -42,6 +42,7 @@ const SignUpPage = () => {
           setValues({ ...values, error: data.error, checkIdSuccess: false });
           return "";
         } else {
+          if(data.email){
           setValues({
             ...values,
             id: id,
@@ -49,7 +50,7 @@ const SignUpPage = () => {
             email: data.email,
             error: "",
             checkIdSuccess: true,
-          });
+          })};
         }
       });
     }
