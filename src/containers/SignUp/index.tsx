@@ -82,7 +82,7 @@ const SignUp = ({
         setValues({ ...values, error: data.errors, signupSuccess: false });
         return "";
       } else {
-        if(data.id){
+        if(data.user){
         setValues({
           ...values,
           error: "",
