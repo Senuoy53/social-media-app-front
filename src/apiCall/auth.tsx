@@ -1,4 +1,4 @@
-import {API} from "../config";
+import { API } from "../config";
 
 export const checkUid = (id: any) => {
   return fetch(`${API}/checkUID/${id}`, {
@@ -13,56 +13,75 @@ export const checkUid = (id: any) => {
 };
 
 export const signup = (user: any) => {
-    return fetch(`${API}/signup`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify(user),
+  return fetch(`${API}/signup`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(user),
+  })
+    .then((res) => {
+      return res.json();
     })
-      .then((res) => {
-        return res.json();
-      })
-      .catch((err) => {
-        console.log(err);
-        return err;
-      });
-  };
+    .catch((err) => {
+      console.log(err);
+      return err;
+    });
+};
 
 export const signin = (user: any) => {
-    return fetch(`${API}/signin`, {
+  return fetch(`${API}/signin`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(user),
+  })
+    .then((res) => {
+      return res.json();
+    })
+    .catch((err) => {
+      console.log(err);
+      return err;
+    });
+};
+
+export const authenticate = (data: any, next: () => any) => {
+  if (typeof window.localStorage !== "undefined") {
+    localStorage.setItem("jwt", JSON.stringify(data));
+    next();
+  }
+};
+
+export const signout = () => {
+  if (typeof window.localStorage !== "undefined") {
+    let jwt = localStorage.getItem("jwt");
+    //  Take accessToken
+    let accessToken = JSON.parse(jwt!).accessToken;
+    //  Take refreshToken
+    let refreshToken = JSON.parse(jwt!).refreshToken;
+    fetch(`${API}/signout`, {
       method: "POST",
       headers: {
         Accept: "application/json",
-        "Content-type": "application/json",
+        authorization: "Bearer " + accessToken,
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify({ refreshToken: refreshToken }),
     })
       .then((res) => {
+        localStorage.removeItem("jwt");
         return res.json();
       })
       .catch((err) => {
         console.log(err);
         return err;
       });
-  };
-
-  export const authenticate = (data: any, next: () => any) => {
-    if(typeof window.localStorage !== 'undefined' ){
-        localStorage.setItem('jwt', JSON.stringify(data))
-        next()
-    }
   }
+  return;
+};
 
-  export const signout = () => {
-    if(typeof window.localStorage !== 'undefined'){
-        localStorage.removeItem('jwt')
-    }
-    return
-}
-
-  
 /*   export const isAuthenticated = () => {
     if(typeof window.localStorage == 'undefined'){
         return false

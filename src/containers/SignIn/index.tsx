@@ -11,14 +11,14 @@ import {
   InputLabel,
   OutlinedInput,
   TextField,
-  Alert
+  Alert,
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { ValuesType } from "./types";
 import Layout from "../../components/Layout";
 // import { useHistory } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import {signin, authenticate } from "../../apiCall/auth"
+import { signin, authenticate } from "../../apiCall/auth";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -37,13 +37,17 @@ const SignIn = () => {
     password: "",
   });
 
-
   // useNavigate
   const history = useNavigate();
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, error: "", verificationError: false, [name]: value });
+    setFormValues({
+      ...formValues,
+      error: "",
+      verificationError: false,
+      [name]: value,
+    });
   };
 
   const handleClickShowPassword = (e: any) => {
@@ -86,20 +90,20 @@ const SignIn = () => {
     const { email, password } = validateForm(formValues);
 
     if (email || password) {
-      return
-          //toast.warn("Veuillez remplir tous les champs");
+      return;
+      //toast.warn("Veuillez remplir tous les champs");
     } else {
       setFormValues({ ...formValues, error: "", verificationError: false });
 
       signin({ email: formValues.email, password: formValues.password }).then(
         (data) => {
           if (data.error) {
-            if(data.error == 'Please verify user'){
+            if (data.error == "Please verify user") {
               setFormValues({
                 ...formValues,
                 signinSuccess: false,
-                verificationError: true
-              })
+                verificationError: true,
+              });
               return;
             }
             setFormValues({
@@ -110,18 +114,18 @@ const SignIn = () => {
             console.log(formValues.error);
             return "";
           } else {
-            if(data.token){
-            authenticate(data, () => {
+            if (data.accessToken) {
+              authenticate(data, () => {
                 setFormValues({
                   ...formValues,
                   name: data.name,
                   email: data.email,
                   error: "",
                   signinSuccess: true,
-                })
-            })
-            history("/")
-          }   
+                });
+              });
+              history("/");
+            }
           }
         }
       );
@@ -176,7 +180,11 @@ const SignIn = () => {
             {formErrors.password && (
               <p className="errors">{formErrors.password}</p>
             )}
-            {formValues.verificationError && <Alert sx={{ mt: 2 }} severity="warning">Please verify your email</Alert>}
+            {formValues.verificationError && (
+              <Alert sx={{ mt: 2 }} severity="warning">
+                Please verify your email
+              </Alert>
+            )}
           </div>
         </div>
         {/* <button className="btn">Sign In</button> */}
