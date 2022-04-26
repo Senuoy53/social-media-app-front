@@ -10,6 +10,7 @@ import {
   InputLabel,
   OutlinedInput,
   TextField,
+  Alert
 } from "@mui/material";
 import SignUpWrapper from "./SignUpWrapper";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -88,7 +89,6 @@ const SignUp = ({
           error: "",
           signupSuccess: true,
         });
-        history("/signin");
       }
     }
     });
@@ -236,6 +236,7 @@ const SignUp = ({
             {errors.confirmPassword && (
               <p className="errors">{errors.confirmPassword.message}</p>
             )}
+            {signupSuccess && <Alert sx={{ mt: 2 }} severity="success">Signed up, please verify your email</Alert>}
           </div>
         </div>
 
@@ -243,7 +244,7 @@ const SignUp = ({
           Sign Up
         </Button>
         <p className="messageInfo">
-          Already Signed Up? <Link to="#">Login Now</Link>
+          Already Signed Up? <Link to="/signin">Login Now</Link>
         </p>
       </SignUpWrapper>
     </Layout>
