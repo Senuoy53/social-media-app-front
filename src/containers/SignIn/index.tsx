@@ -11,6 +11,7 @@ import {
   InputLabel,
   OutlinedInput,
   TextField,
+  Alert
 } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { ValuesType } from "./types";
@@ -28,6 +29,7 @@ const SignIn = () => {
     password: "",
     error: "",
     signinSuccess: false,
+    verificationError: false,
   };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState<ValuesType>({
@@ -35,12 +37,13 @@ const SignIn = () => {
     password: "",
   });
 
+
   // useNavigate
   const history = useNavigate();
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, error: "", [name]: value });
+    setFormValues({ ...formValues, error: "", verificationError: false, [name]: value });
   };
 
   const handleClickShowPassword = (e: any) => {
@@ -83,14 +86,22 @@ const SignIn = () => {
     const { email, password } = validateForm(formValues);
 
     if (email || password) {
-      //   toast.warn("Veuillez remplir tous les champs");
+      return
+          //toast.warn("Veuillez remplir tous les champs");
     } else {
-      setFormValues({ ...formValues, error: "" });
+      setFormValues({ ...formValues, error: "", verificationError: false });
 
       signin({ email: formValues.email, password: formValues.password }).then(
         (data) => {
-          console.log(data);
           if (data.error) {
+            if(data.error == 'Please verify user'){
+              setFormValues({
+                ...formValues,
+                signinSuccess: false,
+                verificationError: true
+              })
+              return;
+            }
             setFormValues({
               ...formValues,
               error: data.error,
@@ -165,6 +176,7 @@ const SignIn = () => {
             {formErrors.password && (
               <p className="errors">{formErrors.password}</p>
             )}
+            {formValues.verificationError && <Alert sx={{ mt: 2 }} severity="warning">Please verify your email</Alert>}
           </div>
         </div>
         {/* <button className="btn">Sign In</button> */}
