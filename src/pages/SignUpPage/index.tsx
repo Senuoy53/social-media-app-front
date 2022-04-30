@@ -1,14 +1,13 @@
 import { useState } from "react";
 import CheckId from "../../containers/CheckId";
 import SignUp from "../../containers/SignUp";
-import {checkUid} from "../../apiCall/auth"
+import { checkSimUser } from "../../apiCall/auth";
 
 const SignUpPage = () => {
-
   const [values, setValues] = useState({
     id: "",
-    name: "",
-    surname: "",
+    fname: "",
+    lname: "",
     email: "",
     password: "",
     error: "",
@@ -18,8 +17,8 @@ const SignUpPage = () => {
 
   const {
     id,
-    name,
-    surname,
+    fname,
+    lname,
     email,
     password,
     checkIdSuccess: CheckIdSuccess,
@@ -37,20 +36,22 @@ const SignUpPage = () => {
     if (!values.id) {
       setValues({ ...values, error: "Please enter a User ID!!!" });
     } else {
-      checkUid(id).then((data) => {
+      checkSimUser(id).then((data) => {
         if (data.error) {
           setValues({ ...values, error: data.error, checkIdSuccess: false });
           return "";
         } else {
-          if(data.email){
-          setValues({
-            ...values,
-            id: id,
-            name: data.name,
-            email: data.email,
-            error: "",
-            checkIdSuccess: true,
-          })};
+          if (data.email) {
+            setValues({
+              ...values,
+              id: id,
+              fname: data.fname,
+              lname: data.lname,
+              email: data.email,
+              error: "",
+              checkIdSuccess: true,
+            });
+          }
         }
       });
     }
@@ -69,8 +70,8 @@ const SignUpPage = () => {
         ) : (
           <SignUp
             checkedId={id}
-            checkedName={name}
-            checkedSurname={surname}
+            checkedFname={fname}
+            checkedLname={lname}
             checkedEmail={email}
           />
         )}

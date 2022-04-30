@@ -1,7 +1,7 @@
-import { API } from "../config";
+import { BACK_URL } from "../variables";
 
-export const checkUid = (id: any) => {
-  return fetch(`${API}/checkUID/${id}`, {
+export const checkSimUser = (id: any) => {
+  return fetch(`${BACK_URL}/checkSimUser/${id}`, {
     method: "GET",
   })
     .then((res) => {
@@ -13,7 +13,7 @@ export const checkUid = (id: any) => {
 };
 
 export const signup = (user: any) => {
-  return fetch(`${API}/signup`, {
+  return fetch(`${BACK_URL}/signup`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -31,7 +31,7 @@ export const signup = (user: any) => {
 };
 
 export const signin = (user: any) => {
-  return fetch(`${API}/signin`, {
+  return fetch(`${BACK_URL}/signin`, {
     method: "POST",
     headers: {
       Accept: "application/json",
@@ -62,7 +62,7 @@ export const signout = () => {
     let accessToken = JSON.parse(jwt!).accessToken;
     //  Take refreshToken
     let refreshToken = JSON.parse(jwt!).refreshToken;
-    fetch(`${API}/signout`, {
+    fetch(`${BACK_URL}/signout`, {
       method: "POST",
       headers: {
         Accept: "application/json",

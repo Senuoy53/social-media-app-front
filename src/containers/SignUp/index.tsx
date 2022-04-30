@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
   Button,
@@ -10,7 +10,7 @@ import {
   InputLabel,
   OutlinedInput,
   TextField,
-  Alert
+  Alert,
 } from "@mui/material";
 import SignUpWrapper from "./SignUpWrapper";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -18,15 +18,14 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 // Password confirmation error
 import { useForm } from "react-hook-form";
 import Layout from "../../components/Layout";
-import {signup} from "../../apiCall/auth"
+import { signup } from "../../apiCall/auth";
 
 const SignUp = ({
   checkedId,
-  checkedName,
-  checkedSurname,
+  checkedFname,
+  checkedLname,
   checkedEmail,
 }: SignUpProps) => {
-
   const history = useNavigate();
   const [values, setValues] = useState({
     id: checkedId,
@@ -72,10 +71,11 @@ const SignUp = ({
     setValues({ ...values, signupSuccess: false });
     signup({
       _id: id,
-      name: data.name,
+      fname: data.fname,
+      lname: data.lname,
       email: data.email,
       password: data.password,
-    }).then((data:any) => {
+    }).then((data: any) => {
       if (data.error) {
         setValues({ ...values, error: data.error, signupSuccess: false });
         return "";
@@ -83,14 +83,14 @@ const SignUp = ({
         setValues({ ...values, error: data.errors, signupSuccess: false });
         return "";
       } else {
-        if(data.user){
-        setValues({
-          ...values,
-          error: "",
-          signupSuccess: true,
-        });
+        if (data.user) {
+          setValues({
+            ...values,
+            error: "",
+            signupSuccess: true,
+          });
+        }
       }
-    }
     });
   };
 
@@ -102,14 +102,14 @@ const SignUp = ({
           {/* Name */}
           <div className="input-container">
             <TextField
-              id="name"
-              label="Name"
+              id="fname"
+              label="Fname"
               variant="outlined"
               className="input"
               size="small"
-              {...register("name", {
-                value: checkedName,
-                required: "Name is required",
+              {...register("fname", {
+                value: checkedFname,
+                required: "First name is required",
                 minLength: {
                   value: 4,
                   message: "Minimum require length is 4",
@@ -120,18 +120,18 @@ const SignUp = ({
                 },
               })}
             />
-            {errors.name && <p className="errors">{errors.name.message}</p>}
+            {errors.fname && <p className="errors">{errors.fname.message}</p>}
           </div>
           {/* Surname */}
           <div className="input-container">
             <TextField
-              id="surname"
-              label="Surname"
+              id="lname"
+              label="Lname"
               variant="outlined"
               className="input"
               size="small"
-              {...register("surname", {
-                value: checkedSurname,
+              {...register("lname", {
+                value: checkedLname,
                 minLength: {
                   value: 4,
                   message: "Minimum require length is 4",
@@ -142,9 +142,7 @@ const SignUp = ({
                 },
               })}
             />
-            {errors.surname && (
-              <p className="errors">{errors.surname.message}</p>
-            )}
+            {errors.lname && <p className="errors">{errors.lname.message}</p>}
           </div>
           {/* Email */}
           <div className="input-container">
@@ -236,7 +234,11 @@ const SignUp = ({
             {errors.confirmPassword && (
               <p className="errors">{errors.confirmPassword.message}</p>
             )}
-            {signupSuccess && <Alert sx={{ mt: 2 }} severity="success">Signed up, please verify your email</Alert>}
+            {signupSuccess && (
+              <Alert sx={{ mt: 2 }} severity="success">
+                Signed up, please verify your email
+              </Alert>
+            )}
           </div>
         </div>
 

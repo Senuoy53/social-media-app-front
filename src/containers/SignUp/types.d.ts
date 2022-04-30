@@ -1,6 +1,6 @@
 interface SignUpProps {
   checkedId: string;
-  checkedName: string;
-  checkedSurname: string;
+  checkedFname: string;
+  checkedLname: string;
   checkedEmail: string;
 }

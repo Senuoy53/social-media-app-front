@@ -19,12 +19,14 @@ import Layout from "../../components/Layout";
 // import { useHistory } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { signin, authenticate } from "../../apiCall/auth";
+import { useDispatch } from "react-redux";
+import { requestSignin } from "./actions";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const initialValues = {
-    name: "",
-    surname: "",
+    fname: "",
+    lname: "",
     email: "",
     password: "",
     error: "",
@@ -39,6 +41,8 @@ const SignIn = () => {
 
   // useNavigate
   const history = useNavigate();
+  // useDispatch
+  const disptach = useDispatch();
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -93,42 +97,45 @@ const SignIn = () => {
       return;
       //toast.warn("Veuillez remplir tous les champs");
     } else {
+      disptach(requestSignin());
+
       setFormValues({ ...formValues, error: "", verificationError: false });
 
-      signin({ email: formValues.email, password: formValues.password }).then(
-        (data) => {
-          if (data.error) {
-            if (data.error == "Please verify user") {
-              setFormValues({
-                ...formValues,
-                signinSuccess: false,
-                verificationError: true,
-              });
-              return;
-            }
-            setFormValues({
-              ...formValues,
-              error: data.error,
-              signinSuccess: false,
-            });
-            console.log(formValues.error);
-            return "";
-          } else {
-            if (data.accessToken) {
-              authenticate(data, () => {
-                setFormValues({
-                  ...formValues,
-                  name: data.name,
-                  email: data.email,
-                  error: "",
-                  signinSuccess: true,
-                });
-              });
-              history("/");
-            }
-          }
-        }
-      );
+      // signin({ email: formValues.email, password: formValues.password }).then(
+      //   (data) => {
+      //     if (data.error) {
+      //       if (data.error == "Please verify user") {
+      //         setFormValues({
+      //           ...formValues,
+      //           signinSuccess: false,
+      //           verificationError: true,
+      //         });
+      //         return;
+      //       }
+      //       setFormValues({
+      //         ...formValues,
+      //         error: data.error,
+      //         signinSuccess: false,
+      //       });
+      //       console.log(formValues.error);
+      //       return "";
+      //     } else {
+      //       if (data.accessToken) {
+      //         authenticate(data, () => {
+      //           setFormValues({
+      //             ...formValues,
+      //             fname: data.fname,
+      //             lname: data.lname,
+      //             email: data.email,
+      //             error: "",
+      //             signinSuccess: true,
+      //           });
+      //         });
+      //         history("/");
+      //       }
+      //     }
+      //   }
+      // );
     }
   };
   return (
