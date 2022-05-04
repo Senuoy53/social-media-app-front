@@ -1,24 +1,31 @@
-import { takeLatest, call, put } from "redux-saga/effects";
+import { takeLatest, call, put, select } from "redux-saga/effects";
 import { ActionsTypes } from "./constants";
 import { BACK_URL } from "../../variables";
-import { requestSigninError, requestSigninSuccess } from "./actions";
+import {
+  requestSigninError,
+  requestSigninSuccess,
+  setVerificationError,
+} from "./actions";
 import { makeRequest } from "../../utils/request";
 import { SignInResponse } from "./types";
+import { Action } from "../../utils/types";
+import { authenticate } from "../../utils/app-utils";
 
 function* signinSaga() {
-  yield takeLatest(ActionsTypes.REQUEST_SIGN_IN, requestSignIn);
+  yield takeLatest(ActionsTypes.REQUEST_SIGN_IN, RequestSignIn);
 }
 
-function* requestSignIn() {
-  console.log("im here in saga");
-  console.log("url", BACK_URL);
+function* RequestSignIn(action: Action) {
+  const { email, password, history } = action.payload;
   const options = {
     method: "POST",
     url: `${BACK_URL}/signin`,
     header: {
       "Content-type": "application/json",
     },
-    data: { email: "asadali@emeal.nttdata.com", password: "Amine@12" },
+
+    // data: { ...action.payload },
+    data: { email: email, password: password },
   };
 
   //   try {
@@ -27,11 +34,18 @@ function* requestSignIn() {
 
   // I have only 4xx and 5xx http errors
   if (status >= 400 && status < 600) {
-    console.log("erro request", data.error);
-    yield put(requestSigninError(data.error));
+    if (data.error === "Please verify user") {
+      yield put(setVerificationError(true));
+    } else {
+      yield put(setVerificationError(false));
+      yield put(requestSigninError(data.error));
+    }
   } else {
-    console.log("success post request", data);
+    yield put(setVerificationError(false));
     yield put(requestSigninSuccess(data));
+    // Authenticate - add data to local storage
+    authenticate(data, () => {});
+    history("/");
   }
 }
 

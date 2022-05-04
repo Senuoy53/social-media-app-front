@@ -1,3 +1,8 @@
+interface Action {
+  type: string;
+  payload?: any;
+}
+
 interface User {
   id: string;
   fname: string;
@@ -11,4 +16,4 @@ interface GlobalState {
   signInState: SigninState;
 }
 
-export { User, GlobalState };
+export { Action, User, GlobalState };

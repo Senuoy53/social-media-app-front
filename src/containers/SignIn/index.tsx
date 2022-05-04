@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 import SignInWrapper from "./SignInWrapper";
@@ -16,22 +16,33 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { ValuesType } from "./types";
 import Layout from "../../components/Layout";
-// import { useHistory } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { signin, authenticate } from "../../apiCall/auth";
-import { useDispatch } from "react-redux";
-import { requestSignin } from "./actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  requestSignin,
+  setErrorMessage,
+  setVerificationError,
+} from "./actions";
+import { createStructuredSelector } from "reselect";
+import {
+  makeSelectAccessToken,
+  makeSelectError,
+  makeSelectErrorMessage,
+  makeSelectVerificationError,
+} from "./selectors";
+
+const signInState = createStructuredSelector({
+  error: makeSelectError(),
+  errorMessage: makeSelectErrorMessage(),
+  accessToken: makeSelectAccessToken(),
+  verificationError: makeSelectVerificationError(),
+});
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const initialValues = {
-    fname: "",
-    lname: "",
     email: "",
     password: "",
-    error: "",
-    signinSuccess: false,
-    verificationError: false,
   };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState<ValuesType>({
@@ -42,18 +53,22 @@ const SignIn = () => {
   // useNavigate
   const history = useNavigate();
   // useDispatch
-  const disptach = useDispatch();
+  const dispatch = useDispatch();
+  // Selectors
+  const { errorMessage, accessToken, verificationError } =
+    useSelector(signInState);
 
+  // Handle change function
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormValues({
       ...formValues,
-      error: "",
-      verificationError: false,
+
       [name]: value,
     });
   };
 
+  // handleClickShowPassword
   const handleClickShowPassword = (e: any) => {
     setShowPassword(!showPassword);
   };
@@ -94,48 +109,16 @@ const SignIn = () => {
     const { email, password } = validateForm(formValues);
 
     if (email || password) {
-      return;
-      //toast.warn("Veuillez remplir tous les champs");
+      dispatch(setErrorMessage(""));
+      dispatch(setVerificationError(false));
     } else {
-      disptach(requestSignin());
-
-      setFormValues({ ...formValues, error: "", verificationError: false });
-
-      // signin({ email: formValues.email, password: formValues.password }).then(
-      //   (data) => {
-      //     if (data.error) {
-      //       if (data.error == "Please verify user") {
-      //         setFormValues({
-      //           ...formValues,
-      //           signinSuccess: false,
-      //           verificationError: true,
-      //         });
-      //         return;
-      //       }
-      //       setFormValues({
-      //         ...formValues,
-      //         error: data.error,
-      //         signinSuccess: false,
-      //       });
-      //       console.log(formValues.error);
-      //       return "";
-      //     } else {
-      //       if (data.accessToken) {
-      //         authenticate(data, () => {
-      //           setFormValues({
-      //             ...formValues,
-      //             fname: data.fname,
-      //             lname: data.lname,
-      //             email: data.email,
-      //             error: "",
-      //             signinSuccess: true,
-      //           });
-      //         });
-      //         history("/");
-      //       }
-      //     }
-      //   }
-      // );
+      dispatch(
+        requestSignin({
+          email: formValues.email,
+          password: formValues.password,
+          history: history,
+        })
+      );
     }
   };
   return (
@@ -157,7 +140,8 @@ const SignIn = () => {
               onChange={handleChange}
             />
             {formErrors.email && <p className="errors">{formErrors.email}</p>}
-            {formValues.error && <p className="errors">{formValues.error}</p>}
+            {/* {formValues.error && <p className="errors">{formValues.error}</p>} */}
+            {errorMessage && <p className="errors">{errorMessage}</p>}
           </div>
 
           <div className="input-container">
@@ -184,10 +168,10 @@ const SignIn = () => {
               />
             </FormControl>
 
-            {formErrors.password && (
+            {!verificationError && formErrors.password && (
               <p className="errors">{formErrors.password}</p>
             )}
-            {formValues.verificationError && (
+            {verificationError && (
               <Alert sx={{ mt: 2 }} severity="warning">
                 Please verify your email
               </Alert>

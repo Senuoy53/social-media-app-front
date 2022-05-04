@@ -35,6 +35,8 @@ const SignUpPage = () => {
 
     if (!values.id) {
       setValues({ ...values, error: "Please enter a User ID!!!" });
+    } else if (values.id.length < 16) {
+      setValues({ ...values, error: "Minimum require length is 16" });
     } else {
       checkSimUser(id).then((data) => {
         if (data.error) {

@@ -1,10 +1,5 @@
 import { User } from "../../utils/types";
 
-interface Action {
-  type: string;
-  payload?: any;
-}
-
 interface ValuesType {
   email: string;
   password: string;
@@ -14,12 +9,7 @@ interface SigninState {
   signinResData: SigninResData[] | null;
   error: boolean;
   errorMessage: string;
-  signinForm: SigninForm;
-}
-
-interface SigninForm {
-  email: string;
-  password: string;
+  verificationError: boolean;
 }
 
 interface SigninResData {
@@ -30,17 +20,8 @@ interface SigninResData {
 }
 
 interface SignInResponse {
-  error: boolean;
-  message: string;
   data: SigninResData;
   status: number;
 }
 
-export {
-  Action,
-  ValuesType,
-  SigninResData,
-  SigninState,
-  SigninForm,
-  SignInResponse,
-};
+export { ValuesType, SigninResData, SigninState, SignInResponse };

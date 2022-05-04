@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SignUpPage from "./pages/SignUpPage";
-import SignInPage from "./pages/SignInPage";
-import Home from "./pages/Home";
+import Home from "../../pages/Home";
+import SignInPage from "../../pages/SignInPage";
+import SignUpPage from "../../pages/SignUpPage";
+
 import PrivateRoute from "./PrivateRoute";
 
 const Router = () => {

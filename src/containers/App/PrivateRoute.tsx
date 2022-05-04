@@ -1,7 +1,7 @@
 import { Navigate } from "react-router";
 //import {isAuthenticated} from "./apiCall/auth"
 import { useState, useEffect } from "react";
-import { API } from "./config";
+import { BACK_URL } from "../../variables";
 
 const PrivateRoute = ({ children }: any) => {
   const [auth, setAuth] = useState(false);
@@ -11,7 +11,7 @@ const PrivateRoute = ({ children }: any) => {
     if (localStorage.getItem("jwt")) {
       let jwt = localStorage.getItem("jwt");
       let token = JSON.parse(jwt!).accessToken;
-      fetch(`${API}/verifytoken`, {
+      fetch(`${BACK_URL}/verifytoken`, {
         method: "GET",
         headers: {
           Accept: "application/json",
