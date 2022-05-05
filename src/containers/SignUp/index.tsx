@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-import { Link, useNavigate } from "react-router-dom";
-
 import {
   Button,
   FormControl,
@@ -18,7 +16,42 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 // Password confirmation error
 import { useForm } from "react-hook-form";
 import Layout from "../../components/Layout";
-import { signup } from "../../apiCall/auth";
+
+import {
+  SubTitle,
+  FnameFields,
+  LnameFields,
+  EmailFields,
+  SignupSuccessMessage,
+  ButtonField,
+  InputLabels,
+  PassworFields,
+  ConPassworFields,
+  FnameRequires,
+  LnameRequirers,
+  PasswordRequires,
+  ConPasswordRequires,
+  ValidatePassworError,
+} from "./constants";
+import { MessageInfo } from "../../utils/constants";
+import { outlineType } from "../../utils/app-utils";
+import MessageInfoComp from "../../components/MessageInfoComp";
+import { SignUpProps } from "./types";
+import { useDispatch, useSelector } from "react-redux";
+import { requestSignUp } from "./actions";
+import {
+  makeSelectErrorMessage,
+  makeSelectSignUpSuccess,
+  makeSelectUser,
+} from "./selectors";
+import { createStructuredSelector } from "reselect";
+
+// SignUp selectors
+const signUpState = createStructuredSelector({
+  errorMessage: makeSelectErrorMessage(),
+  signUpSuccess: makeSelectSignUpSuccess(),
+  User: makeSelectUser(),
+});
 
 const SignUp = ({
   checkedId,
@@ -26,17 +59,19 @@ const SignUp = ({
   checkedLname,
   checkedEmail,
 }: SignUpProps) => {
-  const history = useNavigate();
   const [values, setValues] = useState({
     id: checkedId,
-    error: "",
-    signupSuccess: false,
   });
 
-  const { id, error, signupSuccess } = values;
+  const { id } = values;
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  // useDispatch
+  const dispatch = useDispatch();
+  // Selectors
+  const { errorMessage, signUpSuccess, User } = useSelector(signUpState);
 
   // Password confirmation error
   // Handleform events
@@ -66,80 +101,40 @@ const SignUp = ({
   //Add user to database
   // clickSignup
   const clickSignup = (data: any) => {
-    // alert(JSON.stringify(data));
-
-    setValues({ ...values, signupSuccess: false });
-    signup({
-      _id: id,
-      fname: data.fname,
-      lname: data.lname,
-      email: data.email,
-      password: data.password,
-    }).then((data: any) => {
-      if (data.error) {
-        setValues({ ...values, error: data.error, signupSuccess: false });
-        return "";
-      } else if (data.errors) {
-        setValues({ ...values, error: data.errors, signupSuccess: false });
-        return "";
-      } else {
-        if (data.user) {
-          setValues({
-            ...values,
-            error: "",
-            signupSuccess: true,
-          });
-        }
-      }
-    });
+    dispatch(
+      requestSignUp({
+        _id: checkedId,
+        fname: data.fname,
+        lname: data.lname,
+        email: data.email,
+        password: data.password,
+      })
+    );
   };
 
   return (
-    <Layout subtitle="Sign Up">
+    <Layout subtitle={SubTitle.SIGN_UP}>
       {/* Form */}
       <SignUpWrapper onSubmit={handleSubmit(clickSignup)}>
         <div className="input-box">
-          {/* Name */}
+          {/* Fname */}
           <div className="input-container">
             <TextField
-              id="fname"
-              label="Fname"
-              variant="outlined"
-              className="input"
-              size="small"
+              {...FnameFields}
               {...register("fname", {
                 value: checkedFname,
-                required: "First name is required",
-                minLength: {
-                  value: 4,
-                  message: "Minimum require length is 4",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "Maximum require length is 20",
-                },
+                ...FnameRequires,
               })}
             />
             {errors.fname && <p className="errors">{errors.fname.message}</p>}
           </div>
-          {/* Surname */}
+          {/* Lname */}
           <div className="input-container">
             <TextField
-              id="lname"
-              label="Lname"
-              variant="outlined"
-              className="input"
-              size="small"
+              {...LnameFields}
               {...register("lname", {
                 value: checkedLname,
-                minLength: {
-                  value: 4,
-                  message: "Minimum require length is 4",
-                },
-                maxLength: {
-                  value: 20,
-                  message: "Maximum require length is 20",
-                },
+                ...LnameRequirers,
               })}
             />
             {errors.lname && <p className="errors">{errors.lname.message}</p>}
@@ -147,41 +142,23 @@ const SignUp = ({
           {/* Email */}
           <div className="input-container">
             <TextField
-              id="email"
-              label="Email"
-              variant="outlined"
-              className="input"
+              {...EmailFields}
               disabled
-              size="small"
               {...register("email", {
                 value: checkedEmail,
               })}
             />
-            {error && <p className="errors">{error}</p>}
+            {errorMessage && <p className="errors">{errorMessage}</p>}
           </div>
           {/* Password */}
           <div className="input-container">
             <FormControl variant="outlined" className="input" size="small">
-              <InputLabel htmlFor="password">Password</InputLabel>
+              <InputLabel htmlFor="password">{InputLabels.PASSWORD}</InputLabel>
               <OutlinedInput
-                id="password"
-                type={showPassword ? "text" : "password"}
+                {...PassworFields}
+                type={outlineType(showPassword)}
                 {...register("password", {
-                  required: "Password is required",
-                  pattern: {
-                    value:
-                      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
-                    message:
-                      "Password should include at least one uppercase, one numeric value and one special character",
-                  },
-                  minLength: {
-                    value: 8,
-                    message: "Minimum require length is 8",
-                  },
-                  maxLength: {
-                    value: 20,
-                    message: "Maximum require length is 20",
-                  },
+                  ...PasswordRequires,
                 })}
                 endAdornment={
                   <InputAdornment position="end">
@@ -194,7 +171,6 @@ const SignUp = ({
                     </IconButton>
                   </InputAdornment>
                 }
-                label="Password"
               />
             </FormControl>
 
@@ -205,13 +181,16 @@ const SignUp = ({
           {/* Confirm Password */}
           <div className="input-container">
             <FormControl variant="outlined" className="input" size="small">
-              <InputLabel htmlFor="password">Confirm Password</InputLabel>
+              <InputLabel htmlFor="password">
+                {InputLabels.CONFIRM_PASSWORD}
+              </InputLabel>
               <OutlinedInput
-                type={showConfirmPassword ? "text" : "password"}
+                {...ConPassworFields}
+                type={outlineType(showConfirmPassword)}
                 {...register("confirmPassword", {
-                  required: "Confirm password is required",
+                  ...ConPasswordRequires,
                   validate: (value) =>
-                    value === password || "The passwords do not match",
+                    value === password || ValidatePassworError.MESSAGE,
                 })}
                 onPaste={(e) => {
                   e.preventDefault();
@@ -228,26 +207,28 @@ const SignUp = ({
                     </IconButton>
                   </InputAdornment>
                 }
-                label="Confirm Password"
               />
             </FormControl>
             {errors.confirmPassword && (
               <p className="errors">{errors.confirmPassword.message}</p>
             )}
-            {signupSuccess && (
+            {signUpSuccess && (
               <Alert sx={{ mt: 2 }} severity="success">
-                Signed up, please verify your email
+                {SignupSuccessMessage.Message}
               </Alert>
             )}
           </div>
         </div>
 
         <Button variant="contained" className="btn" type="submit">
-          Sign Up
+          {ButtonField.SIGN_UP}
         </Button>
-        <p className="messageInfo">
-          Already Signed Up? <Link to="/signin">Login Now</Link>
-        </p>
+
+        <MessageInfoComp
+          part1={MessageInfo.ALREADY_SIGN_UP}
+          to="/signin"
+          part2={MessageInfo.LOGIN_NOW}
+        />
       </SignUpWrapper>
     </Layout>
   );

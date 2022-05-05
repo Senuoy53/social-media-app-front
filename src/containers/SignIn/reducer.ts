@@ -33,12 +33,12 @@ const signInReducer = (state = initialState, action: Action) => {
         errorMessage: "",
       };
 
-    case ActionsTypes.SET_ERROR_MESSAGE:
-      return {
-        ...state,
-        errorMessage: action.payload,
-        verificationError: false,
-      };
+    // case ActionsTypes.SET_ERROR_MESSAGE:
+    //   return {
+    //     ...state,
+    //     errorMessage: action.payload,
+    //     verificationError: false,
+    //   };
 
     default:
       return state;

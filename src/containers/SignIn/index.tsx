@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-
-import { Link } from "react-router-dom";
 import SignInWrapper from "./SignInWrapper";
 
 import {
@@ -20,21 +18,31 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   requestSignin,
-  setErrorMessage,
+  requestSigninError,
   setVerificationError,
 } from "./actions";
 import { createStructuredSelector } from "reselect";
 import {
-  makeSelectAccessToken,
-  makeSelectError,
   makeSelectErrorMessage,
   makeSelectVerificationError,
 } from "./selectors";
 
+import {
+  NoteMessage,
+  EmailFields,
+  PasswordFields,
+  PasswordLabel,
+  VerificationError,
+  ButtonField,
+  MessageInfo,
+  SubTitle,
+} from "./constants";
+
+import { outlineType } from "../../utils/app-utils";
+import MessageInfoComp from "../../components/MessageInfoComp";
+
 const signInState = createStructuredSelector({
-  error: makeSelectError(),
   errorMessage: makeSelectErrorMessage(),
-  accessToken: makeSelectAccessToken(),
   verificationError: makeSelectVerificationError(),
 });
 
@@ -45,18 +53,19 @@ const SignIn = () => {
     password: "",
   };
   const [formValues, setFormValues] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState<ValuesType>({
-    email: "",
-    password: "",
-  });
+  const [formErrors, setFormErrors] = useState<ValuesType>(initialValues);
 
   // useNavigate
   const history = useNavigate();
   // useDispatch
   const dispatch = useDispatch();
   // Selectors
-  const { errorMessage, accessToken, verificationError } =
-    useSelector(signInState);
+  const { errorMessage, verificationError } = useSelector(signInState);
+
+  // useEffect to empty errors
+  useEffect(() => {
+    dispatch(requestSigninError(""));
+  }, []);
 
   // Handle change function
   const handleChange = (e: any) => {
@@ -76,7 +85,6 @@ const SignIn = () => {
   //   ValidateForm Funtion
   const validateForm = (values: ValuesType) => {
     const errors: any = {};
-    // const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     const regex = /^[^\s@]+@+emeal.nttdata.com$/i;
     const regexb = /^[^\s@]+@+nttdata.com$/i;
     const regexc = /^[^\s@]+@+everis.nttdata.com$/i;
@@ -109,7 +117,8 @@ const SignIn = () => {
     const { email, password } = validateForm(formValues);
 
     if (email || password) {
-      dispatch(setErrorMessage(""));
+      dispatch(requestSigninError(""));
+      // dispatch(setErrorMessage(""));
       dispatch(setVerificationError(false));
     } else {
       dispatch(
@@ -121,37 +130,34 @@ const SignIn = () => {
       );
     }
   };
+
   return (
-    <Layout subtitle="Sign In">
+    <Layout subtitle={SubTitle.SIGN_IN}>
       {/* Form */}
       <SignInWrapper>
         <h3 className="noteMessage">
-          Please login with your <span id="red">nttdata email</span>
+          {NoteMessage.PART_1} <span id="red">{NoteMessage.PART_2}</span>
         </h3>
         <div className="input-box">
           <div className="input-container">
             <TextField
-              id="outlined-basic"
-              label="Email"
-              variant="outlined"
-              className="input"
-              name="email"
+              {...EmailFields}
               value={formValues.email}
               onChange={handleChange}
             />
             {formErrors.email && <p className="errors">{formErrors.email}</p>}
-            {/* {formValues.error && <p className="errors">{formValues.error}</p>} */}
             {errorMessage && <p className="errors">{errorMessage}</p>}
           </div>
 
           <div className="input-container">
             <FormControl variant="outlined" className="input">
-              <InputLabel htmlFor="password">Password</InputLabel>
+              <InputLabel htmlFor="password">
+                {PasswordLabel.Password}
+              </InputLabel>
               <OutlinedInput
-                id="password"
-                type={showPassword ? "text" : "password"}
+                {...PasswordFields}
+                type={outlineType(showPassword)}
                 value={formValues.password}
-                name="password"
                 onChange={handleChange}
                 endAdornment={
                   <InputAdornment position="end">
@@ -164,7 +170,6 @@ const SignIn = () => {
                     </IconButton>
                   </InputAdornment>
                 }
-                label="Password"
               />
             </FormControl>
 
@@ -173,21 +178,21 @@ const SignIn = () => {
             )}
             {verificationError && (
               <Alert sx={{ mt: 2 }} severity="warning">
-                Please verify your email
+                {VerificationError.MESSAGE}
               </Alert>
             )}
           </div>
         </div>
         {/* <button className="btn">Sign In</button> */}
         <Button variant="contained" className="btn" onClick={clickSignin}>
-          Sign In{" "}
+          {ButtonField.SIGN_IN}
         </Button>
-        <p className="messageInfo">
-          Don't Have An Account? <Link to="/signup">Create One</Link>
-        </p>
-        <p className="messageInfo">
-          Forgotten Password? <Link to="#">Reset It</Link>
-        </p>
+
+        <MessageInfoComp
+          part1={MessageInfo.DONT_HAVE_ACCOUNT}
+          to="/signup"
+          part2={MessageInfo.CREATE_ONE}
+        />
         {/* </form> */}
       </SignInWrapper>
     </Layout>

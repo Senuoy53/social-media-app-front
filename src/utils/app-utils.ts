@@ -4,3 +4,10 @@ export const authenticate = (data: any, next: () => any) => {
     next();
   }
 };
+
+const outlineType = (showPassword: boolean) => {
+  if (showPassword) return "text";
+  return "password";
+};
+
+export { outlineType };

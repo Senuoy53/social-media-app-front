@@ -47,14 +47,18 @@ const SignInWrapper = styled.form`
     })}
   }
 
-  .messageInfo {
+  /* .messageInfo {
     color: ${({ theme }) => theme.colors.LightBlueBg};
     text-align: center;
+
+    ${mobile({
+    fontSize: "15px",
+  })}
   }
 
   a {
     color: ${({ theme }) => theme.colors.LightBlueBg};
-  }
+  } */
 `;
 
 export default SignInWrapper;

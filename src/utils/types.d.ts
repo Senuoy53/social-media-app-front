@@ -1,3 +1,6 @@
+import { CheckIdState } from "../containers/CheckId/types";
+import { SignUpState } from "../containers/SignUp/types";
+
 interface Action {
   type: string;
   payload?: any;
@@ -14,6 +17,8 @@ interface User {
 
 interface GlobalState {
   signInState: SigninState;
+  checkIdState: CheckIdState;
+  signUpState: SignUpState;
 }
 
 export { Action, User, GlobalState };

@@ -1,53 +1,5 @@
 import { BACK_URL } from "../variables";
 
-export const checkSimUser = (id: any) => {
-  return fetch(`${BACK_URL}/checkSimUser/${id}`, {
-    method: "GET",
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .catch((err) => {
-      return err;
-    });
-};
-
-export const signup = (user: any) => {
-  return fetch(`${BACK_URL}/signup`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify(user),
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .catch((err) => {
-      console.log(err);
-      return err;
-    });
-};
-
-export const signin = (user: any) => {
-  return fetch(`${BACK_URL}/signin`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify(user),
-  })
-    .then((res) => {
-      return res.json();
-    })
-    .catch((err) => {
-      console.log(err);
-      return err;
-    });
-};
-
 export const authenticate = (data: any, next: () => any) => {
   if (typeof window.localStorage !== "undefined") {
     localStorage.setItem("jwt", JSON.stringify(data));

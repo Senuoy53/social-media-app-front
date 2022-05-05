@@ -1,13 +1,6 @@
 import { ActionsTypes } from "./constants";
 import { SigninResData } from "./types";
 
-const setSigninData = (payload: {}) => {
-  return {
-    type: ActionsTypes.SET_SIGN_IN_DATA,
-    payload,
-  };
-};
-
 const requestSignin = (payload: {}) => {
   return {
     type: ActionsTypes.REQUEST_SIGN_IN,
@@ -44,7 +37,6 @@ const setErrorMessage = (payload: string) => {
 };
 
 export {
-  setSigninData,
   requestSignin,
   requestSigninSuccess,
   requestSigninError,
