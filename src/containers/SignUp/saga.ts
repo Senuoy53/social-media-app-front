@@ -15,7 +15,6 @@ function* signUpSaga() {
 }
 
 function* RequestSignUp(action: Action) {
-  console.log("signUp saga");
   const options = {
     method: "POST",
     url: `${BACK_URL}/signup`,

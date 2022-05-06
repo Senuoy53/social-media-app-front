@@ -1,4 +1,5 @@
 import axios from "axios";
+import { BACK_URL } from "../variables";
 
 const makeRequest = async (options: any) => {
   try {
@@ -8,4 +9,8 @@ const makeRequest = async (options: any) => {
   }
 };
 
-export { makeRequest };
+const axiosApi = axios.create({
+  baseURL: `${BACK_URL}`,
+});
+
+export { makeRequest, axiosApi };

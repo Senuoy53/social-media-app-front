@@ -1,7 +1,7 @@
 import { Navigate } from "react-router";
-//import {isAuthenticated} from "./apiCall/auth"
 import { useState, useEffect } from "react";
 import { BACK_URL } from "../../variables";
+import { axiosApi } from "../../utils/request";
 
 const PrivateRoute = ({ children }: any) => {
   const [auth, setAuth] = useState(false);
@@ -11,27 +11,28 @@ const PrivateRoute = ({ children }: any) => {
     if (localStorage.getItem("jwt")) {
       let jwt = localStorage.getItem("jwt");
       let token = JSON.parse(jwt!).accessToken;
-      fetch(`${BACK_URL}/verifytoken`, {
+
+      axiosApi({
         method: "GET",
+        url: `${BACK_URL}/verifytoken`,
         headers: {
           Accept: "application/json",
           authorization: "Bearer " + token,
         },
       })
         .then((res) => {
-          return res.json();
-        })
-        .then((json) => {
-          console.log(JSON.stringify(json));
-          if (json.success) {
+          // console.log("res", res);
+          if (res.data.success) {
+            setIsTokenValidated(true);
             setAuth(true);
           }
         })
         .catch((err) => {
+          setIsTokenValidated(true); // in case there is no token
+          console.log("err", err.response.data.error);
           setAuth(false);
           localStorage.removeItem("jwt");
-        })
-        .then(() => setIsTokenValidated(true));
+        });
     } else {
       setIsTokenValidated(true); // in case there is no token
     }
