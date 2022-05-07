@@ -31,6 +31,10 @@ const Navbar = () => {
   // const open = Boolean(anchorEl);
   const [open, setOpen] = useState(false);
 
+  // Get user from localstorage
+  let jwt = localStorage.getItem("jwt");
+  let user = JSON.parse(jwt!).user;
+
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
     setOpen(true);
@@ -118,6 +122,7 @@ const Navbar = () => {
             <div className="logoTitle">Internal Network</div>
           </div>
 
+          {/* navMenu */}
           <div className="navMenu">
             <NavLink to="/" className="navBox">
               <Home className="navIcon" />
@@ -144,6 +149,7 @@ const Navbar = () => {
             </NavLink>
           </div>
 
+          {/* Icons */}
           <Icons>
             {/* imageAvatar */}
             <Tooltip title="Account settings">
@@ -220,8 +226,8 @@ const Navbar = () => {
                 alt="Remy Sharp"
                 src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
               />
-              <Box>
-                Younes Lamrani
+              <Box sx={{ textTransform: "capitalize" }} className="user">
+                {user.fname + " " + user.lname}
                 <Box sx={{ color: "#7493CA" }}> See you profile</Box>
               </Box>
             </MenuItem>
