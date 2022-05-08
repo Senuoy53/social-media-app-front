@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { axiosApi } from "../../utils/request";
 import { BACK_URL } from "../../variables";
+import Post from '../../components/Post'
 
 const signout = () => {
   if (typeof window.localStorage !== "undefined") {
@@ -31,12 +32,12 @@ const signout = () => {
 
 const Home = () => {
   return (
-    <>
-      <h1>Hello, Home is secure</h1>
+    <div>
+      <Post/>
       <Link to="/signin" onClick={signout}>
         <button>LOGOUT</button>
       </Link>
-    </>
+    </div>
   );
 };
 
