@@ -32,9 +32,9 @@ export const mobile600 = (props: any) => {
   `;
 };
 
-export const mobile350 = (props: any) => {
+export const mobile400 = (props: any) => {
   return css`
-    @media only screen and (max-width: 350px) {
+    @media only screen and (max-width: 400px) {
       ${props}
     }
   `;

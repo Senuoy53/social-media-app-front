@@ -8,9 +8,31 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;   
 }
 
-  body {
-    /* font-family: Open-Sans, Helvetica, Sans-Serif; */
-  }
+
+*::selection {
+        background-color: #ff4a57;
+      }
+
+
+/* stop scrolling for the main page */
+
+
+html::-webkit-scrollbar {
+ width: 0.8rem;
+}
+
+/* html::-webkit-scrollbar-track {
+ background-color: #f3f3f3;
+} */
+
+
+html::-webkit-scrollbar-thumb {
+ background-color: #121A38;
+}
+
+
+
+
 `;
 
 // Global colors
