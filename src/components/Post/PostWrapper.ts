@@ -34,16 +34,16 @@ body.active-modal {
   line-height: 1.4;
   background: #f1f1f1;
   border-radius: 10px;
-  width: 700px;
+  width: 600px;
   ${mobile({
     width: "100%",
   })}
 }
 
 .top-bar{
-  background: #131A37;
+  background: ${({ theme }) => theme.colors.BlueBg};
   border-radius: 10px 10px 0 0;
-  color: white;
+  color: ${({ theme }) => theme.colors.White};
   padding: 10px 10px;
   display: flex;
   justify-content: space-between;
@@ -74,7 +74,7 @@ body.active-modal {
 .top-bar-buttom{
   height: 5px;
   width: 100%;
-  background-color:#202DB5;
+  background-color:${({ theme }) => theme.colors.Blue1};
 }
 
 .avatar{
@@ -82,6 +82,7 @@ body.active-modal {
     display:"none",
   })}
 }
+
 
 .custom-text-area{
   display:flex;
@@ -97,7 +98,7 @@ body.active-modal {
 .custom-text-area textarea{
   font-size: 1.5em;
   resize: vertical;
-  width: 550px;
+  width: 450px;
   height: 50px;
   border: none;
   background: #f1f1f1;
@@ -119,7 +120,7 @@ body.active-modal {
 }
 
 .image-box img{
-  width:650px;
+  width:550px;
   height:auto;
   max-height: 350px;
   border-radius: 10px;
@@ -143,12 +144,6 @@ body.active-modal {
   margin: 10px
 }
 
-.post-button{
-  color: white;
-  background: lightblue;
-  width: 100px;
-  height: 50px;
-}
 `;
 
 export default PostWrapper;
