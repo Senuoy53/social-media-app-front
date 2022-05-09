@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -12,6 +12,8 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import PostWrapper from './PostWrapper'
+import { BACK_URL } from "../../variables";
+import axios from "axios";
 
 
 const color = "white";
@@ -32,7 +34,7 @@ const useStyles = makeStyles({
     color: color,
 }
 });
-
+//userId: localStorage.getItem('myCat').user
 
 const Post = () => {
 
@@ -41,10 +43,30 @@ const Post = () => {
   const [values, setValues] = useState({
     type: 'type',
     category: 'category',
+    description: '',
+    imgUrl:'',
+    isAnonym: false,
+    error:'',
+    loading: false,
   });
 
-  const {type, category} = values
+  const [categories, setCategories] = useState([])
+  
+  const {type, category,description,imgUrl, isAnonym, error, loading} = values
 
+  useEffect(()=>{
+    init()
+  },[])
+
+  const init = () => {
+    getCategories()
+  }
+
+  const getCategories = async () => {
+    const { data } = await axios(`${BACK_URL}/categories`);
+    console.log(data)
+    setCategories(data);
+  }
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -63,15 +85,46 @@ const Post = () => {
     });
   };
 
-  return (
-    <div>
-    <PostWrapper>
-      <button onClick={toggleModal} className="btn-modal">
-        Open
-      </button>
-      {modal && (
-        
-        <div className="modal">
+  const handleAnonymClick = () => {
+    setValues({
+      ...values,
+      isAnonym: !isAnonym
+    })
+  }
+
+  const addPost = async (json:any) => {
+    /* const { data } = await axios.post(
+     `${BASE_URL}/`,
+     postData
+    );
+    return data; */
+   }
+
+  const SubmitPost = () => {
+    setValues({ ...values, error: '', loading: true});
+    let userId = JSON.parse(localStorage.getItem('jwt')!).user._id; 
+    let found = false
+    let categoryId = ''
+    for (var i = 0; i < categories.length && !found; i++) {
+      if (categories[i]['categoryName'] === category) {
+        categoryId = categories[i]['_id']
+        found = true;
+        break;
+      }
+    }
+    const json = JSON.stringify(
+      { userId: userId,
+        categoryId: categoryId,
+        anDescription: description,
+        imgUrl: imgUrl,
+        anIsAnonymous: isAnonym,
+      });
+    console.log(json)
+ }
+  
+
+  const PostModal = () => (
+    <div className="modal">
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
             <div className='top-bar'>
@@ -111,10 +164,10 @@ const Post = () => {
                 <MenuItem value="category">
                   <em>category</em>
                 </MenuItem>
-                <MenuItem value="1">General</MenuItem>
-                <MenuItem value="2">Information Technology</MenuItem>
-                <MenuItem value="3">Human Resources</MenuItem>
-                <MenuItem value="4">Other</MenuItem>
+                {categories.map( (category,index) => (
+                  <MenuItem key={index} value={category["categoryName"]}>{category["categoryName"]}</MenuItem>
+                  ))
+                }
                 </Select>
               </div>
               
@@ -125,7 +178,7 @@ const Post = () => {
               <div className='avatar'>
                 <Avatar alt="avatar" src={avatar} sx={{ width: 66, height: 66, mr:3 }}/>
               </div>
-              <textarea className="text-area" name="w3review">Write something ...</textarea>
+              <textarea className="text-area" name="description" placeholder="Write something ..." onChange={handleChange}/>
               </div>
               <div className='image-box'>
                 <img src={Moroccotech}/>
@@ -136,27 +189,39 @@ const Post = () => {
                 </div>
                 <div className='button-right-side'>
                   <Tooltip title="Anonymous">
-                    <IconButton>
-                      <FontAwesomeIcon icon={faUserSecret} color="grey" size="2x"/>
+                    <IconButton onClick={handleAnonymClick}>
+                      {isAnonym ? <FontAwesomeIcon icon={faUserSecret} color="black" size="2x"/>
+                                : <FontAwesomeIcon icon={faUserSecret} color="grey" size="2x"/>
+                    }
                     </IconButton>
                   </Tooltip>
-                  <Button variant="contained"  style={{width: '120px', height: '50px', fontSize:'18px'}}>Post</Button>
+                  <Button variant="contained" onClick={SubmitPost} style={{width: '120px', height: '50px', fontSize:'18px'}}>Post</Button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      )}
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A ullam 
+  )
+
+  return (
+    <div>
+    <PostWrapper>
+      <button onClick={toggleModal} className="btn-modal">
+        Open
+      </button>
+      {modal && PostModal()}
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. A ullam 
         excepturi corrupti doloremque accusantium id ratione ipsa veniam eum
-         magnam soluta molestias accusamus, maiores numquam nam rerum amet porro
-          aspernatur. Quam officiis sint atque placeat amet repudiandae corrupti 
-          totam ab vel perferendis cum dicta, sunt id autem tempore earum tenetur
-           quas, dolore exercitationem repellendus illum, quisquam architecto cum 
-           autem? Fuga ab perferendis et ut deserunt laboriosam ipsam perspiciatis 
-           consequuntur, modi molestias sint, adipisci nam, sit labore voluptatem quibusdam. 
-           Similique neque eum vel officiis sed perferendis corrupti saepe </p>
-      </PostWrapper>
+        magnam soluta molestias accusamus, maiores numquam nam rerum amet porro
+        aspernatur. Quam officiis sint atque placeat amet repudiandae corrupti 
+        totam ab vel perferendis cum dicta, sunt id autem tempore earum tenetur
+        quas, dolore exercitationem repellendus illum, quisquam architecto cum 
+        autem? Fuga ab perferendis et ut deserunt laboriosam ipsam perspiciatis 
+        consequuntur, modi molestias sint, adipisci nam, sit labore voluptatem quibusdam. 
+        Similique neque eum vel officiis sed perferendis corrupti saepe
+      </p>
+    </PostWrapper>
     </div>
     
   );
