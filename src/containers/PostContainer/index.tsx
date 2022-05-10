@@ -3,6 +3,7 @@ import { Favorite, FavoriteBorder, Share } from "@mui/icons-material";
 import { Card, CardActions, Checkbox, IconButton } from "@mui/material";
 import PostHeader from "../../components/PostHeader";
 import PostBody from "../../components/PostBody";
+import PostShowInfo from "../../containers/PostShowInfo";
 
 const PostContainer = ({
   avatar,
@@ -18,7 +19,8 @@ const PostContainer = ({
         <PostHeader avatar={avatar} title={title} subheader={subheader} />
         {/* Post Body */}
         <PostBody desc={desc} img={img} />
-        {/* Post Reactions */}
+        {/* Show post info */}
+        <PostShowInfo />
       </Card>
     </PostContainerWrapper>
   );

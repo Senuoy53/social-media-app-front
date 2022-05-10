@@ -41,6 +41,7 @@ export const theme = {
     LightBlueBg: "#7493CA",
     ButtonColor1: "#2672EC",
     GrayColor: "#7E7979",
+    LightGrayColor: "rgba(0, 0, 0, 0.6)",
     ErrorColor: "#d8000c",
   },
 };
