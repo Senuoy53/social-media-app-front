@@ -12,7 +12,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
 import PostWrapper from './PostWrapper'
-import { BACK_URL } from "../../variables";
+import { BACK_URL_API } from "../../variables";
 import axios from "axios";
 
 
@@ -91,7 +91,7 @@ const Post = () => {
   }
 
   const getCategories = async () => {
-    const { data } = await axios(`${BACK_URL}/categories`);
+    const { data } = await axios(`${BACK_URL_API}/categories`);
     console.log(data)
     setCategories(data);
   }
@@ -127,7 +127,7 @@ const Post = () => {
 
   const addPost = async (json:any) => {
     const { data } = await axios.post(
-      `${BACK_URL}/announcements/create`,
+      `${BACK_URL_API}/announcements/create`,
      json
     );
     return data;
