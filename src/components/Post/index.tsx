@@ -2,10 +2,8 @@ import { useState,useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-import CloseIcon from '@mui/icons-material/Close';
 import Avatar from '@mui/material/Avatar';
 import avatar from '../../assets/img/avatar.jpg';
-import Moroccotech from '../../assets/img/Moroccotech.jpeg'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {faImage, faUserSecret, faXmark} from "@fortawesome/free-solid-svg-icons"
 import Button from '@mui/material/Button';
@@ -15,14 +13,13 @@ import PostWrapper from './PostWrapper'
 import { BACK_URL_API } from "../../variables";
 import axios from "axios";
 
-import firebaseConfig from "../../services/firebase"
+import { firebaseConfig } from "../../variables";
 import { initializeApp } from 'firebase/app';
-
 import { getStorage, ref, uploadBytes, getDownloadURL} from "firebase/storage";
 
-import { v4 as uuidv4 } from 'uuid'
+import { v4 as uuidv4 } from 'uuid' 
 
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig); 
 
 const color = "white";
 
@@ -42,24 +39,18 @@ const useStyles = makeStyles({
     color: color,
 }
 });
-//userId: localStorage.getItem('myCat').user
 
 const Post = () => {
-  //image previeww//image previeww//image previeww
   const [selectedFile, setSelectedFile] = useState()
   const [preview, setPreview] = useState('')
 
-    // create a preview as a side effect, whenever selected file is changed
     useEffect(() => {
         if (!selectedFile) {
             setPreview('')
             return
         }
-
         const objectUrl = URL.createObjectURL(selectedFile)
         setPreview(objectUrl)
-
-        // free memory when ever this component is unmounted
         return () => URL.revokeObjectURL(objectUrl)
     }, [selectedFile])
 
@@ -68,11 +59,8 @@ const Post = () => {
             setSelectedFile(undefined)
             return
         }
-
-        // I've kept this example simple by using the first image instead of multiple
         setSelectedFile(e.target.files[0])
     }
-  //image previeww//image previeww//image previeww
 
   const classes = useStyles();
   const [modal, setModal] = useState(true);
@@ -83,12 +71,13 @@ const Post = () => {
     imgUrl:'',
     isAnonym: false,
     error:'',
-    loading: false,
   });
+
+  const [loading,setLoading] = useState(false);
 
   const [categories, setCategories] = useState([])
   
-  const {type, category,description,imgUrl, isAnonym, error, loading} = values
+  const {type, category,description,imgUrl, isAnonym, error} = values
 
   useEffect(()=>{
     init()
@@ -179,7 +168,8 @@ const Post = () => {
    }
 
   const SubmitPost = async () => {
-    setValues({ ...values, error: '', loading: true});
+    setLoading(true)
+    setValues({ ...values, error: ''});
     let userId = JSON.parse(localStorage.getItem('jwt')!).user._id; 
     let found = false
     let categoryId = ''
@@ -190,11 +180,9 @@ const Post = () => {
         break;
       }
     }
-
     if (selectedFile != undefined) {
       await uploadImageToFirebase(selectedFile)
     }
-
     const json = { 
         userId: userId,
         categoryId: categoryId,
@@ -202,8 +190,8 @@ const Post = () => {
         imgUrl: imgUrl,
         anIsAnonymous: isAnonym,
       };
-    console.log(JSON.stringify(json))
-    addPost(json)
+    await addPost(json)
+    setLoading(false)
  }
   
 
@@ -291,7 +279,6 @@ const Post = () => {
               </div>
             </div>
           </div>
-
         </div>
   )
 
