@@ -51,6 +51,7 @@ const Post = () => {
   });
 
   const [categories, setCategories] = useState([])
+  const [showImage, setShowImage] = useState(true)
   
   const {type, category,description,imgUrl, isAnonym, error, loading} = values
 
@@ -70,6 +71,10 @@ const Post = () => {
   const toggleModal = () => {
     setModal(!modal);
   };
+
+  const handleClickShowImage = () => {
+    setShowImage(!showImage)
+  }
 
   if(modal) {
     document.body.classList.add('active-modal')
@@ -181,13 +186,13 @@ const Post = () => {
               </div>
               <textarea className="text-area" name="description" placeholder="Write something ..." onChange={handleChange}/>
               </div>
-              <div className='image-box'>
+              {showImage && <div className='image-box'>
                 <FontAwesomeIcon icon={faXmark} color="grey" size="2x" className="image-close-button"/>
                 <img src={Moroccotech}/>
-              </div>
+              </div>}
               <div className='buttons'>
                 <div className='button-left-side'>
-                  <FontAwesomeIcon icon={faImage} color="green" size="3x"/>
+                  <FontAwesomeIcon icon={faImage} color="green" size="3x" onClick={handleClickShowImage}/>
                 </div>
                 <div className='button-right-side'>
                   <Tooltip title="Anonymous">
