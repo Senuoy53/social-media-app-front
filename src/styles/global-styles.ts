@@ -9,9 +9,6 @@ const GlobalStyle = createGlobalStyle`
 }
 
 
-*::selection {
-        background-color: #ff4a57;
-      }
 
 
 /* stop scrolling for the main page */
