@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mobile, mobile600, mobile350 } from "../../styles/responsive";
+import { mobile, mobile600, mobile400 } from "../../styles/responsive";
 
 const NavbarWrapper = styled.div`
   .navbar {
@@ -7,9 +7,10 @@ const NavbarWrapper = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 0px 3%;
+
     ${mobile({
       padding: "0px 1%",
-    })}
+    })};
   }
 
   .navMenu {
@@ -36,7 +37,7 @@ const NavbarWrapper = styled.div`
       margin-left: 40px;
       position: relative;
 
-      ${mobile350({
+      ${mobile400({
         marginLeft: "10px",
       })}
 

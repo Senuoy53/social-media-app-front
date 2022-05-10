@@ -81,6 +81,11 @@ const Navbar = () => {
     justifyContent: "space-between",
   });
 
+  const StyledMenu = styled(Menu)(({ theme }) => ({
+    top: "7%",
+    left: "-3%",
+  }));
+
   const Icons = styled(Box)(({ theme }) => ({}));
 
   const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -114,7 +119,7 @@ const Navbar = () => {
 
   return (
     <NavbarWrapper>
-      <AppBar position="sticky" sx={{ backgroundColor: "#121A38" }}>
+      <AppBar position="fixed" sx={{ backgroundColor: "#121A38" }}>
         {/* <AppBar position="sticky"> */}
         <StyledToolbar className="navbar">
           <div className="logo-container">
@@ -180,18 +185,21 @@ const Navbar = () => {
           </Icons>
 
           {/* Menu */}
-          <Menu
+          <StyledMenu
             // anchorEl={anchorEl}
+
             id="account-menu"
             open={open}
             onClose={handleClose}
             onClick={handleClose}
+            keepMounted
             PaperProps={{
               elevation: 0,
               sx: {
                 overflow: "visible",
                 filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-                mt: 1.5,
+                // mt: 7,
+                // ml: -6,
 
                 "& .MuiAvatar-root": {
                   width: 32,
@@ -213,8 +221,16 @@ const Navbar = () => {
                 },
               },
             }}
-            transformOrigin={{ horizontal: "right", vertical: "top" }}
-            anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+            transformOrigin={{
+              horizontal: "right",
+              vertical: "top",
+            }}
+            anchorOrigin={{
+              horizontal: "right",
+              vertical: "top",
+            }}
+            // anchorReference="anchorPosition"
+            // anchorPosition={{ top: 64, left: 1220 }}
           >
             {/* {/* <MenuItem sx={{ color: "#7493CA" }}> */}
             <MenuItem>
@@ -239,7 +255,7 @@ const Navbar = () => {
               </ListItemIcon>
               Logout
             </MenuItem>
-          </Menu>
+          </StyledMenu>
         </StyledToolbar>
       </AppBar>
     </NavbarWrapper>
