@@ -15,6 +15,14 @@ import PostWrapper from './PostWrapper'
 import { BACK_URL_API } from "../../variables";
 import axios from "axios";
 
+import firebaseConfig from "../../services/firebase"
+import { initializeApp } from 'firebase/app';
+
+import { getStorage, ref, uploadBytes, getDownloadURL} from "firebase/storage";
+
+import { v4 as uuidv4 } from 'uuid'
+
+const app = initializeApp(firebaseConfig);
 
 const color = "white";
 
@@ -136,10 +144,27 @@ const Post = () => {
     })
   }
 
+  const uploadImageToFirebase = async (image:any) => {
+    try {
+      const storage = getStorage();
+      const fileName = uuidv4()
+      const storageRef = ref(storage, fileName);
+      uploadBytes(storageRef, image).then((snapshot) => {
+        console.log('Image Uploaded');
+        getDownloadURL(ref(storage, fileName)).then((url)=>{
+          setValues({...values, imgUrl: url})
+          console.log(url)
+        })
+      });
+    } catch (error) {
+      console.error('There was an error uploading a file to Cloud Storage:', error);
+    }
+  }
   const addPost = async (json:any) => {
     if (typeof window.localStorage !== "undefined") {
       let jwt = localStorage.getItem("jwt");
       let accessToken = JSON.parse(jwt!).accessToken;
+    
       const { data } = await axios.post(
         `${BACK_URL_API}/announcements/create`,
         json,
@@ -153,7 +178,7 @@ const Post = () => {
     }
    }
 
-  const SubmitPost = () => {
+  const SubmitPost = async () => {
     setValues({ ...values, error: '', loading: true});
     let userId = JSON.parse(localStorage.getItem('jwt')!).user._id; 
     let found = false
@@ -165,6 +190,11 @@ const Post = () => {
         break;
       }
     }
+
+    if (selectedFile != undefined) {
+      await uploadImageToFirebase(selectedFile)
+    }
+
     const json = { 
         userId: userId,
         categoryId: categoryId,
