@@ -91,9 +91,20 @@ const Post = () => {
   }
 
   const getCategories = async () => {
-    const { data } = await axios(`${BACK_URL_API}/categories`);
-    console.log(data)
-    setCategories(data);
+    if (typeof window.localStorage !== "undefined") {
+      let jwt = localStorage.getItem("jwt");
+      let accessToken = JSON.parse(jwt!).accessToken;
+      const { data } = await axios.get(
+        `${BACK_URL_API}/categories`,
+        {
+          headers: {
+            authorization: "Bearer " + accessToken,
+          }
+        }
+        );
+      console.log(data)
+      setCategories(data);
+    }
   }
   const toggleModal = () => {
     setModal(!modal);
@@ -126,11 +137,20 @@ const Post = () => {
   }
 
   const addPost = async (json:any) => {
-    const { data } = await axios.post(
-      `${BACK_URL_API}/announcements/create`,
-     json
-    );
-    return data;
+    if (typeof window.localStorage !== "undefined") {
+      let jwt = localStorage.getItem("jwt");
+      let accessToken = JSON.parse(jwt!).accessToken;
+      const { data } = await axios.post(
+        `${BACK_URL_API}/announcements/create`,
+        json,
+        {
+          headers: {
+            authorization: "Bearer " + accessToken,
+          }
+        },
+      );
+      return data;
+    }
    }
 
   const SubmitPost = () => {
