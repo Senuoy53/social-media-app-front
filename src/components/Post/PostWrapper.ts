@@ -119,14 +119,21 @@ body.active-modal {
   justify-content: center;
 }
 
+.image-close-button{
+  position: absolute;
+  right: 5%;
+}
+
+.post-close-button{
+  position: absolute;
+  right: 5%;
+}
+
 .image-box img{
-  width:550px;
+  width:95%;
   height:auto;
   max-height: 350px;
   border-radius: 10px;
-  ${mobile({
-    width:"95%",
-  })}
 }
 .buttons{
   display: flex;

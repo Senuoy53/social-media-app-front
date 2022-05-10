@@ -7,7 +7,7 @@ import Avatar from '@mui/material/Avatar';
 import avatar from '../../assets/img/avatar.jpg';
 import Moroccotech from '../../assets/img/Moroccotech.jpeg'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {faImage, faUserSecret} from "@fortawesome/free-solid-svg-icons"
+import {faImage, faUserSecret, faXmark} from "@fortawesome/free-solid-svg-icons"
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import IconButton from '@mui/material/IconButton';
@@ -41,7 +41,7 @@ const Post = () => {
   const classes = useStyles();
   const [modal, setModal] = useState(true);
   const [values, setValues] = useState({
-    type: 'type',
+    type: 'annoucement',
     category: 'category',
     description: '',
     imgUrl:'',
@@ -93,11 +93,11 @@ const Post = () => {
   }
 
   const addPost = async (json:any) => {
-    /* const { data } = await axios.post(
-     `${BASE_URL}/`,
-     postData
+    const { data } = await axios.post(
+      `${BACK_URL}/announcements/create`,
+     json
     );
-    return data; */
+    return data;
    }
 
   const SubmitPost = () => {
@@ -112,14 +112,15 @@ const Post = () => {
         break;
       }
     }
-    const json = JSON.stringify(
-      { userId: userId,
+    const json = { 
+        userId: userId,
         categoryId: categoryId,
         anDescription: description,
         imgUrl: imgUrl,
         anIsAnonymous: isAnonym,
-      });
-    console.log(json)
+      };
+    console.log(JSON.stringify(json))
+    addPost(json)
  }
   
 
@@ -128,7 +129,7 @@ const Post = () => {
           <div onClick={toggleModal} className="overlay"></div>
           <div className="modal-content">
             <div className='top-bar'>
-              <CloseIcon onClick={toggleModal}/>
+              <FontAwesomeIcon icon={faXmark} color="white" size="2x" className="post-close-button" onClick={toggleModal}/>
               <h2>Create post</h2>
               <div className='selects'>
                 <Select
@@ -143,11 +144,11 @@ const Post = () => {
                   name='type'
                   onChange={handleChange}
                 >
-                <MenuItem value="type">
-                  <em>type</em>
+                <MenuItem value="annoucement">
+                  <em>annoucement</em>
                 </MenuItem>
-                <MenuItem value="1">Annoucement</MenuItem>
-                <MenuItem value="2">Survey</MenuItem>
+                {/* <MenuItem value="1">Annoucement</MenuItem>
+                <MenuItem value="2">Survey</MenuItem> */}
                 </Select>
                 <Select
                   className={classes.select}
@@ -181,6 +182,7 @@ const Post = () => {
               <textarea className="text-area" name="description" placeholder="Write something ..." onChange={handleChange}/>
               </div>
               <div className='image-box'>
+                <FontAwesomeIcon icon={faXmark} color="grey" size="2x" className="image-close-button"/>
                 <img src={Moroccotech}/>
               </div>
               <div className='buttons'>
