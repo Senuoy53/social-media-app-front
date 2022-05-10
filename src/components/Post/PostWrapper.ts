@@ -129,6 +129,13 @@ body.active-modal {
   right: 5%;
 }
 
+.image-preview{
+  width:100px;
+}
+.image-upload>input {
+  display: none;
+}
+
 .image-box img{
   width:95%;
   height:auto;

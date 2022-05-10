@@ -37,6 +37,34 @@ const useStyles = makeStyles({
 //userId: localStorage.getItem('myCat').user
 
 const Post = () => {
+  //image previeww//image previeww//image previeww
+  const [selectedFile, setSelectedFile] = useState()
+  const [preview, setPreview] = useState('')
+
+    // create a preview as a side effect, whenever selected file is changed
+    useEffect(() => {
+        if (!selectedFile) {
+            setPreview('')
+            return
+        }
+
+        const objectUrl = URL.createObjectURL(selectedFile)
+        setPreview(objectUrl)
+
+        // free memory when ever this component is unmounted
+        return () => URL.revokeObjectURL(objectUrl)
+    }, [selectedFile])
+
+    const onSelectFile = (e: any) => {
+        if (!e.target.files || e.target.files.length === 0) {
+            setSelectedFile(undefined)
+            return
+        }
+
+        // I've kept this example simple by using the first image instead of multiple
+        setSelectedFile(e.target.files[0])
+    }
+  //image previeww//image previeww//image previeww
 
   const classes = useStyles();
   const [modal, setModal] = useState(true);
@@ -51,7 +79,6 @@ const Post = () => {
   });
 
   const [categories, setCategories] = useState([])
-  const [showImage, setShowImage] = useState(true)
   
   const {type, category,description,imgUrl, isAnonym, error, loading} = values
 
@@ -72,8 +99,9 @@ const Post = () => {
     setModal(!modal);
   };
 
-  const handleClickShowImage = () => {
-    setShowImage(!showImage)
+  const handleClickDeleteImage = () => {
+    setSelectedFile(undefined)
+    setPreview('')
   }
 
   if(modal) {
@@ -186,13 +214,19 @@ const Post = () => {
               </div>
               <textarea className="text-area" name="description" placeholder="Write something ..." onChange={handleChange}/>
               </div>
-              {showImage && <div className='image-box'>
-                <FontAwesomeIcon icon={faXmark} color="grey" size="2x" className="image-close-button"/>
-                <img src={Moroccotech}/>
+              {selectedFile && <div className='image-box'>
+                <FontAwesomeIcon icon={faXmark} color="grey" size="2x" className="image-close-button" onClick={handleClickDeleteImage}/>
+                <img src={preview} />
               </div>}
               <div className='buttons'>
                 <div className='button-left-side'>
-                  <FontAwesomeIcon icon={faImage} color="green" size="3x" onClick={handleClickShowImage}/>
+                <div className="image-upload">
+                  <label htmlFor="file-input">
+                  <FontAwesomeIcon icon={faImage} color="green" size="3x"/>
+                  </label>
+                  <input id="file-input" type="file" onChange={onSelectFile}/>
+                </div>
+                 {/*  <FontAwesomeIcon icon={faImage} color="green" size="3x" onClick={handleClickShowImage}/> */}
                 </div>
                 <div className='button-right-side'>
                   <Tooltip title="Anonymous">
@@ -207,6 +241,7 @@ const Post = () => {
               </div>
             </div>
           </div>
+
         </div>
   )
 
