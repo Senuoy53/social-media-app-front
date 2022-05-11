@@ -10,7 +10,6 @@ const ReactionsCountWrapper = styled.div`
     padding: 0px;
     margin-bottom: 0px;
     margin-left: 6px;
-    margin-top: 4px;
     display: flex;
     align-items: center;
     list-style: none;
