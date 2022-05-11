@@ -107,20 +107,25 @@ const Modal = ({toggleModal, categories}:any) => {
     }
     
     const uploadImageToFirebase = async (image:any) => {
+        let URL
         try {
           const storage = getStorage();
           const fileName = uuidv4()
           const storageRef = ref(storage, fileName);
-          uploadBytes(storageRef, image).then((snapshot) => {
-            console.log('Image Uploaded');
-            getDownloadURL(ref(storage, fileName)).then((url)=>{
-              setValues({...values, imgUrl: url})
+  
+          await uploadBytes(storageRef, image).then(()=>{
+            console.log('image uploaded successfully to firebase')
+          })
+          await getDownloadURL(ref(storage, fileName)).then((url)=>{
+              console.log('getDownloadURL success')
               console.log(url)
-            })
-          });
+              URL = url
+          })
         } catch (error) {
           console.error('There was an error uploading a file to Cloud Storage:', error);
+          URL = ''
         }
+        return URL
     }
       
     const addPost = async (json:any) => {
@@ -151,6 +156,7 @@ const Modal = ({toggleModal, categories}:any) => {
         let userId = JSON.parse(localStorage.getItem('jwt')!).user._id; 
         let found = false
         let categoryId = ''
+        let url
         for (var i = 0; i < categories.length && !found; i++) {
           if (categories[i]['categoryName'] === category) {
             categoryId = categories[i]['_id']
@@ -159,17 +165,18 @@ const Modal = ({toggleModal, categories}:any) => {
           }
         }
         if (selectedFile != undefined) {
-          await uploadImageToFirebase(selectedFile)
+          url = await uploadImageToFirebase(selectedFile)
         }
         const json = { 
             userId: userId,
             categoryId: categoryId,
             anDescription: description,
-            imgUrl: imgUrl,
+            imgUrl: url,
             anIsAnonymous: isAnonym,
           };
-        await addPost(json)
+        addPost(json)
         setLoading(false)
+        toggleModal()
     }
 
     return (
