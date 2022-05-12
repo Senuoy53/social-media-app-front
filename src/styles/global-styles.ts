@@ -38,6 +38,7 @@ export const theme = {
     White: "#fff",
     Black: "#000",
     BlueBg: "#121A38",
+    Blue1:"#202DB5",
     LightBlueBg: "#7493CA",
     ButtonColor1: "#2672EC",
     GrayColor: "#7E7979",
