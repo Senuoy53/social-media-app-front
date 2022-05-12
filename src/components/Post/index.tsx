@@ -1,19 +1,16 @@
 import { useState, useEffect } from "react";
 import PostWrapper from './PostWrapper'
-import './index.css'
+//import './index.css'
 import Modal from "../Modal"
 import { BACK_URL_API } from "../../variables";
 import axios from "axios";
 
-
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import Avatar from '@mui/material/Avatar';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
-import { red } from '@mui/material/colors';
+
 import Button from '@mui/material/Button'
 import { makeStyles } from "@material-ui/core";
-
 
 
 import avatar from '../../assets/img/avatar.jpg';
@@ -65,6 +62,7 @@ const Post = () => {
 
   return (
     <div>
+      <PostWrapper>
       <div onClick={toggleModal} className='post'>
           <Card sx={{
         width: {
@@ -92,6 +90,7 @@ const Post = () => {
           </Card>
       </div>
       {modal && <Modal toggleModal={toggleModal} categories={categories}/>}
+      </PostWrapper>
     </div>  
   );
 }

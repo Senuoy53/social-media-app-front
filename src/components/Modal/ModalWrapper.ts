@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {mobile} from "../../styles/responsive";
 
-const PostWrapper = styled.form`
+const ModalWrapper = styled.div`
 .modal, .overlay {
     width: 100vw;
     height: 100vh;
@@ -148,4 +148,4 @@ const PostWrapper = styled.form`
   }
 `
 
-export default PostWrapper
+export default ModalWrapper

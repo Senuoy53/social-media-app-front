@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {mobile} from "../../styles/responsive";
 
-const PostWrapper = styled.form`
+const PostWrapper = styled.div`
 body.active-modal {
   overflow-y: hidden;
 }
@@ -11,6 +11,12 @@ body.active-modal {
   display: block;
   margin: 100px auto 0;
   font-size: 18px;
+}
+
+.post{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 `;
 
