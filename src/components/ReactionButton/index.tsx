@@ -15,114 +15,47 @@ import angrySvg from "../../assets/img/svg-icon/facebook-angry.svg";
 import CustomReactionBtn from "../CustomReactionBtn";
 
 const ReactionButton = () => {
-  const [unlike, setUnlike] = useState(true);
-  const [like, setLike] = useState(false);
-  const [love, setLove] = useState(false);
-  const [wow, setWow] = useState(false);
-  const [haha, setHaha] = useState(false);
-  const [sad, setSad] = useState(false);
-  const [angry, setAngry] = useState(false);
+  const [reaction, setReaction] = useState("unlike");
 
   //   handleClick
   const handleClick = (e: any) => {
     switch (e.target.id) {
       case "unlike":
-        setLike(true);
-        setUnlike(!unlike);
-        setLove(false);
-        setWow(false);
-        setHaha(false);
-        setSad(false);
-        setAngry(false);
+        if (reaction === "unlike") return setReaction("like");
+        setReaction("unlike");
         break;
       case "like":
-        if (like) {
-          setUnlike(true);
-        } else {
-          setUnlike(false);
-        }
-        setLike(!like);
-        setLove(false);
-        setWow(false);
-        setHaha(false);
-        setSad(false);
-        setAngry(false);
+        if (reaction === "like") return setReaction("unlike");
+        setReaction("like");
         break;
       case "love":
-        if (love) {
-          setUnlike(true);
-        } else {
-          setUnlike(false);
-        }
-        setLove(!love);
-        setLike(false);
-        setWow(false);
-        setHaha(false);
-        setSad(false);
-        setAngry(false);
+        if (reaction === "love") return setReaction("unlike");
+        setReaction("love");
         break;
       case "wow":
-        if (wow) {
-          setUnlike(true);
-        } else {
-          setUnlike(false);
-        }
-        setWow(!wow);
-        setLike(false);
-        setLove(false);
-        setHaha(false);
-        setSad(false);
-        setAngry(false);
+        if (reaction === "wow") return setReaction("unlike");
+        setReaction("wow");
         break;
       case "haha":
-        if (haha) {
-          setUnlike(true);
-        } else {
-          setUnlike(false);
-        }
-        setHaha(!haha);
-        setLike(false);
-        setLove(false);
-        setWow(false);
-        setSad(false);
-        setAngry(false);
+        if (reaction === "haha") return setReaction("unlike");
+        setReaction("haha");
         break;
       case "sad":
-        if (sad) {
-          setUnlike(true);
-        } else {
-          setUnlike(false);
-        }
-        setSad(!sad);
-        setLike(false);
-        setLove(false);
-        setWow(false);
-        setHaha(false);
-        setAngry(false);
+        if (reaction === "sad") return setReaction("unlike");
+        setReaction("sad");
         break;
       case "angry":
-        if (angry) {
-          setUnlike(true);
-        } else {
-          setUnlike(false);
-        }
-        setAngry(!angry);
-        setLike(false);
-        setLove(false);
-        setWow(false);
-        setHaha(false);
-        setSad(false);
-
+        if (reaction === "angry") return setReaction("unlike");
+        setReaction("angry");
         break;
       default:
         break;
     }
-    // setLike(!like);
   };
 
   return (
     <ReactionButtonWrapper>
-      {unlike && (
+      {reaction === "unlike" && (
         <div className="like-button regular" onClick={handleClick} id="unlike">
           <FontAwesomeIcon
             icon={fasThumbsUp}
@@ -135,7 +68,7 @@ const ReactionButton = () => {
         </div>
       )}
 
-      {like && (
+      {reaction === "like" && (
         <div className="like-button solid" onClick={handleClick} id="like">
           <FontAwesomeIcon icon={faThumbsUp} className="like-icon" id="like" />
           <span className="like-text" id="like">
@@ -144,7 +77,7 @@ const ReactionButton = () => {
         </div>
       )}
 
-      {love && (
+      {reaction === "love" && (
         <CustomReactionBtn
           className="btn love-button"
           SvgImg={loveSvg}
@@ -154,7 +87,7 @@ const ReactionButton = () => {
         />
       )}
 
-      {wow && (
+      {reaction === "wow" && (
         <CustomReactionBtn
           className="btn yellow-button"
           SvgImg={wowSvg}
@@ -164,7 +97,7 @@ const ReactionButton = () => {
         />
       )}
 
-      {haha && (
+      {reaction === "haha" && (
         <CustomReactionBtn
           className="btn yellow-button"
           SvgImg={hahaSvg}
@@ -174,7 +107,7 @@ const ReactionButton = () => {
         />
       )}
 
-      {sad && (
+      {reaction === "sad" && (
         <CustomReactionBtn
           className="btn yellow-button"
           SvgImg={sadSvg}
@@ -184,7 +117,7 @@ const ReactionButton = () => {
         />
       )}
 
-      {angry && (
+      {reaction === "angry" && (
         <CustomReactionBtn
           className="btn angry-button"
           SvgImg={angrySvg}
