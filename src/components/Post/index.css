@@ -8,3 +8,9 @@ body.active-modal {
     margin: 100px auto 0;
     font-size: 18px;
   }
+
+  .post{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }

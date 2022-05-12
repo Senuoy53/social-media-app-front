@@ -6,7 +6,30 @@ import { BACK_URL_API } from "../../variables";
 import axios from "axios";
 
 
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import Avatar from '@mui/material/Avatar';
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import { red } from '@mui/material/colors';
+import Button from '@mui/material/Button'
+import { makeStyles } from "@material-ui/core";
+
+
+
+import avatar from '../../assets/img/avatar.jpg';
+
+
+const useStyles = makeStyles(() => ({
+  title: {
+    color: 'grey',
+  }
+}));
+
+
+
 const Post = () => {
+
+  const classes = useStyles();
   const [modal, setModal] = useState(false);
   const [categories, setCategories] = useState([])
   
@@ -42,21 +65,33 @@ const Post = () => {
 
   return (
     <div>
-      <button onClick={toggleModal} className="btn-modal">
-        Open
-      </button>
+      <div onClick={toggleModal} className='post'>
+          <Card sx={{
+        width: {
+          sx: 1.0, // 100%
+          sm: 400,
+          md: 600,
+        },
+      }}>
+            <CardHeader
+              avatar={
+                <Avatar alt="avatar" src={avatar}/>
+              }
+              action={
+                <Button variant="contained" size="medium" sx={{
+                  margin: "5px 0 0 10px",
+                }}>
+                  Post
+                </Button>
+              }
+              title="Whats on your mind ? "
+              classes={{
+                title: classes.title,
+              }} 
+            />
+          </Card>
+      </div>
       {modal && <Modal toggleModal={toggleModal} categories={categories}/>}
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. A ullam 
-        excepturi corrupti doloremque accusantium id ratione ipsa veniam eum
-        magnam soluta molestias accusamus, maiores numquam nam rerum amet porro
-        aspernatur. Quam officiis sint atque placeat amet repudiandae corrupti 
-        totam ab vel perferendis cum dicta, sunt id autem tempore earum tenetur
-        quas, dolore exercitationem repellendus illum, quisquam architecto cum 
-        autem? Fuga ab perferendis et ut deserunt laboriosam ipsam perspiciatis 
-        consequuntur, modi molestias sint, adipisci nam, sit labore voluptatem quibusdam. 
-        Similique neque eum vel officiis sed perferendis corrupti saepe
-      </p>
     </div>  
   );
 }
