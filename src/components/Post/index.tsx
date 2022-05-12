@@ -65,11 +65,11 @@ const Post = () => {
       <PostWrapper>
       <div onClick={toggleModal} className='post'>
           <Card sx={{
-        width: {
+        width: 1.0 /* {
           sx: 1.0, // 100%
           sm: 400,
           md: 600,
-        },
+        } */,
       }}>
             <CardHeader
               avatar={
