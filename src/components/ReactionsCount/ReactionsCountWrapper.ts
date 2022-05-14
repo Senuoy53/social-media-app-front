@@ -3,16 +3,15 @@ import styled from "styled-components";
 const ReactionsCountWrapper = styled.div`
   display: flex;
   align-items: center;
-  font-size: 14px;
-  color: ${({ theme }) => theme.colors.LightGrayColor};
+  margin-left: 5px;
 
   ul {
     padding: 0px;
     margin-bottom: 0px;
-    margin-left: 6px;
     display: flex;
     align-items: center;
     list-style: none;
+    margin-right: 5px;
   }
 
   ul li {
@@ -27,10 +26,6 @@ const ReactionsCountWrapper = styled.div`
     width: 100%;
     height: 100%;
     border-radius: 50%;
-  }
-
-  #reactionCount {
-    margin-left: 5px;
   }
 `;
 

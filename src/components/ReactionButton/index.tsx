@@ -13,43 +13,39 @@ import sadSvg from "../../assets/img/svg-icon/facebook-reaction-sad.svg";
 import angrySvg from "../../assets/img/svg-icon/facebook-angry.svg";
 
 import CustomReactionBtn from "../CustomReactionBtn";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  reactionCountPlus,
+  reactionCountMinus,
+} from "../ReactionsCount/actions";
+import { setReaction } from "./actions";
+import { createStructuredSelector } from "reselect";
+import { makeSelectReaction } from "./selectors";
+
+const reactionButtonState = createStructuredSelector({
+  reaction: makeSelectReaction(),
+});
 
 const ReactionButton = () => {
-  const [reaction, setReaction] = useState("unlike");
+  // Selectors
+  const { reaction } = useSelector(reactionButtonState);
+
+  // useDispatch
+  const dispatch = useDispatch();
 
   //   handleClick
   const handleClick = (e: any) => {
-    switch (e.target.id) {
-      case "unlike":
-        if (reaction === "unlike") return setReaction("like");
-        setReaction("unlike");
-        break;
-      case "like":
-        if (reaction === "like") return setReaction("unlike");
-        setReaction("like");
-        break;
-      case "love":
-        if (reaction === "love") return setReaction("unlike");
-        setReaction("love");
-        break;
-      case "wow":
-        if (reaction === "wow") return setReaction("unlike");
-        setReaction("wow");
-        break;
-      case "haha":
-        if (reaction === "haha") return setReaction("unlike");
-        setReaction("haha");
-        break;
-      case "sad":
-        if (reaction === "sad") return setReaction("unlike");
-        setReaction("sad");
-        break;
-      case "angry":
-        if (reaction === "angry") return setReaction("unlike");
-        setReaction("angry");
-        break;
-      default:
-        break;
+    if (e.target.id === "unlike" && reaction === "unlike") {
+      dispatch(reactionCountPlus());
+      dispatch(setReaction("like"));
+    } else if (e.target.id !== "unlike" && reaction === "unlike") {
+      dispatch(reactionCountPlus());
+      dispatch(setReaction(e.target.id));
+    } else if (e.target.id === reaction) {
+      dispatch(reactionCountMinus());
+      dispatch(setReaction("unlike"));
+    } else {
+      dispatch(setReaction(e.target.id));
     }
   };
 

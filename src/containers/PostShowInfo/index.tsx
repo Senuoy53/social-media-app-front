@@ -9,7 +9,7 @@ const PostShowInfo = () => {
         <ReactionButton />
         <ReactionsCount />
       </div>
-      <div className="left">show comments</div>
+      <div className="left">15 comments</div>
     </PostShowInfoWrapper>
   );
 };

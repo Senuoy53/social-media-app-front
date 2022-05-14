@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 const ReactionButtonWrapper = styled.div`
-  font-size: 20px;
-  color: #7e7979;
   cursor: pointer;
   position: relative;
 

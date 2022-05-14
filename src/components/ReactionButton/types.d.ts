@@ -1,0 +1,3 @@
+interface ReactionButtonState {
+  reaction: string;
+}

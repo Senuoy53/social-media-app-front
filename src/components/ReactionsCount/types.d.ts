@@ -1,0 +1,3 @@
+interface ReactionCounterState {
+  reactionCounter: number;
+}

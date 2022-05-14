@@ -1,10 +1,17 @@
 import styled from "styled-components";
+import { mobile600 } from "../../styles/responsive";
 
 const PostShowInfoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0px 16px 10px;
+  font-size: 20px;
+  color: ${({ theme }) => theme.colors.GrayColor};
+
+  ${mobile600({
+    fontSize: "16px",
+  })}
 
   .right {
     display: flex;
