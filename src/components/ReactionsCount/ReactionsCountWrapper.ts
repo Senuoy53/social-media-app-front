@@ -4,6 +4,7 @@ const ReactionsCountWrapper = styled.div`
   display: flex;
   align-items: center;
   margin-left: 5px;
+  font-size: 18px;
 
   ul {
     padding: 0px;
@@ -15,8 +16,8 @@ const ReactionsCountWrapper = styled.div`
   }
 
   ul li {
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     margin-left: -6px;
     background-color: #3335;

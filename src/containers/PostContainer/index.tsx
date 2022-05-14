@@ -4,6 +4,8 @@ import { Card, CardActions, Checkbox, IconButton } from "@mui/material";
 import PostHeader from "../../components/PostHeader";
 import PostBody from "../../components/PostBody";
 import PostShowInfo from "../../containers/PostShowInfo";
+import PostInputBox from "../../components/PostInputBox";
+import CommentsContainer from "../CommentsContainer";
 
 const PostContainer = ({
   avatar,
@@ -21,6 +23,10 @@ const PostContainer = ({
         <PostBody desc={desc} img={img} />
         {/* Show post info */}
         <PostShowInfo />
+        {/* Comments Container */}
+        <CommentsContainer />
+        {/* Post input box  */}
+        <PostInputBox />
       </Card>
     </PostContainerWrapper>
   );

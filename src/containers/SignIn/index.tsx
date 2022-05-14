@@ -33,10 +33,11 @@ import {
   PasswordFields,
   PasswordLabel,
   VerificationError,
-  ButtonField,
   MessageInfo,
   SubTitle,
 } from "./constants";
+
+import { ButtonField } from "../../utils/constants";
 
 import { outlineType } from "../../utils/app-utils";
 import MessageInfoComp from "../../components/MessageInfoComp";
