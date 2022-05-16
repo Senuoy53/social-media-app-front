@@ -37,6 +37,10 @@ export enum VerificationError {
   MESSAGE = "Please verify your email",
 }
 
+export enum ButtonField {
+  SIGN_IN = "Sign In",
+}
+
 export enum MessageInfo {
   DONT_HAVE_ACCOUNT = "Don't Have An Account?",
   CREATE_ONE = "Create One",

@@ -1,8 +1,8 @@
 import { Button, TextField } from "@mui/material";
 import CheckIdWrapper from "./CheckIdrapper";
 import Layout from "../../components/Layout";
-import { MessageInfo, ButtonField } from "./constants";
-
+import { ButtonField } from "./constants";
+import { MessageInfo } from "../../utils/constants";
 import { SubTitle } from "./constants";
 import MessageInfoComp from "../../components/MessageInfoComp";
 import { useEffect, useState } from "react";

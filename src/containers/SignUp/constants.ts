@@ -98,3 +98,7 @@ export enum ValidatePassworError {
 export enum SignupSuccessMessage {
   Message = "Signed up, please verify your email",
 }
+
+export enum ButtonField {
+  SIGN_UP = "Sign Up",
+}
