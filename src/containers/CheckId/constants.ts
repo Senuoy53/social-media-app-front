@@ -5,10 +5,6 @@ export enum ActionsTypes {
   SET_CHECK_ID_SUCCESS = "SET_CHECK_ID_SUCCESS",
 }
 
-export enum ButtonField {
-  CHECK_USER_ID = "Check user ID",
-}
-
 export enum SubTitle {
   SIGN_UP = "Sign Up",
 }

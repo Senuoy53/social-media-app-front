@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mobile, tablette } from "../../styles/responsive";
+import { desktop, mobile, mobile400, tablette } from "../../styles/responsive";
 
 const LayoutWrapper = styled.div`
   ${tablette({
@@ -61,11 +61,25 @@ const LayoutWrapper = styled.div`
     .title {
       font-weight: 500;
       margin-bottom: 30px;
+      font-size: "20px";
+
+      ${mobile400({
+        fontSize: "20px",
+      })}
+
+      ${tablette({
+        fontSize: "20px",
+      })}
+
+      ${desktop({
+        fontSize: "24px",
+      })};
     }
 
     .subtitle {
       color: ${({ theme }) => theme.colors.LightBlueBg};
       margin-bottom: 30px;
+
       ${mobile({
         fontSize: "22px",
       })}

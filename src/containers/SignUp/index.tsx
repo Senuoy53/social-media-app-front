@@ -23,7 +23,6 @@ import {
   LnameFields,
   EmailFields,
   SignupSuccessMessage,
-  ButtonField,
   InputLabels,
   PassworFields,
   ConPassworFields,
@@ -33,6 +32,7 @@ import {
   ConPasswordRequires,
   ValidatePassworError,
 } from "./constants";
+import { ButtonField } from "../../utils/constants";
 import { MessageInfo } from "../../utils/constants";
 import { outlineType } from "../../utils/app-utils";
 import MessageInfoComp from "../../components/MessageInfoComp";

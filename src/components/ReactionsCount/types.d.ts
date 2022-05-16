@@ -1,0 +1,3 @@
+interface ReactionCountProps {
+  reaction: string;
+}
