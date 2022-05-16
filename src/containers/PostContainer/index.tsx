@@ -18,7 +18,7 @@ const PostContainer = ({
         <PostHeader avatar={avatar} title={title} subheader={subheader} />
         {/* Post Body */}
         <PostBody desc={desc} img={img} />
-        {/* Post Reactions */}
+        {/* Show post info */}
       </Card>
     </PostContainerWrapper>
   );

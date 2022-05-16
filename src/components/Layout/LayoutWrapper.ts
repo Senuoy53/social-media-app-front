@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mobile, tablette } from "../../styles/responsive";
+import { desktop, mobile, mobile400, tablette } from "../../styles/responsive";
 
 const LayoutWrapper = styled.div`
   ${tablette({
