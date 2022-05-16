@@ -17,6 +17,15 @@ const PostShowInfoWrapper = styled.div`
     display: flex;
     align-items: center;
     gap: 10px;
+
+    #postReactionCount {
+      font-size: 18px;
+      margin-left: -5px;
+
+      ${mobile600({
+        fontSize: "16px",
+      })}
+    }
   }
 `;
 

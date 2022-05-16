@@ -13,9 +13,9 @@ const StyleButton = styled(Button)({
   },
 });
 
-const ButtonCustom = ({ className, children }: ButtonCustomProps) => {
+const ButtonCustom = ({ className, children, onClick }: ButtonCustomProps) => {
   return (
-    <StyleButton variant="contained" className={className}>
+    <StyleButton variant="contained" className={className} onClick={onClick}>
       {children}
     </StyleButton>
   );

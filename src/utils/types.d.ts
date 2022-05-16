@@ -21,7 +21,8 @@ interface GlobalState {
   checkIdState: CheckIdState;
   signUpState: SignUpState;
   reactionCounterState: ReactionCounterState;
-  reactionButtonState: ReactionButtonState;
+  postShowInfoState: PostShowInfoState;
+  commentsState: CommentsState;
 }
 
 export { Action, User, GlobalState };

@@ -3,7 +3,6 @@ import ReactionButtonWrapper from "./ReactionButtonWrapper";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp } from "@fortawesome/free-solid-svg-icons";
 import { faThumbsUp as fasThumbsUp } from "@fortawesome/free-regular-svg-icons";
-import { useState } from "react";
 import ReactionHover from "../ReactionHover";
 
 import loveSvg from "../../assets/img/svg-icon/facebook-love.svg";
@@ -13,63 +12,21 @@ import sadSvg from "../../assets/img/svg-icon/facebook-reaction-sad.svg";
 import angrySvg from "../../assets/img/svg-icon/facebook-angry.svg";
 
 import CustomReactionBtn from "../CustomReactionBtn";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  reactionCountPlus,
-  reactionCountMinus,
-} from "../ReactionsCount/actions";
-import { setReaction } from "./actions";
-import { createStructuredSelector } from "reselect";
-import { makeSelectReaction } from "./selectors";
 
-const reactionButtonState = createStructuredSelector({
-  reaction: makeSelectReaction(),
-});
-
-const ReactionButton = () => {
-  // Selectors
-  const { reaction } = useSelector(reactionButtonState);
-
-  // useDispatch
-  const dispatch = useDispatch();
-
-  //   handleClick
-  const handleClick = (e: any) => {
-    if (e.target.id === "unlike" && reaction === "unlike") {
-      dispatch(reactionCountPlus());
-      dispatch(setReaction("like"));
-    } else if (e.target.id !== "unlike" && reaction === "unlike") {
-      dispatch(reactionCountPlus());
-      dispatch(setReaction(e.target.id));
-    } else if (e.target.id === reaction) {
-      dispatch(reactionCountMinus());
-      dispatch(setReaction("unlike"));
-    } else {
-      dispatch(setReaction(e.target.id));
-    }
-  };
-
+const ReactionButton = ({ reaction, onClick }: ReactionButtonProps) => {
   return (
     <ReactionButtonWrapper>
       {reaction === "unlike" && (
-        <div className="like-button regular" onClick={handleClick} id="unlike">
-          <FontAwesomeIcon
-            icon={fasThumbsUp}
-            className="like-icon"
-            id="unlike"
-          />
-          <span className="like-text" id="unlike">
-            Like
-          </span>
+        <div className="like-button regular" onClick={onClick} id="unlike">
+          <FontAwesomeIcon icon={fasThumbsUp} className="like-icon" />
+          <span className="like-text">Like</span>
         </div>
       )}
 
       {reaction === "like" && (
-        <div className="like-button solid" onClick={handleClick} id="like">
-          <FontAwesomeIcon icon={faThumbsUp} className="like-icon" id="like" />
-          <span className="like-text" id="like">
-            Like
-          </span>
+        <div className="like-button solid" onClick={onClick} id="like">
+          <FontAwesomeIcon icon={faThumbsUp} className="like-icon" />
+          <span className="like-text">Like</span>
         </div>
       )}
 
@@ -79,7 +36,7 @@ const ReactionButton = () => {
           SvgImg={loveSvg}
           id="love"
           text="Love"
-          onClick={handleClick}
+          onClick={onClick}
         />
       )}
 
@@ -89,7 +46,7 @@ const ReactionButton = () => {
           SvgImg={wowSvg}
           id="wow"
           text="Wow"
-          onClick={handleClick}
+          onClick={onClick}
         />
       )}
 
@@ -99,7 +56,7 @@ const ReactionButton = () => {
           SvgImg={hahaSvg}
           id="haha"
           text="Haha"
-          onClick={handleClick}
+          onClick={onClick}
         />
       )}
 
@@ -109,7 +66,7 @@ const ReactionButton = () => {
           SvgImg={sadSvg}
           id="sad"
           text="Sad"
-          onClick={handleClick}
+          onClick={onClick}
         />
       )}
 
@@ -119,12 +76,12 @@ const ReactionButton = () => {
           SvgImg={angrySvg}
           id="angry"
           text="Angry"
-          onClick={handleClick}
+          onClick={onClick}
         />
       )}
 
       <div className="hover-like-img">
-        <ReactionHover onClick={handleClick} />
+        <ReactionHover onClick={onClick} />
       </div>
     </ReactionButtonWrapper>
   );

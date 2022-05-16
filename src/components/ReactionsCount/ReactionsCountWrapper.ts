@@ -12,7 +12,6 @@ const ReactionsCountWrapper = styled.div`
     display: flex;
     align-items: center;
     list-style: none;
-    margin-right: 5px;
   }
 
   ul li {

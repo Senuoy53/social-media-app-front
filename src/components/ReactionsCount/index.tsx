@@ -5,24 +5,8 @@ import wow from "../../assets/img/svg-icon/facebook-wow.svg";
 import haha from "../../assets/img/svg-icon/facebook-haha.svg";
 import sad from "../../assets/img/svg-icon/facebook-reaction-sad.svg";
 import angry from "../../assets/img/svg-icon/facebook-angry.svg";
-import { createStructuredSelector } from "reselect";
-import { makeSelectReactionCounter } from "./selectors";
-import { useSelector } from "react-redux";
-import { makeSelectReaction } from "../ReactionButton/selectors";
 
-const reactionCounterState = createStructuredSelector({
-  reactionCounter: makeSelectReactionCounter(),
-});
-
-const reactionButtonState = createStructuredSelector({
-  reaction: makeSelectReaction(),
-});
-
-const ReactionsCount = () => {
-  // Selectors
-  const { reactionCounter } = useSelector(reactionCounterState);
-  const { reaction } = useSelector(reactionButtonState);
-
+const ReactionsCount = ({ reaction }: ReactionCountProps) => {
   return (
     <ReactionsCountWrapper>
       <ul>
@@ -62,9 +46,6 @@ const ReactionsCount = () => {
           </li>
         )}
       </ul>
-      {reactionCounter > 0 && (
-        <span id="reactionCount"> {reactionCounter}</span>
-      )}
     </ReactionsCountWrapper>
   );
 };

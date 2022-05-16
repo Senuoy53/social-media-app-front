@@ -24,9 +24,17 @@ const ReactionButtonWrapper = styled.div`
     background-color: #3335;
   }
 
+  .like-button > * {
+    pointer-events: none;
+  }
+
   .btn {
     display: flex;
     align-items: center;
+  }
+
+  .btn > * {
+    pointer-events: none;
   }
 
   .love-button {

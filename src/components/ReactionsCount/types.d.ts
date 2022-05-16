@@ -1,3 +1,3 @@
-interface ReactionCounterState {
-  reactionCounter: number;
+interface ReactionCountProps {
+  reaction: string;
 }

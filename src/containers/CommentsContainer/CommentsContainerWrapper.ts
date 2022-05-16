@@ -3,7 +3,12 @@ import { mobile } from "../../styles/responsive";
 
 const CommentsContainerWrapper = styled.div`
   display: flex;
-  margin: 20px 16px 20px;
+  margin-bottom: 20px;
+  color: ${({ theme }) => theme.colors.GrayColor};
+
+  ${mobile({
+    fontSize: "14px",
+  })}
 
   .com-rightSide {
     /* display: flex;
@@ -17,11 +22,11 @@ const CommentsContainerWrapper = styled.div`
 
     #comBottomContainer {
       display: flex;
+      align-items: center;
       gap: 5px;
       margin-top: 5px;
 
       .CommentButton {
-        font-size: 14px;
         font-weight: lighter;
         cursor: pointer;
 

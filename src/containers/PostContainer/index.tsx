@@ -24,7 +24,12 @@ const PostContainer = ({
         {/* Show post info */}
         <PostShowInfo />
         {/* Comments Container */}
-        <CommentsContainer />
+        <div id="CommentsContainer">
+          <CommentsContainer />
+          <CommentsContainer />
+          <CommentsContainer />
+        </div>
+
         {/* Post input box  */}
         <PostInputBox />
       </Card>
