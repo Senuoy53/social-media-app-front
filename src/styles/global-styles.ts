@@ -39,6 +39,7 @@ export const theme = {
     Black: "#000",
     BlueBg: "#121A38",
     LightBlueBg: "#7493CA",
+    HoverBlueBg: "#2a314c",
     ButtonColor1: "#2672EC",
     GrayColor: "#7E7979",
     LightGrayColor: "rgba(0, 0, 0, 0.6)",

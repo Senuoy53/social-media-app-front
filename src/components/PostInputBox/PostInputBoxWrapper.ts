@@ -17,11 +17,6 @@ const PostInputBoxWrapper = styled.form`
   }
 
   .btn-2 {
-    padding: 3px 30px;
-    text-transform: capitalize;
-    border-radius: 50px;
-    background-color: ${({ theme }) => theme.colors.BlueBg};
-
     ${mobile({
       padding: "2px 20px",
       fontSize: "12px",
