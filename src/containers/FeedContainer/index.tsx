@@ -5,8 +5,7 @@ import Post from "../../components/Post";
 const FeedContainer = () => {
   return (
     <FeedContainerWrapper>
-      Feed
-      <Post/>
+      <Post />
       <PostContainer
         avatar="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
         title="Younes Lamrani"

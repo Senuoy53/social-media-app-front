@@ -1,7 +1,7 @@
 import LeftBarWrapper from "./LeftBarWrapper";
 
 const LeftBar = () => {
-  return <LeftBarWrapper>LeftBar</LeftBarWrapper>;
+  return <LeftBarWrapper></LeftBarWrapper>;
 };
 
 export default LeftBar;

@@ -14,3 +14,4 @@ declare module "*.svg" {
 declare module "*.gif" {
   export default "" as string;
 }
+declare module "uuid";

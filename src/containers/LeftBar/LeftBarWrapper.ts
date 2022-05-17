@@ -7,9 +7,10 @@ const LeftBarWrapper = styled.section`
   max-height: 100px;
   flex: 20%;
   background-color: white;
-  ${mobile({
-    display: "none",
-  })}
+  display: "none",
+    ${mobile({
+      display: "none",
+    })};
 `;
 
 export default LeftBarWrapper;

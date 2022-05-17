@@ -1,7 +1,7 @@
 import RightBarWrapper from "./RightBarWrapper";
 
 const RightBar = () => {
-  return <RightBarWrapper>RightBar</RightBarWrapper>;
+  return <RightBarWrapper></RightBarWrapper>;
 };
 
 export default RightBar;
