@@ -18,7 +18,7 @@ import Divider from "@mui/material/Divider";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { axiosApi } from "../../utils/request";
+import { axiosAuthApi } from "../../utils/request";
 import { BACK_URL } from "../../variables";
 import NavbarWrapper from "./NavbarWrapper";
 
@@ -55,9 +55,9 @@ const Navbar = () => {
       //  Take refreshToken
       let refreshToken = JSON.parse(jwt!).refreshToken;
 
-      axiosApi({
+      axiosAuthApi({
         method: "POST",
-        url: `${BACK_URL}/signout`,
+        url: "/signout",
         headers: {
           Accept: "application/json",
           authorization: "Bearer " + accessToken,

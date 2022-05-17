@@ -1,7 +1,6 @@
 import { Navigate } from "react-router";
 import { useState, useEffect } from "react";
-import { BACK_URL } from "../../variables";
-import { axiosApi } from "../../utils/request";
+import { axiosAuthApi } from "../../utils/request";
 
 const PrivateRoute = ({ children }: any) => {
   const [auth, setAuth] = useState(false);
@@ -12,9 +11,9 @@ const PrivateRoute = ({ children }: any) => {
       let jwt = localStorage.getItem("jwt");
       let token = JSON.parse(jwt!).accessToken;
 
-      axiosApi({
+      axiosAuthApi({
         method: "GET",
-        url: `${BACK_URL}/verifytoken`,
+        url: `/verifytoken`,
         headers: {
           Accept: "application/json",
           authorization: "Bearer " + token,

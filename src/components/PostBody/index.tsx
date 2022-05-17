@@ -5,7 +5,7 @@ const PostBody = ({ desc, img }: PostBodyProps) => {
   return (
     <PostBodyWrapper>
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" id="description">
           {desc}
         </Typography>
       </CardContent>
