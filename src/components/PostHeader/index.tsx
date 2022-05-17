@@ -1,6 +1,7 @@
 import PostHeaderWrapper from "./PostHeaderWrapper";
 import { MoreVert } from "@mui/icons-material";
 import { Avatar, CardHeader, IconButton } from "@mui/material";
+import Moment from "react-moment";
 
 const PostHeader = ({ avatar, title, subheader }: PostHeaderProps) => {
   return (
@@ -16,7 +17,7 @@ const PostHeader = ({ avatar, title, subheader }: PostHeaderProps) => {
           </IconButton>
         }
         title={title}
-        subheader={subheader}
+        subheader={<Moment format="MMM DD YYYY, LT">{subheader}</Moment>}
       />
     </PostHeaderWrapper>
   );

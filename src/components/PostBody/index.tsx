@@ -12,7 +12,7 @@ const PostBody = ({ desc, img }: PostBodyProps) => {
       <CardMedia
         component="img"
         image={img}
-        alt="Paella dish"
+        alt="Profile Picture"
         className="CardMedia"
       />
     </PostBodyWrapper>

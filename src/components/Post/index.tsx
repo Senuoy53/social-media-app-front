@@ -12,8 +12,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import { makeStyles } from "@material-ui/core";
 
-import avatar from "../../assets/img/avatar.jpg";
-
 const useStyles = makeStyles(() => ({
   title: {
     color: "grey",
@@ -24,6 +22,10 @@ const Post = () => {
   const classes = useStyles();
   const [modal, setModal] = useState(false);
   const [categories, setCategories] = useState([]);
+
+  // Get user from localstorage
+  let jwt = localStorage.getItem("jwt");
+  let user = JSON.parse(jwt!).user;
 
   const getCategories = async () => {
     if (typeof window.localStorage !== "undefined") {
@@ -67,7 +69,7 @@ const Post = () => {
             }}
           >
             <CardHeader
-              avatar={<Avatar alt="avatar" src={avatar} />}
+              avatar={<Avatar alt="avatar" src={user.profilePicture} />}
               action={
                 <Button
                   variant="contained"
@@ -86,7 +88,13 @@ const Post = () => {
             />
           </Card>
         </div>
-        {modal && <Modal toggleModal={toggleModal} categories={categories} />}
+        {modal && (
+          <Modal
+            toggleModal={toggleModal}
+            categories={categories}
+            user={user}
+          />
+        )}
       </PostWrapper>
     </div>
   );

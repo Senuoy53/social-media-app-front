@@ -9,7 +9,6 @@ import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import { Alert } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import avatar from "../../assets/img/avatar.jpg";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -49,7 +48,7 @@ const useStyles = makeStyles({
 });
 
 //Modal (popup) component
-const Modal = ({ toggleModal, categories }: any) => {
+const Modal = ({ toggleModal, categories, user }: any) => {
   const classes = useStyles();
   const [values, setValues] = useState({
     type: "annoucement",
@@ -249,7 +248,7 @@ const Modal = ({ toggleModal, categories }: any) => {
               <div className="avatar">
                 <Avatar
                   alt="avatar"
-                  src={avatar}
+                  src={user.profilePicture}
                   sx={{ width: 66, height: 66, mr: 3 }}
                 />
               </div>

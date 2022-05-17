@@ -44,7 +44,7 @@ const FeedContainer = () => {
           ) : (
             <PostContainer
               key={index}
-              avatar="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+              avatar={item.userId.profilePicture}
               title={`${item.userId.fname} ${item.userId.lname}`}
               subheader={item.createdAt}
               desc={item.anDescription}
@@ -52,15 +52,6 @@ const FeedContainer = () => {
             />
           )
         )}
-
-      {/* <PostContainer
-        avatar="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-        title="Younes Lamrani"
-        subheader="Mai 09 2022, 18:35 pm"
-        desc="Hello guys, whats'up ?"
-        img="https://images.pexels.com/photos/1686451/pexels-photo-1686451.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-        data format : 2022-05-16T17:43:56.734Z
-      /> */}
     </FeedContainerWrapper>
   );
 };

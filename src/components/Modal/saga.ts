@@ -32,7 +32,6 @@ function* requestAllAnnouncements() {
     if ((status >= 400 && status < 600) || data.error) {
       yield put(requestAnnouncementError(data.error));
     } else {
-      console.log("saga data", data);
       yield put(requestAnnouncementError(""));
       yield put(requestAnnouncementSuccess(data));
     }

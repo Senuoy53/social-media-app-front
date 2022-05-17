@@ -176,8 +176,8 @@ const Navbar = () => {
                       width: { xs: "30px", sm: "40px" },
                       height: { xs: "30px", sm: "40px" },
                     }}
-                    alt="Remy Sharp"
-                    src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                    alt="Profile picture"
+                    src={user.profilePicture}
                   />
                 </StyledBadge>
               </IconButton>
@@ -239,8 +239,8 @@ const Navbar = () => {
                   width: { xs: "30px", sm: "40px" },
                   height: { xs: "30px", sm: "40px" },
                 }}
-                alt="Remy Sharp"
-                src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                alt="Profile picture"
+                src={user.profilePicture}
               />
               <Box sx={{ textTransform: "capitalize" }} className="user">
                 {user.fname + " " + user.lname}
