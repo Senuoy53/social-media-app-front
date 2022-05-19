@@ -79,8 +79,8 @@ const Navbar = () => {
 
   // Styles
   const StyledToolbar = styled(Toolbar)({
-    display: "flex",
-    justifyContent: "space-between",
+    // display: "flex",
+    // justifyContent: "space-between",
   });
 
   const StyledMenu = styled(Menu)(({ theme }) => ({
@@ -121,7 +121,15 @@ const Navbar = () => {
 
   return (
     <NavbarWrapper>
-      <AppBar position="fixed" sx={{ backgroundColor: "#121A38" }}>
+      <AppBar
+        position="fixed"
+        sx={{
+          backgroundColor: "#121A38",
+          maxWidth: "1400px",
+          left: "50%",
+          transform: "translateX(-50%)",
+        }}
+      >
         {/* <AppBar position="sticky"> */}
         <StyledToolbar className="navbar">
           <div className="logo-container">
