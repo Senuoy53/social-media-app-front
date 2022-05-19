@@ -17,15 +17,14 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { BACK_URL_API } from "../../variables";
-import axios from "axios";
-
 import { firebaseConfig } from "../../variables";
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
 import { setAnnouncementData } from "./actions";
+import ButtonCustom from "../ButtonCustom";
+import { ButtonField } from "../../utils/constants";
 
 //firebase iniialisation
 const app = initializeApp(firebaseConfig);
@@ -229,7 +228,7 @@ const Modal = ({ toggleModal, categories, user }: any) => {
           <div className="top-bar-buttom">&nbsp;</div>
           <div className="content">
             {error && (
-              <Alert sx={{ mt: 2 }} severity="warning">
+              <Alert sx={{ mt: 2 }} severity="warning" id="alert">
                 Category and Description are required
               </Alert>
             )}
@@ -241,25 +240,29 @@ const Modal = ({ toggleModal, categories, user }: any) => {
                   sx={{ width: 66, height: 66, mr: 3 }}
                 />
               </div>
-              <textarea
-                className="text-area"
-                name="description"
-                placeholder="Write something ..."
-                onChange={handleChange}
-              />
-            </div>
-            {selectedFile && (
-              <div className="image-box">
-                <FontAwesomeIcon
-                  icon={faXmark}
-                  color="grey"
-                  size="2x"
-                  className="image-close-button"
-                  onClick={handleClickDeleteImage}
+
+              <div>
+                <textarea
+                  className="text-area"
+                  name="description"
+                  placeholder="Write something ..."
+                  onChange={handleChange}
                 />
-                <img src={preview} />
+                {selectedFile && (
+                  <div className="image-box">
+                    <FontAwesomeIcon
+                      icon={faXmark}
+                      color="grey"
+                      size="2x"
+                      className="image-close-button"
+                      onClick={handleClickDeleteImage}
+                    />
+                    <img src={preview} />
+                  </div>
+                )}
               </div>
-            )}
+            </div>
+
             <div className="buttons">
               <div className="button-left-side">
                 <div className="image-upload">
@@ -287,13 +290,9 @@ const Modal = ({ toggleModal, categories, user }: any) => {
                     )}
                   </IconButton>
                 </Tooltip>
-                <Button
-                  variant="contained"
-                  onClick={SubmitPost}
-                  style={{ width: "120px", height: "50px", fontSize: "18px" }}
-                >
-                  Post
-                </Button>
+                <ButtonCustom className="btn-2" onClick={SubmitPost}>
+                  {ButtonField.POST}
+                </ButtonCustom>
               </div>
             </div>
           </div>

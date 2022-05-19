@@ -19,15 +19,17 @@ const ModalWrapper = styled.div`
   }
   .modal-content {
     position: absolute;
-    top: 50%;
+    top: calc(50% + 30px);
     left: 50%;
     transform: translate(-50%, -50%);
     line-height: 1.4;
     background: #f1f1f1;
     border-radius: 10px;
     width: 600px;
+    max-height: 500px;
     ${mobile({
-      width: "100%",
+      width: "90%",
+      maxHeight: "800px",
     })}
     z-index: 1000;
   }
@@ -70,6 +72,7 @@ const ModalWrapper = styled.div`
   }
 
   .avatar {
+    align-self: start;
     ${mobile({
       display: "none",
     })}
@@ -79,11 +82,13 @@ const ModalWrapper = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
-    margin: 10px;
+    width: 100%;
+
+    /* margin: 10px; */
     ${mobile({
-      flexDirection: "column",
-      width: "100%",
-    })}
+      // flexDirection: "column",
+      // width: "500px",
+    })};
   }
 
   .custom-text-area textarea {
@@ -93,9 +98,10 @@ const ModalWrapper = styled.div`
     height: 50px;
     border: none;
     background: #f1f1f1;
+    resize: none;
     ${mobile({
-      width: "90%",
-      height: "100px",
+      width: "100%",
+      // height: "100px",
     })}
   }
 
@@ -103,11 +109,23 @@ const ModalWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 10px;
+  }
+
+  #alert {
+    padding: 0px 16px;
+    margin-top: 0;
   }
 
   .image-box {
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
+    /* width: 400px;
+    max-width: 400px; */
+    height: 250px;
+
+    max-height: 250px;
+    margin-top: 10px;
   }
 
   .image-close-button {
@@ -128,25 +146,34 @@ const ModalWrapper = styled.div`
   }
 
   .image-box img {
-    width: 95%;
-    height: auto;
-    max-height: 350px;
+    /* width: 95%; */
+    /* height: auto; */
+    /* max-height: 350px; */
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
   }
   .buttons {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
-    margin: 10px;
+    width: 100%;
+    /* margin: 10px; */
   }
 
   .button-right-side {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 35%;
-    margin: 10px;
+    /* width: 35%; */
+    margin-top: 10px;
+    /* margin: 10px; */
+  }
+
+  .btn-2 {
+    width: 120px;
+    height: 50px;
+    font-size: 18px;
   }
 `;
 

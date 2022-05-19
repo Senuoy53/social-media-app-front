@@ -33,7 +33,9 @@ const Navbar = () => {
 
   // Get user from localstorage
   let jwt = localStorage.getItem("jwt");
+
   let user = JSON.parse(jwt!).user;
+  console.log("user picture nav", user);
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);

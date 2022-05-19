@@ -11,6 +11,8 @@ import Avatar from "@mui/material/Avatar";
 
 import Button from "@mui/material/Button";
 import { makeStyles } from "@material-ui/core";
+import ButtonCustom from "../ButtonCustom";
+import { ButtonField } from "../../utils/constants";
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -71,15 +73,9 @@ const Post = () => {
             <CardHeader
               avatar={<Avatar alt="avatar" src={user.profilePicture} />}
               action={
-                <Button
-                  variant="contained"
-                  size="medium"
-                  sx={{
-                    margin: "5px 0 0 10px",
-                  }}
-                >
-                  Post
-                </Button>
+                <ButtonCustom className="btn-2">
+                  {ButtonField.POST}
+                </ButtonCustom>
               }
               title="Whats on your mind ? "
               classes={{
