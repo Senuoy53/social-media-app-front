@@ -3,9 +3,10 @@ import { ActionsTypes } from "./constants";
 import { AnnouncementState } from "./types";
 
 const initialState: AnnouncementState = {
-  announcement: null,
+  announcement: [],
   error: false,
   errorMessage: "",
+  loading: false,
 };
 
 const announcementReducer = (state = initialState, action: Action) => {
@@ -22,7 +23,13 @@ const announcementReducer = (state = initialState, action: Action) => {
         ...state,
         error: true,
         errorMessage: action.payload,
-        announcement: null,
+        // announcement: null,
+      };
+
+    case ActionsTypes.SET_LOADING_ANNOUNCEMENT:
+      return {
+        ...state,
+        loading: action.payload,
       };
 
     // case ActionsTypes.SET_VERIFICATION_ERROR:

@@ -24,6 +24,8 @@ import { firebaseConfig } from "../../variables";
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
+import { useDispatch } from "react-redux";
+import { setAnnouncementData } from "./actions";
 
 //firebase iniialisation
 const app = initializeApp(firebaseConfig);
@@ -65,6 +67,9 @@ const Modal = ({ toggleModal, categories, user }: any) => {
   //Photo preview separate to component
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState("");
+
+  // useDispatch
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!selectedFile) {
@@ -130,31 +135,13 @@ const Modal = ({ toggleModal, categories, user }: any) => {
     return URL;
   };
 
-  const addPost = async (json: any) => {
-    if (typeof window.localStorage !== "undefined") {
-      let jwt = localStorage.getItem("jwt");
-      let accessToken = JSON.parse(jwt!).accessToken;
-
-      const { data } = await axios.post(
-        `${BACK_URL_API}/announcements/create`,
-        json,
-        {
-          headers: {
-            authorization: "Bearer " + accessToken,
-          },
-        }
-      );
-      return data;
-    }
-  };
-
   const SubmitPost = async () => {
     setError(false);
     if (category == "category" || description == "") {
       setError(true);
       return;
     }
-    setLoading(true);
+    // setLoading(true);
     let userId = JSON.parse(localStorage.getItem("jwt")!).user._id;
     let found = false;
     let categoryId = "";
@@ -169,15 +156,17 @@ const Modal = ({ toggleModal, categories, user }: any) => {
     if (selectedFile != undefined) {
       url = await uploadImageToFirebase(selectedFile);
     }
-    const json = {
-      userId: userId,
-      categoryId: categoryId,
-      anDescription: description,
-      imgUrl: url,
-      anIsAnonymous: isAnonym,
-    };
-    addPost(json);
-    setLoading(false);
+
+    // Call the action to setAnnouncementData to backEnd/DB
+    dispatch(
+      setAnnouncementData({
+        userId: userId,
+        categoryId: categoryId,
+        anDescription: description,
+        imgUrl: url,
+        anIsAnonymous: isAnonym,
+      })
+    );
     toggleModal();
   };
 

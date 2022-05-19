@@ -1,7 +1,8 @@
 interface AnnouncementState {
-  announcement: string[] | null;
+  announcement: string[];
   error: boolean;
   errorMessage: string;
+  loading: boolean;
 }
 
 interface AnnouncementResponse {

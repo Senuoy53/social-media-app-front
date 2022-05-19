@@ -1,0 +1,3 @@
+interface LoadingComponentsProps {
+  className?: string;
+}

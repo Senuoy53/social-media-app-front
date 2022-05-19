@@ -31,7 +31,7 @@ const Post = () => {
     if (typeof window.localStorage !== "undefined") {
       let jwt = localStorage.getItem("jwt");
       let accessToken = JSON.parse(jwt!).accessToken;
-      console.log("back url", BACK_URL_API);
+
       const { data } = await axios.get(`${BACK_URL_API}/categories`, {
         headers: {
           authorization: "Bearer " + accessToken,

@@ -28,4 +28,16 @@ const makeSelectAnnouncement = () =>
       _.get(announcementState, "announcement", null) as string[]
   );
 
-export { makeSelectError, makeSelectErrorMessage, makeSelectAnnouncement };
+const makeSelectLoading = () =>
+  createSelector(
+    selectFromAnnouncementStateDomain,
+    (announcementState: AnnouncementState): boolean =>
+      _.get(announcementState, "loading", false) as boolean
+  );
+
+export {
+  makeSelectError,
+  makeSelectErrorMessage,
+  makeSelectAnnouncement,
+  makeSelectLoading,
+};

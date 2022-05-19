@@ -1,8 +1,15 @@
 import { ActionsTypes } from "./constants";
 
-const requestAnnouncement = () => {
+const setAnnouncementData = (payload: {}) => {
   return {
-    type: ActionsTypes.REQUEST_ANNOUNCEMENT,
+    type: ActionsTypes.SET_ANNOUNCEMENT_DATA,
+    payload,
+  };
+};
+
+const requestAnnouncements = () => {
+  return {
+    type: ActionsTypes.REQUEST_ANNOUNCEMENTS,
   };
 };
 
@@ -20,8 +27,17 @@ const requestAnnouncementError = (payload: string) => {
   };
 };
 
+const setLoadingAnnouncement = (payload: boolean) => {
+  return {
+    type: ActionsTypes.SET_LOADING_ANNOUNCEMENT,
+    payload,
+  };
+};
+
 export {
-  requestAnnouncement,
+  requestAnnouncements,
   requestAnnouncementSuccess,
   requestAnnouncementError,
+  setAnnouncementData,
+  setLoadingAnnouncement,
 };

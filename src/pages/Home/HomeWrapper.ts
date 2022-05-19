@@ -4,6 +4,7 @@ import { mobile } from "../../styles/responsive";
 const HomeWrapper = styled.div`
   min-height: 100vh;
   background-color: #f3f3f3;
+
   .main {
     display: flex;
     padding: 0px 3%;

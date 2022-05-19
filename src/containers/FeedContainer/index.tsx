@@ -6,52 +6,68 @@ import { createStructuredSelector } from "reselect";
 import {
   makeSelectAnnouncement,
   makeSelectErrorMessage,
+  makeSelectLoading,
 } from "../../components/Modal/selectors";
 import { useDispatch, useSelector } from "react-redux";
-import { requestAnnouncement } from "../../components/Modal/actions";
+import {
+  requestAnnouncements,
+  setLoadingAnnouncement,
+} from "../../components/Modal/actions";
+import LoadingComponent from "../../components/LoadingComponent";
 
 // CheckId selectors
 const announcementState = createStructuredSelector({
   errorMessage: makeSelectErrorMessage(),
   announcements: makeSelectAnnouncement(),
+  loading: makeSelectLoading(),
 });
 
 const FeedContainer = () => {
   // useDispatch
   const dispatch = useDispatch();
   // Selectors
-  const { errorMessage, announcements } = useSelector(announcementState);
+  const { errorMessage, announcements, loading } =
+    useSelector(announcementState);
 
-  useEffect(() => {
-    dispatch(requestAnnouncement());
-    console.log("Announcements :", announcements);
-  }, []);
+  console.log("Announcements :", announcements);
+
+  // useEffect(() => {
+  //   dispatch(setLoadingAnnouncement(true));
+  //   dispatch(requestAnnouncements());
+  //   // console.log("Announcements :", announcements);
+  // }, []);
 
   return (
     <FeedContainerWrapper>
       <Post />
 
-      {announcements &&
-        announcements.map((item: any, index: number) =>
-          item.anIsAnonymous ? (
-            <PostContainer
-              key={index}
-              title="Anonymous"
-              subheader={item.createdAt}
-              desc={item.anDescription}
-              img={item.imgUrl}
-            />
-          ) : (
-            <PostContainer
-              key={index}
-              avatar={item.userId.profilePicture}
-              title={`${item.userId.fname} ${item.userId.lname}`}
-              subheader={item.createdAt}
-              desc={item.anDescription}
-              img={item.imgUrl}
-            />
+      <div className="postsContainer">
+        {loading ? (
+          <LoadingComponent className="loadingPosts" />
+        ) : (
+          announcements &&
+          announcements.map((item: any, index: number) =>
+            item.anIsAnonymous ? (
+              <PostContainer
+                key={index}
+                title="Anonymous"
+                subheader={item.createdAt}
+                desc={item.anDescription}
+                img={item.imgUrl}
+              />
+            ) : (
+              <PostContainer
+                key={index}
+                avatar={item.userId.profilePicture}
+                title={`${item.userId.fname} ${item.userId.lname}`}
+                subheader={item.createdAt}
+                desc={item.anDescription}
+                img={item.imgUrl}
+              />
+            )
           )
         )}
+      </div>
     </FeedContainerWrapper>
   );
 };

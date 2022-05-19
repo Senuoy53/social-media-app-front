@@ -1,6 +1,8 @@
 import { Navigate } from "react-router";
 import { useState, useEffect } from "react";
 import { axiosAuthApi } from "../../utils/request";
+import LoadingComponent from "../../components/LoadingComponent";
+import "./index.css";
 
 const PrivateRoute = ({ children }: any) => {
   const [auth, setAuth] = useState(false);
@@ -36,7 +38,8 @@ const PrivateRoute = ({ children }: any) => {
       setIsTokenValidated(true); // in case there is no token
     }
   }, []);
-  if (!isTokenValidated) return <h1>loading</h1>;
+
+  if (!isTokenValidated) return <LoadingComponent className="LoadingHome" />;
   return auth ? children : <Navigate to="/signin" />;
 };
 
