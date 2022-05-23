@@ -6,12 +6,13 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;   
+    
 }
 
 
 
 
-/* stop scrolling for the main page */
+
 
 
 html::-webkit-scrollbar {
@@ -38,7 +39,7 @@ export const theme = {
     White: "#fff",
     Black: "#000",
     BlueBg: "#121A38",
-    Blue1:"#202DB5",
+    Blue1: "#202DB5",
     LightBlueBg: "#7493CA",
     HoverBlueBg: "#2a314c",
     ButtonColor1: "#2672EC",

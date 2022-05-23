@@ -9,7 +9,6 @@ import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import { Alert } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import avatar from "../../assets/img/avatar.jpg";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -18,13 +17,14 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { BACK_URL_API } from "../../variables";
-import axios from "axios";
-
 import { firebaseConfig } from "../../variables";
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
+import { useDispatch } from "react-redux";
+import { setAnnouncementData } from "./actions";
+import ButtonCustom from "../ButtonCustom";
+import { ButtonField } from "../../utils/constants";
 
 //firebase iniialisation
 const app = initializeApp(firebaseConfig);
@@ -49,7 +49,7 @@ const useStyles = makeStyles({
 });
 
 //Modal (popup) component
-const Modal = ({ toggleModal, categories }: any) => {
+const Modal = ({ toggleModal, categories, user }: any) => {
   const classes = useStyles();
   const [values, setValues] = useState({
     type: "annoucement",
@@ -66,6 +66,9 @@ const Modal = ({ toggleModal, categories }: any) => {
   //Photo preview separate to component
   const [selectedFile, setSelectedFile] = useState();
   const [preview, setPreview] = useState("");
+
+  // useDispatch
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!selectedFile) {
@@ -131,31 +134,13 @@ const Modal = ({ toggleModal, categories }: any) => {
     return URL;
   };
 
-  const addPost = async (json: any) => {
-    if (typeof window.localStorage !== "undefined") {
-      let jwt = localStorage.getItem("jwt");
-      let accessToken = JSON.parse(jwt!).accessToken;
-
-      const { data } = await axios.post(
-        `${BACK_URL_API}/announcements/create`,
-        json,
-        {
-          headers: {
-            authorization: "Bearer " + accessToken,
-          },
-        }
-      );
-      return data;
-    }
-  };
-
   const SubmitPost = async () => {
     setError(false);
     if (category == "category" || description == "") {
       setError(true);
       return;
     }
-    setLoading(true);
+    // setLoading(true);
     let userId = JSON.parse(localStorage.getItem("jwt")!).user._id;
     let found = false;
     let categoryId = "";
@@ -170,15 +155,17 @@ const Modal = ({ toggleModal, categories }: any) => {
     if (selectedFile != undefined) {
       url = await uploadImageToFirebase(selectedFile);
     }
-    const json = {
-      userId: userId,
-      categoryId: categoryId,
-      anDescription: description,
-      imgUrl: url,
-      anIsAnonymous: isAnonym,
-    };
-    addPost(json);
-    setLoading(false);
+
+    // Call the action to setAnnouncementData to backEnd/DB
+    dispatch(
+      setAnnouncementData({
+        userId: userId,
+        categoryId: categoryId,
+        anDescription: description,
+        imgUrl: url,
+        anIsAnonymous: isAnonym,
+      })
+    );
     toggleModal();
   };
 
@@ -241,7 +228,7 @@ const Modal = ({ toggleModal, categories }: any) => {
           <div className="top-bar-buttom">&nbsp;</div>
           <div className="content">
             {error && (
-              <Alert sx={{ mt: 2 }} severity="warning">
+              <Alert sx={{ mt: 2 }} severity="warning" id="alert">
                 Category and Description are required
               </Alert>
             )}
@@ -249,29 +236,33 @@ const Modal = ({ toggleModal, categories }: any) => {
               <div className="avatar">
                 <Avatar
                   alt="avatar"
-                  src={avatar}
+                  src={user.profilePicture}
                   sx={{ width: 66, height: 66, mr: 3 }}
                 />
               </div>
-              <textarea
-                className="text-area"
-                name="description"
-                placeholder="Write something ..."
-                onChange={handleChange}
-              />
-            </div>
-            {selectedFile && (
-              <div className="image-box">
-                <FontAwesomeIcon
-                  icon={faXmark}
-                  color="grey"
-                  size="2x"
-                  className="image-close-button"
-                  onClick={handleClickDeleteImage}
+
+              <div>
+                <textarea
+                  className="text-area"
+                  name="description"
+                  placeholder="Write something ..."
+                  onChange={handleChange}
                 />
-                <img src={preview} />
+                {selectedFile && (
+                  <div className="image-box">
+                    <FontAwesomeIcon
+                      icon={faXmark}
+                      color="grey"
+                      size="2x"
+                      className="image-close-button"
+                      onClick={handleClickDeleteImage}
+                    />
+                    <img src={preview} />
+                  </div>
+                )}
               </div>
-            )}
+            </div>
+
             <div className="buttons">
               <div className="button-left-side">
                 <div className="image-upload">
@@ -299,13 +290,9 @@ const Modal = ({ toggleModal, categories }: any) => {
                     )}
                   </IconButton>
                 </Tooltip>
-                <Button
-                  variant="contained"
-                  onClick={SubmitPost}
-                  style={{ width: "120px", height: "50px", fontSize: "18px" }}
-                >
-                  Post
-                </Button>
+                <ButtonCustom className="btn-2" onClick={SubmitPost}>
+                  {ButtonField.POST}
+                </ButtonCustom>
               </div>
             </div>
           </div>

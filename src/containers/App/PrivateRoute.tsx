@@ -1,7 +1,8 @@
 import { Navigate } from "react-router";
 import { useState, useEffect } from "react";
-import { BACK_URL } from "../../variables";
-import { axiosApi } from "../../utils/request";
+import { axiosAuthApi } from "../../utils/request";
+import LoadingComponent from "../../components/LoadingComponent";
+import "./index.css";
 
 const PrivateRoute = ({ children }: any) => {
   const [auth, setAuth] = useState(false);
@@ -12,9 +13,9 @@ const PrivateRoute = ({ children }: any) => {
       let jwt = localStorage.getItem("jwt");
       let token = JSON.parse(jwt!).accessToken;
 
-      axiosApi({
+      axiosAuthApi({
         method: "GET",
-        url: `${BACK_URL}/verifytoken`,
+        url: `/verifytoken`,
         headers: {
           Accept: "application/json",
           authorization: "Bearer " + token,
@@ -37,7 +38,16 @@ const PrivateRoute = ({ children }: any) => {
       setIsTokenValidated(true); // in case there is no token
     }
   }, []);
-  if (!isTokenValidated) return <h1>loading</h1>;
+
+  if (!isTokenValidated)
+    return (
+      <LoadingComponent
+        className="LoadingHome"
+        width="100px"
+        height="100px"
+        scale="1"
+      />
+    );
   return auth ? children : <Navigate to="/signin" />;
 };
 

@@ -11,8 +11,8 @@ import Avatar from "@mui/material/Avatar";
 
 import Button from "@mui/material/Button";
 import { makeStyles } from "@material-ui/core";
-
-import avatar from "../../assets/img/avatar.jpg";
+import ButtonCustom from "../ButtonCustom";
+import { ButtonField } from "../../utils/constants";
 
 const useStyles = makeStyles(() => ({
   title: {
@@ -25,11 +25,15 @@ const Post = () => {
   const [modal, setModal] = useState(false);
   const [categories, setCategories] = useState([]);
 
+  // Get user from localstorage
+  let jwt = localStorage.getItem("jwt");
+  let user = JSON.parse(jwt!).user;
+
   const getCategories = async () => {
     if (typeof window.localStorage !== "undefined") {
       let jwt = localStorage.getItem("jwt");
       let accessToken = JSON.parse(jwt!).accessToken;
-      console.log("back url", BACK_URL_API);
+
       const { data } = await axios.get(`${BACK_URL_API}/categories`, {
         headers: {
           authorization: "Bearer " + accessToken,
@@ -67,17 +71,11 @@ const Post = () => {
             }}
           >
             <CardHeader
-              avatar={<Avatar alt="avatar" src={avatar} />}
+              avatar={<Avatar alt="avatar" src={user.profilePicture} />}
               action={
-                <Button
-                  variant="contained"
-                  size="medium"
-                  sx={{
-                    margin: "5px 0 0 10px",
-                  }}
-                >
-                  Post
-                </Button>
+                <ButtonCustom className="btn-2">
+                  {ButtonField.POST}
+                </ButtonCustom>
               }
               title="Whats on your mind ? "
               classes={{
@@ -86,7 +84,13 @@ const Post = () => {
             />
           </Card>
         </div>
-        {modal && <Modal toggleModal={toggleModal} categories={categories} />}
+        {modal && (
+          <Modal
+            toggleModal={toggleModal}
+            categories={categories}
+            user={user}
+          />
+        )}
       </PostWrapper>
     </div>
   );

@@ -1,8 +1,9 @@
 import styled from "styled-components";
-import {mobile} from "../../styles/responsive";
+import { mobile } from "../../styles/responsive";
 
 const ModalWrapper = styled.div`
-.modal, .overlay {
+  .modal,
+  .overlay {
     width: 100vw;
     height: 100vh;
     top: 0;
@@ -10,26 +11,30 @@ const ModalWrapper = styled.div`
     right: 0;
     bottom: 0;
     position: fixed;
+    z-index: 1000;
   }
-  
+
   .overlay {
-    background: rgba(49,49,49,0.8);
+    background: rgba(49, 49, 49, 0.8);
   }
   .modal-content {
     position: absolute;
-    top: 50%;
+    top: calc(50% + 30px);
     left: 50%;
     transform: translate(-50%, -50%);
     line-height: 1.4;
     background: #f1f1f1;
     border-radius: 10px;
     width: 600px;
+    max-height: 500px;
     ${mobile({
-      width: "100%",
+      width: "90%",
+      maxHeight: "800px",
     })}
+    z-index: 1000;
   }
-  
-  .top-bar{
+
+  .top-bar {
     background: ${({ theme }) => theme.colors.BlueBg};
     border-radius: 10px 10px 0 0;
     color: ${({ theme }) => theme.colors.White};
@@ -41,13 +46,13 @@ const ModalWrapper = styled.div`
       flexDirection: "column",
     })}
   }
-  
-  .top-bar h2{
+
+  .top-bar h2 {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1.3em;
   }
-  
-  .selects{
+
+  .selects {
     display: flex;
     justify-content: space-around;
     gap: 12px;
@@ -59,93 +64,117 @@ const ModalWrapper = styled.div`
       marginRight: "0",
     })}
   }
-  
-  .top-bar-buttom{
+
+  .top-bar-buttom {
     height: 5px;
     width: 100%;
-    background-color:${({ theme }) => theme.colors.Blue1};
+    background-color: ${({ theme }) => theme.colors.Blue1};
   }
-  
-  .avatar{
+
+  .avatar {
+    align-self: start;
     ${mobile({
-      display:"none",
+      display: "none",
     })}
   }
-  
-  
-  .custom-text-area{
-    display:flex;
-    justify-content:space-around;
-    align-items:center;
-    margin: 10px;
+
+  .custom-text-area {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+
+    /* margin: 10px; */
     ${mobile({
-      flexDirection: "column",
-      width: '100%',
-    })}
+      // flexDirection: "column",
+      // width: "500px",
+    })};
   }
-  
-  .custom-text-area textarea{
+
+  .custom-text-area textarea {
     font-size: 1.5em;
     resize: vertical;
     width: 450px;
     height: 50px;
     border: none;
     background: #f1f1f1;
+    resize: none;
     ${mobile({
-      width: '90%',
-      height: "100px",
+      width: "100%",
+      // height: "100px",
     })}
   }
-  
-  .content{
+
+  .content {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 10px;
   }
-  
-  .image-box{
-    display: flex;
-    justify-content: center;
+
+  #alert {
+    padding: 0px 16px;
+    margin-top: 0;
   }
-  
-  .image-close-button{
+
+  .image-box {
+    /* display: flex;
+    justify-content: center; */
+    /* width: 400px;
+    max-width: 400px; */
+    height: 250px;
+
+    max-height: 250px;
+    margin-top: 10px;
+  }
+
+  .image-close-button {
     position: absolute;
     right: 5%;
   }
-  
-  .post-close-button{
+
+  .post-close-button {
     position: absolute;
     right: 5%;
   }
-  
-  .image-preview{
-    width:100px;
+
+  .image-preview {
+    width: 100px;
   }
-  .image-upload>input {
+  .image-upload > input {
     display: none;
   }
-  
-  .image-box img{
-    width:95%;
-    height:auto;
-    max-height: 350px;
+
+  .image-box img {
+    /* width: 95%; */
+    /* height: auto; */
+    /* max-height: 350px; */
+    width: 100%;
+    height: 100%;
     border-radius: 10px;
   }
-  .buttons{
+  .buttons {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
-    margin: 10px
+    width: 100%;
+    /* margin: 10px; */
   }
-  
-  .button-right-side{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 35%;
-    margin: 10px
-  }
-`
 
-export default ModalWrapper
+  .button-right-side {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* width: 35%; */
+    margin-top: 10px;
+    /* margin: 10px; */
+  }
+
+  .btn-2 {
+    width: 120px;
+    height: 50px;
+    font-size: 18px;
+  }
+`;
+
+export default ModalWrapper;

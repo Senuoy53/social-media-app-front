@@ -18,7 +18,7 @@ import Divider from "@mui/material/Divider";
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { axiosApi } from "../../utils/request";
+import { axiosAuthApi } from "../../utils/request";
 import { BACK_URL } from "../../variables";
 import NavbarWrapper from "./NavbarWrapper";
 
@@ -33,7 +33,9 @@ const Navbar = () => {
 
   // Get user from localstorage
   let jwt = localStorage.getItem("jwt");
+
   let user = JSON.parse(jwt!).user;
+  console.log("user picture nav", user);
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -55,9 +57,9 @@ const Navbar = () => {
       //  Take refreshToken
       let refreshToken = JSON.parse(jwt!).refreshToken;
 
-      axiosApi({
+      axiosAuthApi({
         method: "POST",
-        url: `${BACK_URL}/signout`,
+        url: "/signout",
         headers: {
           Accept: "application/json",
           authorization: "Bearer " + accessToken,
@@ -77,8 +79,8 @@ const Navbar = () => {
 
   // Styles
   const StyledToolbar = styled(Toolbar)({
-    display: "flex",
-    justifyContent: "space-between",
+    // display: "flex",
+    // justifyContent: "space-between",
   });
 
   const StyledMenu = styled(Menu)(({ theme }) => ({
@@ -119,7 +121,15 @@ const Navbar = () => {
 
   return (
     <NavbarWrapper>
-      <AppBar position="fixed" sx={{ backgroundColor: "#121A38" }}>
+      <AppBar
+        position="fixed"
+        sx={{
+          backgroundColor: "#121A38",
+          maxWidth: "1400px",
+          left: "50%",
+          transform: "translateX(-50%)",
+        }}
+      >
         {/* <AppBar position="sticky"> */}
         <StyledToolbar className="navbar">
           <div className="logo-container">
@@ -176,8 +186,8 @@ const Navbar = () => {
                       width: { xs: "30px", sm: "40px" },
                       height: { xs: "30px", sm: "40px" },
                     }}
-                    alt="Remy Sharp"
-                    src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                    alt="Profile picture"
+                    src={user.profilePicture}
                   />
                 </StyledBadge>
               </IconButton>
@@ -239,8 +249,8 @@ const Navbar = () => {
                   width: { xs: "30px", sm: "40px" },
                   height: { xs: "30px", sm: "40px" },
                 }}
-                alt="Remy Sharp"
-                src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                alt="Profile picture"
+                src={user.profilePicture}
               />
               <Box sx={{ textTransform: "capitalize" }} className="user">
                 {user.fname + " " + user.lname}

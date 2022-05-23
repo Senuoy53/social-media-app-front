@@ -1,5 +1,5 @@
 interface ButtonCustomProps {
   className: string;
   children: string;
-  onClick: (e: any) => void;
+  onClick?: (e: any) => void;
 }
