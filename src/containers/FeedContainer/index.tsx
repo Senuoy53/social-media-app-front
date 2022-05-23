@@ -43,7 +43,12 @@ const FeedContainer = () => {
 
       <div className="postsContainer">
         {loading ? (
-          <LoadingComponent className="loadingPosts" />
+          <LoadingComponent
+            className="loadingPosts"
+            width="50px"
+            height="50px"
+            scale="0.5"
+          />
         ) : (
           announcements &&
           announcements.map((item: any, index: number) =>

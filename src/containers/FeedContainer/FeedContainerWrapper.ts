@@ -12,6 +12,11 @@ const FeedContainerWrapper = styled.section`
   .postsContainer {
     text-align: center;
   }
+
+  .loadingPosts {
+    margin-top: 50px;
+    align-self: center;
+  }
 `;
 
 export default FeedContainerWrapper;

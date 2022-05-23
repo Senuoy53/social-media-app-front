@@ -39,7 +39,15 @@ const PrivateRoute = ({ children }: any) => {
     }
   }, []);
 
-  if (!isTokenValidated) return <LoadingComponent className="LoadingHome" />;
+  if (!isTokenValidated)
+    return (
+      <LoadingComponent
+        className="LoadingHome"
+        width="100px"
+        height="100px"
+        scale="1"
+      />
+    );
   return auth ? children : <Navigate to="/signin" />;
 };
 
