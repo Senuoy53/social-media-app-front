@@ -53,6 +53,12 @@ const NavbarWrapper = styled.div`
 
       .navIcon {
         font-size: 35px;
+        /* color: ${({ theme }) => theme.colors.White};
+        color: transparent;
+        background: ${({ theme }) => theme.colors.White};
+        background-clip: text;
+        -webkit-background-clip: text; */
+
         ${mobile600({
           fontSize: "25px",
         })}
