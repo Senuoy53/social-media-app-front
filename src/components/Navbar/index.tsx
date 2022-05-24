@@ -38,7 +38,6 @@ const Navbar = () => {
   let jwt = localStorage.getItem("jwt");
 
   let user = JSON.parse(jwt!).user;
-  console.log("user picture nav", user);
 
   const [navbarInfos, setNavbarInfos] = useState([]);
 
@@ -91,7 +90,7 @@ const Navbar = () => {
         data: { refreshToken: refreshToken },
       })
         .then((res) => {
-          console.log("singout res", res);
+          // console.log("singout res", res);
           localStorage.removeItem("jwt");
           history("/signin");
         })
