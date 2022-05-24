@@ -16,7 +16,7 @@ import {
 
 import Divider from "@mui/material/Divider";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { axiosAuthApi } from "../../utils/request";
 import { BACK_URL } from "../../variables";
@@ -24,6 +24,9 @@ import NavbarWrapper from "./NavbarWrapper";
 
 import logo from "../../assets/img/logo-nttdata-white.svg";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+
+import Icon from "@mui/material/Icon";
 
 const Navbar = () => {
   // UseSates
@@ -35,7 +38,27 @@ const Navbar = () => {
   let jwt = localStorage.getItem("jwt");
 
   let user = JSON.parse(jwt!).user;
-  console.log("user picture nav", user);
+
+  const [navbarInfos, setNavbarInfos] = useState([]);
+
+  // get Navbar Data from backend
+  const getNavbarInfos = async () => {
+    if (typeof window.localStorage !== "undefined") {
+      let accessToken = JSON.parse(jwt!).accessToken;
+
+      const { data } = await axios.get(`${BACK_URL}/navbarinfos`, {
+        headers: {
+          authorization: "Bearer " + accessToken,
+        },
+      });
+      setNavbarInfos(data);
+      console.log("navbar data", data);
+    }
+  };
+
+  useEffect(() => {
+    getNavbarInfos();
+  }, []);
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -67,7 +90,7 @@ const Navbar = () => {
         data: { refreshToken: refreshToken },
       })
         .then((res) => {
-          console.log("singout res", res);
+          // console.log("singout res", res);
           localStorage.removeItem("jwt");
           history("/signin");
         })
@@ -139,7 +162,32 @@ const Navbar = () => {
 
           {/* navMenu */}
           <div className="navMenu">
-            <NavLink to="/" className="navBox">
+            {navbarInfos.map((item: any, index: number) =>
+              item.hasLink ? (
+                <NavLink to={item.link} className="navBox">
+                  {/* <Home className="navIcon" /> */}
+                  <Icon
+                    baseClassName="material-icons-two-tone"
+                    className="navIcon"
+                    style={{
+                      color: "red",
+                    }}
+                  >
+                    home
+                  </Icon>
+
+                  <div className="navText">{item.label}</div>
+                </NavLink>
+              ) : (
+                <NavLink to="/signin" className="navBox">
+                  <Home className="navIcon" />
+
+                  <div className="navText">{item.label}</div>
+                </NavLink>
+              )
+            )}
+
+            {/* <NavLink to="/" className="navBox">
               <Home className="navIcon" />
 
               <div className="navText">Home</div>
@@ -161,7 +209,7 @@ const Navbar = () => {
               <Chat className="navIcon" />
 
               <div className="navText">Chat App</div>
-            </NavLink>
+            </NavLink> */}
           </div>
 
           {/* Icons */}
