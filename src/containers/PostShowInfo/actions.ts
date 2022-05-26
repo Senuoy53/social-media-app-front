@@ -19,4 +19,50 @@ const postReactionCountMinus = () => {
   };
 };
 
-export { postReactionCountPlus, postReactionCountMinus, setPostReaction };
+
+//AS
+const setPostCommentCount = (payload: {}) => {
+  return {
+    type: ActionsTypes.SET_POST_COMMENT_COUNT,
+    payload,
+  };
+};
+
+const requestPostCommentCount = () => {
+  return {
+    type: ActionsTypes.REQUEST_POST_COMMENT_COUNT,
+  };
+};
+
+const requestPostCommentCountSuccess = (payload: any) => {
+  return {
+    type: ActionsTypes.REQUEST_POST_COMMENT_COUNT_SUCCESS,
+    payload,
+  };
+};
+
+const requestPostCommentCountError = (payload: any) => {
+  return {
+    type: ActionsTypes.REQUEST_POST_COMMENT_COUNT_ERROR,
+    payload,
+  };
+};
+
+const setLoadingPostCommentCount = (payload: any) => {
+  return {
+    type: ActionsTypes.SET_LOADING_POST_COMMENT_COUNT,
+    payload,
+  };
+};
+
+export { 
+  postReactionCountPlus, 
+  postReactionCountMinus, 
+  setPostReaction,
+  
+  setPostCommentCount,
+  requestPostCommentCount,
+  requestPostCommentCountSuccess,
+  requestPostCommentCountError,
+  setLoadingPostCommentCount
+};

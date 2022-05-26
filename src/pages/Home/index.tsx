@@ -9,6 +9,7 @@ import FeedContainer from "../../containers/FeedContainer";
 import LeftBar from "../../containers/LeftBar";
 import RightBar from "../../containers/RightBar";
 import HomeWrapper from "./HomeWrapper";
+import LazyComment from "../../components/LazyComment"
 
 const Home = () => {
   // useDispatch
@@ -27,6 +28,7 @@ const Home = () => {
         <FeedContainer />
         <LeftBar />
       </div>
+      {/* <LazyComment/> */}
     </HomeWrapper>
   );
 };
