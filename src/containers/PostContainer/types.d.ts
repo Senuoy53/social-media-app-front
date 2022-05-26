@@ -4,4 +4,7 @@ interface PostContainerProps {
   subheader: string;
   desc: string;
   img?: string;
+  postReactionsDb: any;
+  currentUser: any;
+  currentPost: string;
 }

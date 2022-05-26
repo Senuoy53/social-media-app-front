@@ -80,7 +80,7 @@ const CommentsContainer = () => {
             </ShowReactionCounter>
           )}
 
-          <ReactionsCount reaction={commentReaction} />
+          {/* <ReactionsCount reactions={commentReaction} /> */}
         </div>
       </div>
     </CommentsContainerWrapper>
