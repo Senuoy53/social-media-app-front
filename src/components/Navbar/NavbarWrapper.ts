@@ -36,6 +36,7 @@ const NavbarWrapper = styled.div`
       text-decoration: none;
       margin-left: 40px;
       position: relative;
+      cursor: pointer;
 
       ${mobile400({
         marginLeft: "10px",
