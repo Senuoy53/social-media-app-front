@@ -21,18 +21,18 @@ const postReactionCountMinus = () => {
 
 
 //AS
-const setPostCommentCount = (payload: {}) => {
+/* const setPostCommentCount = (payload: {}) => {
   return {
     type: ActionsTypes.SET_POST_COMMENT_COUNT,
     payload,
   };
 };
-
+*/
 const requestPostCommentCount = () => {
   return {
     type: ActionsTypes.REQUEST_POST_COMMENT_COUNT,
   };
-};
+}; 
 
 const requestPostCommentCountSuccess = (payload: any) => {
   return {
@@ -41,14 +41,14 @@ const requestPostCommentCountSuccess = (payload: any) => {
   };
 };
 
-const requestPostCommentCountError = (payload: any) => {
+const requestPostCommentCountError = (payload: String) => {
   return {
     type: ActionsTypes.REQUEST_POST_COMMENT_COUNT_ERROR,
     payload,
   };
 };
 
-const setLoadingPostCommentCount = (payload: any) => {
+const setLoadingPostCommentCount = (payload: Boolean) => {
   return {
     type: ActionsTypes.SET_LOADING_POST_COMMENT_COUNT,
     payload,
@@ -60,7 +60,6 @@ export {
   postReactionCountMinus, 
   setPostReaction,
   
-  setPostCommentCount,
   requestPostCommentCount,
   requestPostCommentCountSuccess,
   requestPostCommentCountError,

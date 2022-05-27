@@ -1,20 +1,33 @@
 import {useState, useEffect} from "react"
 import { BACK_URL_API } from "../../variables"
 import axios from "axios"
+import { useDispatch, useSelector } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { makeSelectpostCommentCount } from "../../containers/PostShowInfo/selectors";
+import { requestPostCommentCount } from "../../containers/PostShowInfo/actions";
+
+
+const showInfoState = createStructuredSelector({
+    postCommentCount: makeSelectpostCommentCount(),
+  });
+
 
 const LazyComment = () => {
 
-    const [comments, setComments] = useState([] as any)
+    const dispatch = useDispatch();
+    const {postCommentCount} = useSelector(showInfoState)
+    /* const [comments, setComments] = useState([] as any)
     const [commentsCount, setCommentsCount] = useState(0)
     const [seensCommentIds, setseensCommentIds] = useState([] as string[])
-
+ */
 
     useEffect(() => {
-        getCommentsCount()
-        getComments()
+        dispatch(requestPostCommentCount())
+        /* getCommentsCount()
+        getComments() */
     },[])
 
-    const getCommentsCount = async () =>{
+/*     const getCommentsCount = async () =>{
         if (typeof window.localStorage !== "undefined") {
             let jwt = localStorage.getItem("jwt");
             let accessToken = JSON.parse(jwt!).accessToken;
@@ -50,14 +63,15 @@ const LazyComment = () => {
           setseensCommentIds([...seensCommentIds, ...seenIds])
           setComments([...comments,...data]);
         }
-    };
+    }; */
 
     
     return (
         <div>
-            <h1>LazyComment</h1>
-            {comments.map((item:any,index:number)=><h3 key={index}>{item['comment']}</h3> )}
-            {(seensCommentIds.length < commentsCount) && <button onClick={getComments}>View more comments</button>}
+            <h1>LazyComment number {postCommentCount}</h1>
+            
+{/*             {comments.map((item:any,index:number)=><h3 key={index}>{item['comment']}</h3> )}
+            {(seensCommentIds.length < commentsCount) && <button onClick={getComments}>View more comments</button>} */}
         </div>
     )
 }

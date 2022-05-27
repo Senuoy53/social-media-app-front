@@ -1,9 +1,14 @@
+import {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import ReactionButton from "../../components/ReactionButton";
 import ReactionsCount from "../../components/ReactionsCount";
 import PostShowInfoWrapper from "./PostShowInfoWrapper";
 import {
+  makeSelectError,
+  makeSelectErrorMessage,
+  makeSelectLoading,
+  makeSelectpostCommentCount,
   makeSelectPostReaction,
   makeSelectPostReactionCounter,
 } from "./selectors";
@@ -11,20 +16,30 @@ import {
   setPostReaction,
   postReactionCountPlus,
   postReactionCountMinus,
+  requestPostCommentCount,
 } from "./actions";
 import ShowReactionCounter from "../../components/ShowReactionCounter";
+import CommentCounter from "../../components/CommentCounter";
 
 const postShowInfoState = createStructuredSelector({
   postReaction: makeSelectPostReaction(),
   postReactionCounter: makeSelectPostReactionCounter(),
+  postCommentCount: makeSelectpostCommentCount(),
+  error: makeSelectError(),
+  errorMessage: makeSelectErrorMessage(),
+  loading: makeSelectLoading(),
 });
 
 const PostShowInfo = () => {
   // Selectors
-  const { postReaction, postReactionCounter } = useSelector(postShowInfoState);
+  const { postReaction, postReactionCounter, postCommentCount, error, errorMessage, loading } = useSelector(postShowInfoState);
 
   // useDispatch
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(requestPostCommentCount())
+  },[])
 
   //   handleClick
   const handleClick = (e: any) => {
@@ -52,7 +67,7 @@ const PostShowInfo = () => {
           </ShowReactionCounter>
         )}
       </div>
-      <div className="left">15 comments</div>
+      <CommentCounter count={postCommentCount} />
     </PostShowInfoWrapper>
   );
 };
