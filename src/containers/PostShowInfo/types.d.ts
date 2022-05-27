@@ -16,3 +16,7 @@ interface CommmentCountResponse {
   data: any;
   status: number;
 }
+
+interface PostShowInfoProp {
+  postId: string;
+}

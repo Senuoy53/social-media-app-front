@@ -13,6 +13,7 @@ const PostContainer = ({
   subheader,
   desc,
   img,
+  postId
 }: PostContainerProps) => {
   return (
     <PostContainerWrapper>
@@ -22,7 +23,7 @@ const PostContainer = ({
         {/* Post Body */}
         <PostBody desc={desc} img={img} />
         {/* Show post info */}
-        <PostShowInfo />
+        <PostShowInfo postId={postId}/>
         {/* Comments Container */}
         <div id="CommentsContainer">
           <CommentsContainer />

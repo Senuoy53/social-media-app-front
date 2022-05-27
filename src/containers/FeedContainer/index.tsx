@@ -59,6 +59,7 @@ const FeedContainer = () => {
                 subheader={item.createdAt}
                 desc={item.anDescription}
                 img={item.imgUrl}
+                postId={item._id}
               />
             ) : (
               <PostContainer
@@ -68,6 +69,7 @@ const FeedContainer = () => {
                 subheader={item.createdAt}
                 desc={item.anDescription}
                 img={item.imgUrl}
+                postId={item._id}
               />
             )
           )

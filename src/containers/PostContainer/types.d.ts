@@ -4,4 +4,6 @@ interface PostContainerProps {
   subheader: string;
   desc: string;
   img?: string;
+  postId: string;
+  
 }

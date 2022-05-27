@@ -30,7 +30,7 @@ const postShowInfoState = createStructuredSelector({
   loading: makeSelectLoading(),
 });
 
-const PostShowInfo = () => {
+const PostShowInfo = ({postId}:PostShowInfoProp) => {
   // Selectors
   const { postReaction, postReactionCounter, postCommentCount, error, errorMessage, loading } = useSelector(postShowInfoState);
 
@@ -38,7 +38,7 @@ const PostShowInfo = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(requestPostCommentCount('628be480233e5536f33ba7e9'))
+    dispatch(requestPostCommentCount(postId))
   },[])
 
   //   handleClick
