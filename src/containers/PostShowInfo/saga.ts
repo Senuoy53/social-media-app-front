@@ -17,14 +17,14 @@ function* postShowInfoSaga() {
   );
 }
 
-function* requestPostCommentCount() {
+function* requestPostCommentCount(action:any) {
   if (typeof window.localStorage !== "undefined") {
     let jwt = localStorage.getItem("jwt");
     let accessToken = JSON.parse(jwt!).accessToken;
 
     const options = {
       method: "GET",
-      url: `${BACK_URL_API}/comment/getCommentCountByPostId/628be480233e5536f33ba7e9`,
+      url: `${BACK_URL_API}/comment/getCommentCountByPostId/${action.payload}`,
       headers: {
         //"Content-type": "application/json",
         authorization: `Bearer ${accessToken}`,

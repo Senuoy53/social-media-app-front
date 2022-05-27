@@ -29,6 +29,8 @@ const postShowInfoReducer = (state = initialState, action: Action) => {
         postReactionCounter:
           state.postReactionCounter !== 0 && state.postReactionCounter - 1,
       };
+
+      
     //AS
     case ActionsTypes.REQUEST_POST_COMMENT_COUNT_SUCCESS:
       return {

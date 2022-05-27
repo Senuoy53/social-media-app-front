@@ -22,7 +22,7 @@ const LazyComment = () => {
  */
 
     useEffect(() => {
-        dispatch(requestPostCommentCount())
+        dispatch(requestPostCommentCount('628be480233e5536f33ba7e9'))
         /* getCommentsCount()
         getComments() */
     },[])

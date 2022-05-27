@@ -28,9 +28,10 @@ const postReactionCountMinus = () => {
   };
 };
 */
-const requestPostCommentCount = () => {
+const requestPostCommentCount = (payload: string) => {
   return {
     type: ActionsTypes.REQUEST_POST_COMMENT_COUNT,
+    payload
   };
 }; 
 
