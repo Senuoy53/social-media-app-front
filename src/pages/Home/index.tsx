@@ -15,7 +15,7 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setLoadingAnnouncement(true));
+    // dispatch(setLoadingAnnouncement(true));
     dispatch(requestAnnouncements());
   }, []);
 

@@ -7,11 +7,11 @@ const selectFromPostShowInfoStateDomain = (
   globalState: GlobalState
 ): PostShowInfoState => globalState.postShowInfoState;
 
-const makeSelectPostReaction = () =>
+const makeSelectPostReactions = () =>
   createSelector(
     selectFromPostShowInfoStateDomain,
-    (postShowInfoState: PostShowInfoState): string =>
-      _.get(postShowInfoState, "postReaction", "")
+    (postShowInfoState: PostShowInfoState): any =>
+      _.get(postShowInfoState, "postReactions", "")
   );
 
 const makeSelectPostReactionCounter = () =>
@@ -20,4 +20,4 @@ const makeSelectPostReactionCounter = () =>
     (postShowInfoState: PostShowInfoState): number =>
       _.get(postShowInfoState, "postReactionCounter", 0)
   );
-export { makeSelectPostReaction, makeSelectPostReactionCounter };
+export { makeSelectPostReactions, makeSelectPostReactionCounter };

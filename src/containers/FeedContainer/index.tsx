@@ -31,6 +31,11 @@ const FeedContainer = () => {
 
   console.log("Announcements :", announcements);
 
+  // Get user from localstorage
+  let jwt = localStorage.getItem("jwt");
+
+  let currentUser = JSON.parse(jwt!).user;
+
   // useEffect(() => {
   //   dispatch(setLoadingAnnouncement(true));
   //   dispatch(requestAnnouncements());
@@ -59,6 +64,9 @@ const FeedContainer = () => {
                 subheader={item.createdAt}
                 desc={item.anDescription}
                 img={item.imgUrl}
+                postReactionsDb={item.reactions}
+                currentUser={currentUser}
+                currentPost={item._id}
               />
             ) : (
               <PostContainer
@@ -68,6 +76,9 @@ const FeedContainer = () => {
                 subheader={item.createdAt}
                 desc={item.anDescription}
                 img={item.imgUrl}
+                postReactionsDb={item.reactions}
+                currentUser={currentUser}
+                currentPost={item._id}
               />
             )
           )

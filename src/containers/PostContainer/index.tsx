@@ -13,7 +13,11 @@ const PostContainer = ({
   subheader,
   desc,
   img,
+  postReactionsDb,
+  currentUser,
+  currentPost,
 }: PostContainerProps) => {
+  console.log("postReactionsDb", postReactionsDb);
   return (
     <PostContainerWrapper>
       <Card sx={{ margin: 0 }}>
@@ -22,7 +26,11 @@ const PostContainer = ({
         {/* Post Body */}
         <PostBody desc={desc} img={img} />
         {/* Show post info */}
-        <PostShowInfo />
+        <PostShowInfo
+          postReactionsDb={postReactionsDb}
+          currentUser={currentUser}
+          currentPost={currentPost}
+        />
         {/* Comments Container */}
         <div id="CommentsContainer">
           <CommentsContainer />

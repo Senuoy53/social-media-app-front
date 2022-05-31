@@ -1,4 +1,4 @@
 interface ReactionButtonProps {
-  reaction: string;
+  reaction: any;
   onClick: (e: any) => void;
 }
