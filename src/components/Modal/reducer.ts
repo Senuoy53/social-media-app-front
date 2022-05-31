@@ -12,7 +12,7 @@ const initialState: AnnouncementState = {
 const announcementReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case ActionsTypes.REQUEST_ANNOUNCEMENT_SUCCESS:
-      console.log("success payload :", action.payload);
+      // console.log("success payload :", action.payload);
       return {
         ...state,
         announcement: action.payload,

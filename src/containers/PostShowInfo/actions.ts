@@ -1,22 +1,24 @@
 import { ActionsTypes } from "./constants";
 
-const setPostReaction = (payload: string) => {
+const requestAddReaction = (payload: {}) => {
   return {
-    type: ActionsTypes.SET_POST_REACTION,
+    type: ActionsTypes.REQUEST_ADD_REACTION,
     payload,
   };
 };
 
-const postReactionCountPlus = () => {
+const requestUpdateReaction = (payload: {}) => {
   return {
-    type: ActionsTypes.POST_REACTION_COUNT_PLUS,
+    type: ActionsTypes.REQUEST_UPDATE_REACTION,
+    payload,
   };
 };
 
-const postReactionCountMinus = () => {
+const requestRemoveReaction = (payload: {}) => {
   return {
-    type: ActionsTypes.POST_REACTION_COUNT_MINUS,
+    type: ActionsTypes.REQUEST_REMOVE_REACTION,
+    payload,
   };
 };
 
-export { postReactionCountPlus, postReactionCountMinus, setPostReaction };
+export { requestAddReaction, requestUpdateReaction, requestRemoveReaction };

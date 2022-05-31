@@ -13,11 +13,6 @@ const ReactionsCount = ({ reactions }: ReactionCountProps) => {
   useEffect(() => {
     const data: any[] = [];
 
-    // reactions &&
-    //   reactions.map((item: any) => {
-    //     data.push(item.reaction);
-    //   });
-
     const uniqueData: any[] = [];
     reactions &&
       reactions.forEach((reaction: any) => {
@@ -29,7 +24,6 @@ const ReactionsCount = ({ reactions }: ReactionCountProps) => {
     setFilterReactions(uniqueData);
   }, [reactions]);
 
-  // console.log("filterReactions", filterReactions);
   return (
     <ReactionsCountWrapper>
       <ul>

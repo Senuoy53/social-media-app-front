@@ -25,11 +25,11 @@ const postShowInfoReducer = (state = initialState, action: Action) => {
     //     postReactionCounter:
     //       state.postReactionCounter !== 0 && state.postReactionCounter - 1,
     //   };
-    case ActionsTypes.SET_POST_REACTION:
-      return {
-        ...state,
-        postReactions: [...state.postReactions, action.payload],
-      };
+    // case ActionsTypes:
+    //   return {
+    //     ...state,
+    //     postReactions: [...state.postReactions, action.payload],
+    //   };
     default:
       return state;
   }

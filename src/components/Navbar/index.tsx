@@ -52,7 +52,6 @@ const Navbar = () => {
         },
       });
       setNavbarInfos(data);
-      console.log("navbar data", data);
     }
   };
 

@@ -21,3 +21,8 @@ interface PostShowInfoProps {
   currentUser: any;
   currentPost: string;
 }
+
+interface ReactionResponse {
+  data: any;
+  status: number;
+}
