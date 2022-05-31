@@ -16,7 +16,7 @@ const PostContainer = ({
   currentUser,
   currentPost,
 }: PostContainerProps) => {
-  console.log("postReactionsDb", postReactionsDb);
+  // console.log("postReactionsDb", postReactionsDb);
   return (
     <PostContainerWrapper>
       <Card sx={{ margin: 0 }}>
