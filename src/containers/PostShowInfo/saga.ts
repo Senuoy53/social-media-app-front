@@ -27,7 +27,6 @@ function* RequestAddReaction(action: Action) {
         authorization: `Bearer ${accessToken}`,
       },
 
-      // data: { ...action.payload },
       data: { ...action.payload },
     };
 
@@ -58,7 +57,6 @@ function* RequestUpdateReaction(action: Action) {
         authorization: `Bearer ${accessToken}`,
       },
 
-      // data: { ...action.payload },
       data: { ...action.payload },
     };
 
@@ -89,7 +87,6 @@ function* RequestRemoveReaction(action: Action) {
         authorization: `Bearer ${accessToken}`,
       },
 
-      // data: { ...action.payload },
       data: { ...action.payload },
     };
 

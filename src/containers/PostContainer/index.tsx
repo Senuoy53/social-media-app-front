@@ -1,6 +1,5 @@
 import PostContainerWrapper from "./PostContainerWrapper";
-import { Favorite, FavoriteBorder, Share } from "@mui/icons-material";
-import { Card, CardActions, Checkbox, IconButton } from "@mui/material";
+import { Card } from "@mui/material";
 import PostHeader from "../../components/PostHeader";
 import PostBody from "../../components/PostBody";
 import PostShowInfo from "../../containers/PostShowInfo";

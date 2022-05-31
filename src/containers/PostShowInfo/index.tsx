@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import { useDispatch } from "react-redux";
+
 import ReactionButton from "../../components/ReactionButton";
 import ReactionsCount from "../../components/ReactionsCount";
 import PostShowInfoWrapper from "./PostShowInfoWrapper";
@@ -12,23 +12,14 @@ import {
 import ShowReactionCounter from "../../components/ShowReactionCounter";
 import { useEffect, useState } from "react";
 
-// const postShowInfoState = createStructuredSelector({
-//   postReactions: makeSelectPostReactions(),
-//   postReactionCounter: makeSelectPostReactionCounter(),
-// });
-
 const PostShowInfo = ({
   postReactionsDb,
   currentUser,
   currentPost,
 }: PostShowInfoProps) => {
-  // Selectors
-  // const { postReactions, postReactionCounter } = useSelector(postShowInfoState);
-
   // useDispatch
   const dispatch = useDispatch();
-  // console.log("post show infopostReactionsDb", postReactionsDb);
-  // console.log("currentuser", currentUser._id);
+
   const [postReaction, setPostReaction] = useState("unlike");
   const [postReactionCounter, setPostReactionCounter] = useState(0);
   const [reactions, setReactions] = useState<any[]>([]);
