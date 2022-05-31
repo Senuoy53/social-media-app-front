@@ -31,42 +31,42 @@ const ReactionsCount = ({ reactions }: ReactionCountProps) => {
           filterReactions.map((reaction: string, index: number) => {
             if (reaction === "like") {
               return (
-                <li className="like-count-icon">
+                <li key={index} className="like-count-icon">
                   <img src={like} />
                 </li>
               );
             }
             if (reaction === "love") {
               return (
-                <li className="love-count-icon">
+                <li key={index} className="love-count-icon">
                   <img src={love} />
                 </li>
               );
             }
             if (reaction === "wow") {
               return (
-                <li className="wow-count-icon">
+                <li key={index} className="wow-count-icon">
                   <img src={wow} />
                 </li>
               );
             }
             if (reaction === "haha") {
               return (
-                <li className="haha-count-icon">
+                <li key={index} className="haha-count-icon">
                   <img src={haha} />
                 </li>
               );
             }
             if (reaction === "sad") {
               return (
-                <li className="sad-count-icon">
+                <li key={index} className="sad-count-icon">
                   <img src={sad} />
                 </li>
               );
             }
             if (reaction === "angry") {
               return (
-                <li className="angry-count-icon">
+                <li key={index} className="angry-count-icon">
                   <img src={angry} />
                 </li>
               );

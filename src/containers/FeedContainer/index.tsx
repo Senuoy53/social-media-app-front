@@ -29,7 +29,7 @@ const FeedContainer = () => {
   const { errorMessage, announcements, loading } =
     useSelector(announcementState);
 
-  console.log("Announcements :", announcements);
+  // console.log("Announcements :", announcements);
 
   // Get user from localstorage
   let jwt = localStorage.getItem("jwt");

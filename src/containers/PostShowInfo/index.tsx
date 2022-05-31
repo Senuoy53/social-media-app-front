@@ -25,13 +25,13 @@ const PostShowInfo = ({
   const [reactions, setReactions] = useState<any[]>([]);
 
   useEffect(() => {
-    console.log("postReactionsDb", postReactionsDb);
+    // console.log("postReactionsDb", postReactionsDb);
     postReactionsDb.map((items: any, index: number) => {
       if (items.userId === currentUser._id) {
         return setPostReaction(items.reaction);
       }
     });
-    console.log("post reaction before : ", postReaction);
+    // console.log("post reaction before : ", postReaction);
 
     setPostReactionCounter(postReactionsDb.length);
 
@@ -51,16 +51,16 @@ const PostShowInfo = ({
 
       // Delete reaction from list
       const data: any[] = [...reactions];
-      console.log("data", data);
+      // console.log("data", data);
       let indexof = data.indexOf(postReaction);
 
-      console.log("indexof " + postReaction, indexof);
+      // console.log("indexof " + postReaction, indexof);
       if (indexof > -1) {
         data.splice(indexof, 1);
         console.log("data after", data);
         setReactions([...data]);
       }
-      console.log("reactions state after deleting :", reactions);
+      // console.log("reactions state after deleting :", reactions);
 
       setPostReaction("like");
       // Add new reaction to the list
@@ -76,20 +76,20 @@ const PostShowInfo = ({
     } else if (e.target.id !== "unlike" && postReaction === "unlike") {
       setPostReactionCounter(postReactionCounter + 1);
 
-      console.log(e.target.id);
+      // console.log(e.target.id);
 
       // Delete reaction from list
       const data: any[] = [...reactions];
-      console.log("data", data);
+      // console.log("data", data);
       let indexof = data.indexOf(postReaction);
 
-      console.log("indexof " + postReaction, indexof);
+      // console.log("indexof " + postReaction, indexof);
       if (indexof > -1) {
         data.splice(indexof, 1);
         console.log("data after", data);
         setReactions([...data]);
       }
-      console.log("reactions state after deleting :", reactions);
+      // console.log("reactions state after deleting :", reactions);
 
       // Add new reaction to the list
       setReactions([...data, e.target.id]);
@@ -105,22 +105,22 @@ const PostShowInfo = ({
     } else if (e.target.id === postReaction) {
       postReactionCounter !== 0 &&
         setPostReactionCounter(postReactionCounter - 1);
-      console.log("postReaction before ", postReaction);
+      // console.log("postReaction before ", postReaction);
       // Delete reaction from list
       const data: any[] = [...reactions];
-      console.log("data", data);
+      // console.log("data", data);
       let indexof = data.indexOf(postReaction);
 
-      console.log("indexof " + postReaction, indexof);
+      // console.log("indexof " + postReaction, indexof);
       if (indexof > -1) {
         data.splice(indexof, 1);
         console.log("data after", data);
         setReactions([...data]);
       }
-      console.log("reactions state after deleting :", reactions);
+      // console.log("reactions state after deleting :", reactions);
 
       setPostReaction("unlike");
-      console.log(e.target.id);
+      // console.log(e.target.id);
 
       // === disptach removeReaction request ===
       dispatch(
@@ -132,21 +132,21 @@ const PostShowInfo = ({
     } else {
       // Delete reaction from list
       const data: any[] = [...reactions];
-      console.log("data", data);
+      // console.log("data", data);
       let indexof = data.indexOf(postReaction);
 
-      console.log("indexof " + postReaction, indexof);
+      // console.log("indexof " + postReaction, indexof);
       if (indexof > -1) {
         data.splice(indexof, 1);
-        console.log("data after", data);
+        // console.log("data after", data);
         setReactions([...data]);
       }
-      console.log("reactions state after deleting :", reactions);
+      // console.log("reactions state after deleting :", reactions);
 
       // Add new reaction to the list
       setReactions([...data, e.target.id]);
       setPostReaction(e.target.id);
-      console.log(e.target.id);
+      // console.log(e.target.id);
 
       // === disptach updateReaction request ===
       dispatch(
@@ -159,7 +159,7 @@ const PostShowInfo = ({
     }
   };
 
-  console.log("Reactions state", reactions);
+  // console.log("Reactions state", reactions);
   return (
     <PostShowInfoWrapper>
       <div className="right">
