@@ -1,8 +1,4 @@
-interface PostShowInfoState {
-  // postReaction: string;
-  // postReactionCounter: number;
-  postReactions: PostReactions[];
-}
+interface PostShowInfoState {}
 
 interface PostReactions {
   userId: string;
