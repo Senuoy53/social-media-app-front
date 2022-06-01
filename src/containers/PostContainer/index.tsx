@@ -6,6 +6,16 @@ import PostBody from "../../components/PostBody";
 import PostShowInfo from "../../containers/PostShowInfo";
 import PostInputBox from "../../components/PostInputBox";
 import CommentsContainer from "../CommentsContainer";
+import { createStructuredSelector } from "reselect";
+import { makeSelectPostComment } from "../FeedContainer/selectors";
+import { useDispatch, useSelector } from "react-redux";
+import { requestPostComment } from "../FeedContainer/actions";
+import { useEffect } from "react";
+
+
+const postCommentState = createStructuredSelector({
+  postComment: makeSelectPostComment(),
+});
 
 const PostContainer = ({
   avatar,
@@ -15,10 +25,20 @@ const PostContainer = ({
   img,
   postId
 }: PostContainerProps) => {
+
+  const dispatch = useDispatch();
+  const {postComment} = useSelector(postCommentState);
+
+  useEffect(() => {
+    dispatch(requestPostComment(postId));
+  }, []);
+
   return (
     <PostContainerWrapper>
+      {<h4>{JSON.stringify(postComment)}</h4>} 
       <Card sx={{ margin: 0 }}>
         {/* Post Header */}
+        {postId}
         <PostHeader avatar={avatar} title={title} subheader={subheader} />
         {/* Post Body */}
         <PostBody desc={desc} img={img} />

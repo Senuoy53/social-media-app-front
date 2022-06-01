@@ -5,6 +5,7 @@ import signUpReducer from "../containers/SignUp/reducer";
 import postShowInfoReducer from "../containers/PostShowInfo/reducer";
 import commentsReducer from "../containers/CommentsContainer/reducer";
 import announcementReducer from "../components/Modal/reducer";
+import postCommentReducer from "../containers/FeedContainer/reducer";
 
 const rootReducer = combineReducers({
   signInState: signInReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   postShowInfoState: postShowInfoReducer,
   commentsState: commentsReducer,
   announcementState: announcementReducer,
+  postCommentState: postCommentReducer,
 });
 
 export default rootReducer;

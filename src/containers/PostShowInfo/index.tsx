@@ -4,41 +4,25 @@ import { createStructuredSelector } from "reselect";
 import ReactionButton from "../../components/ReactionButton";
 import ReactionsCount from "../../components/ReactionsCount";
 import PostShowInfoWrapper from "./PostShowInfoWrapper";
-import {
-  makeSelectError,
-  makeSelectErrorMessage,
-  makeSelectLoading,
-  makeSelectpostCommentCount,
-  makeSelectPostReaction,
-  makeSelectPostReactionCounter,
-} from "./selectors";
-import {
-  setPostReaction,
-  postReactionCountPlus,
-  postReactionCountMinus,
-  requestPostCommentCount,
-} from "./actions";
+
 import ShowReactionCounter from "../../components/ShowReactionCounter";
 import CommentCounter from "../../components/CommentCounter";
+import { makeSelectPostReaction, makeSelectPostReactionCounter } from './selectors';
+import { postReactionCountMinus, postReactionCountPlus, setPostReaction } from './actions';
 
 const postShowInfoState = createStructuredSelector({
   postReaction: makeSelectPostReaction(),
-  postReactionCounter: makeSelectPostReactionCounter(),
-  postCommentCount: makeSelectpostCommentCount(),
-  error: makeSelectError(),
-  errorMessage: makeSelectErrorMessage(),
-  loading: makeSelectLoading(),
+  postReactionCounter: makeSelectPostReactionCounter()
 });
 
 const PostShowInfo = ({postId}:PostShowInfoProp) => {
   // Selectors
-  const { postReaction, postReactionCounter, postCommentCount, error, errorMessage, loading } = useSelector(postShowInfoState);
+  const { postReaction, postReactionCounter} = useSelector(postShowInfoState);
 
   // useDispatch
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(requestPostCommentCount(postId))
   },[])
 
   //   handleClick
@@ -67,7 +51,7 @@ const PostShowInfo = ({postId}:PostShowInfoProp) => {
           </ShowReactionCounter>
         )}
       </div>
-      <CommentCounter count={postCommentCount} />
+      <CommentCounter count='9' />
     </PostShowInfoWrapper>
   );
 };

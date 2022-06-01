@@ -2,6 +2,7 @@ import { CheckIdState } from "../containers/CheckId/types";
 import { SignUpState } from "../containers/SignUp/types";
 import { ReactionCounterState } from "../components/ReactionsCount/types";
 import { AnnouncementState } from "../components/Modal/types";
+import {PostCommentState} from "../containers/FeedContainer/types"
 
 interface Action {
   type: string;
@@ -25,6 +26,7 @@ interface GlobalState {
   postShowInfoState: PostShowInfoState;
   commentsState: CommentsState;
   announcementState: AnnouncementState;
+  postCommentState: PostCommentState;
 }
 
 export { Action, User, GlobalState };
