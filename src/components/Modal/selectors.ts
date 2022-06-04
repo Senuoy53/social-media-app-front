@@ -35,9 +35,32 @@ const makeSelectLoading = () =>
       _.get(announcementState, "loading", false) as boolean
   );
 
+const makeSelectCurrentPage = () =>
+  createSelector(
+    selectFromAnnouncementStateDomain,
+    (announcementState: AnnouncementState): number =>
+      _.get(announcementState, "currentPage", 0) as number
+  );
+
+const makeSelectTotalPages = () =>
+  createSelector(
+    selectFromAnnouncementStateDomain,
+    (announcementState: AnnouncementState): number =>
+      _.get(announcementState, "totalPages", 0) as number
+  );
+
+const makeSelectLoadingMore = () =>
+  createSelector(
+    selectFromAnnouncementStateDomain,
+    (announcementState: AnnouncementState): boolean =>
+      _.get(announcementState, "loadingMore", false) as boolean
+  );
 export {
   makeSelectError,
   makeSelectErrorMessage,
   makeSelectAnnouncement,
   makeSelectLoading,
+  makeSelectCurrentPage,
+  makeSelectTotalPages,
+  makeSelectLoadingMore,
 };

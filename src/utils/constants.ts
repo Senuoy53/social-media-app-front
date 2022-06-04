@@ -9,3 +9,8 @@ export enum ButtonField {
   CHECK_USER_ID = "Check user ID",
   POST = "Post",
 }
+
+export enum LaodingAnnouncementVaribales {
+  PAGE = 1,
+  LIMIT = 3,
+}

@@ -28,11 +28,17 @@ import axios from "axios";
 
 import Icon from "@mui/material/Icon";
 
+import { setCurrentPage, emptyAnnouncementData } from "../Modal/actions";
+import { useDispatch } from "react-redux";
+
 const Navbar = () => {
   // UseSates
   const [anchorEl, setAnchorEl] = useState(null);
   // const open = Boolean(anchorEl);
   const [open, setOpen] = useState(false);
+
+  // useDispatch
+  const dispatch = useDispatch();
 
   // Get user from localstorage
   let jwt = localStorage.getItem("jwt");
@@ -91,6 +97,9 @@ const Navbar = () => {
         .then((res) => {
           // console.log("singout res", res);
           localStorage.removeItem("jwt");
+
+          // Empty the announcement state
+          dispatch(emptyAnnouncementData([]));
           history("/signin");
         })
         .catch((err) => {

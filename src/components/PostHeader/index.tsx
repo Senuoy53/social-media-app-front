@@ -17,7 +17,7 @@ const PostHeader = ({ avatar, title, subheader }: PostHeaderProps) => {
           </IconButton>
         }
         title={title}
-        subheader={<Moment format="MMM DD YYYY, LT">{subheader}</Moment>}
+        subheader={<Moment format="MMM DD YYYY, h:mm:ss a">{subheader}</Moment>}
       />
     </PostHeaderWrapper>
   );
