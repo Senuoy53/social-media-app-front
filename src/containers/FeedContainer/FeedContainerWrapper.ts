@@ -11,11 +11,29 @@ const FeedContainerWrapper = styled.section`
 
   .postsContainer {
     text-align: center;
-  }
 
-  .loadingPosts {
-    margin-top: 50px;
-    align-self: center;
+    .errorMessage {
+      margin-top: 50px;
+      color: #d8000c;
+      background-color: #ffbaba;
+    }
+
+    .errorMessage:before {
+      font-family: FontAwesome;
+      content: "\f057";
+      font-size: 24px;
+      color: #d8000c;
+    }
+
+    .loadingPosts {
+      margin-top: 50px;
+      align-self: center;
+    }
+
+    .loadingMorePosts {
+      /* margin-top: 20px; */
+      align-self: center;
+    }
   }
 `;
 

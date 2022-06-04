@@ -1,5 +1,5 @@
 interface PostContainerProps {
-  avatar?: string;
+  avatar?: any;
   title: string;
   subheader: string;
   desc: string;
@@ -7,4 +7,5 @@ interface PostContainerProps {
   postReactionsDb: any;
   currentUser: any;
   currentPost: string;
+  // ref?: any;
 }
