@@ -182,7 +182,7 @@ const Navbar = () => {
                   <div className="navText">{item.label}</div>
                 </NavLink>
               ) : (
-                <div className="navBox">
+                <div key={index} className="navBox">
                   <Icon className="navIcon">{item.icon}</Icon>
 
                   <div className="navText">{item.label}</div>
