@@ -10,6 +10,7 @@ const initialState: AnnouncementState = {
   currentPage: 0,
   totalPages: 1,
   loadingMore: false,
+  submitPostClicked: false,
 };
 
 const announcementReducer = (state = initialState, action: Action) => {
@@ -53,6 +54,12 @@ const announcementReducer = (state = initialState, action: Action) => {
       return {
         ...state,
         announcement: action.payload,
+      };
+
+    case ActionsTypes.SET_SUBMIT_POST_CLICKED:
+      return {
+        ...state,
+        submitPostClicked: action.payload,
       };
 
     default:

@@ -9,6 +9,7 @@ import {
   makeSelectErrorMessage,
   makeSelectLoading,
   makeSelectLoadingMore,
+  makeSelectSubmitPostClicked,
   makeSelectTotalPages,
 } from "../../components/Modal/selectors";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +17,7 @@ import {
   requestAnnouncements,
   setLoadingAnnouncement,
   setLoadingMore,
+  setSubmitPostClicked,
 } from "../../components/Modal/actions";
 import LoadingComponent from "../../components/LoadingComponent";
 import { Alert } from "@mui/material";
@@ -29,6 +31,7 @@ const announcementState = createStructuredSelector({
   currentPage: makeSelectCurrentPage(),
   totalPages: makeSelectTotalPages(),
   loadingMore: makeSelectLoadingMore(),
+  submitPostClicked: makeSelectSubmitPostClicked(),
 });
 
 const FeedContainer = () => {
@@ -47,6 +50,7 @@ const FeedContainer = () => {
     currentPage,
     totalPages,
     loadingMore,
+    submitPostClicked,
   } = useSelector(announcementState);
 
   // Get user from localstorage
@@ -55,13 +59,16 @@ const FeedContainer = () => {
   let currentUser = JSON.parse(jwt!).user;
 
   useEffect(() => {
-    if (currentPage == 1) {
+    if (submitPostClicked) {
       // increment testPage by 1 to
       setTestPage(2);
       setPageNumber(2);
 
       dispatch(setLoadingMore(true));
       dispatch(requestAnnouncements({ page: 2, limit: docLimit }));
+
+      // change SubmitPostClicked to true
+      dispatch(setSubmitPostClicked(false));
       //  }
     } else {
       // increment testPage by 1 to

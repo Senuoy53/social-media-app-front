@@ -55,6 +55,14 @@ const makeSelectLoadingMore = () =>
     (announcementState: AnnouncementState): boolean =>
       _.get(announcementState, "loadingMore", false) as boolean
   );
+
+const makeSelectSubmitPostClicked = () =>
+  createSelector(
+    selectFromAnnouncementStateDomain,
+    (announcementState: AnnouncementState): boolean =>
+      _.get(announcementState, "submitPostClicked", false) as boolean
+  );
+
 export {
   makeSelectError,
   makeSelectErrorMessage,
@@ -63,4 +71,5 @@ export {
   makeSelectCurrentPage,
   makeSelectTotalPages,
   makeSelectLoadingMore,
+  makeSelectSubmitPostClicked,
 };

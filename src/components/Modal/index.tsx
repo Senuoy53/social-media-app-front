@@ -25,7 +25,7 @@ import { useDispatch } from "react-redux";
 import {
   emptyAnnouncementData,
   setAnnouncementData,
-  setCurrentPage,
+  setSubmitPostClicked,
 } from "./actions";
 import ButtonCustom from "../ButtonCustom";
 import { ButtonField } from "../../utils/constants";
@@ -162,6 +162,9 @@ const Modal = ({ toggleModal, categories, user }: any) => {
 
     // Empty the announcement state
     dispatch(emptyAnnouncementData([]));
+
+    // change SubmitPostClicked to true
+    dispatch(setSubmitPostClicked(true));
 
     // Call the action to setAnnouncementData to backEnd/DB
     dispatch(
