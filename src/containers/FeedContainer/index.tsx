@@ -59,9 +59,7 @@ const FeedContainer = () => {
   let currentUser = JSON.parse(jwt!).user;
 
   useEffect(() => {
-    console.log("pageNumber", pageNumber);
     if (submitPostClicked) {
-      console.log("submitPostClicked :", submitPostClicked);
       // increment testPage by 1 to
       setTestPage(2);
       setPageNumber(2);
@@ -73,7 +71,6 @@ const FeedContainer = () => {
       dispatch(setSubmitPostClicked(false));
       //  }
     } else {
-      console.log("not submitPostClicked:", submitPostClicked);
       // increment testPage by 1 to
       setTestPage(testPage + 1);
 
