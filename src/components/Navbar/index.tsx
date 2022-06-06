@@ -28,7 +28,7 @@ import axios from "axios";
 
 import Icon from "@mui/material/Icon";
 
-import { setCurrentPage, emptyAnnouncementData } from "../Modal/actions";
+import { emptyAnnouncementData, setSubmitPostClicked } from "../Modal/actions";
 import { useDispatch } from "react-redux";
 
 const Navbar = () => {
@@ -100,6 +100,9 @@ const Navbar = () => {
 
           // Empty the announcement state
           dispatch(emptyAnnouncementData([]));
+          // change SubmitPostClicked to true
+          dispatch(setSubmitPostClicked(false));
+
           history("/signin");
         })
         .catch((err) => {
