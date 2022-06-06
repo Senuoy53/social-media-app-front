@@ -1,3 +1,3 @@
 interface ReactionCountProps {
-  reaction: string;
+  reactions: any;
 }

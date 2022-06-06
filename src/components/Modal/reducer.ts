@@ -7,15 +7,21 @@ const initialState: AnnouncementState = {
   error: false,
   errorMessage: "",
   loading: false,
+  currentPage: 0,
+  totalPages: 1,
+  loadingMore: false,
+  submitPostClicked: false,
 };
 
 const announcementReducer = (state = initialState, action: Action) => {
   switch (action.type) {
     case ActionsTypes.REQUEST_ANNOUNCEMENT_SUCCESS:
-      console.log("success payload :", action.payload);
       return {
         ...state,
-        announcement: action.payload,
+
+        announcement: [...state.announcement, ...action.payload.announcement],
+        currentPage: action.payload.currentPage,
+        totalPages: action.payload.totalPages,
       };
 
     case ActionsTypes.REQUEST_ANNOUNCEMENT_ERROR:
@@ -32,19 +38,29 @@ const announcementReducer = (state = initialState, action: Action) => {
         loading: action.payload,
       };
 
-    // case ActionsTypes.SET_VERIFICATION_ERROR:
-    //   return {
-    //     ...state,
-    //     verificationError: action.payload,
-    //     errorMessage: "",
-    //   };
+    case ActionsTypes.SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.payload,
+      };
 
-    // case ActionsTypes.SET_ERROR_MESSAGE:
-    //   return {
-    //     ...state,
-    //     errorMessage: action.payload,
-    //     verificationError: false,
-    //   };
+    case ActionsTypes.SET_LOADING_MORE:
+      return {
+        ...state,
+        loadingMore: action.payload,
+      };
+
+    case ActionsTypes.EMPTY_ANNOUCNEMENT_DATA:
+      return {
+        ...state,
+        announcement: action.payload,
+      };
+
+    case ActionsTypes.SET_SUBMIT_POST_CLICKED:
+      return {
+        ...state,
+        submitPostClicked: action.payload,
+      };
 
     default:
       return state;

@@ -1,10 +1,13 @@
 interface PostContainerProps {
-  avatar?: string;
+  avatar?: any;
   title: string;
   subheader: string;
   desc: string;
   img?: string;
-  postId: string;
+  postReactionsDb: any;
+  currentUser: any;
+  currentPost: string;
+  // ref?: any;
 }
 
 interface PostCommentType{

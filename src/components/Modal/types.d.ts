@@ -3,6 +3,10 @@ interface AnnouncementState {
   error: boolean;
   errorMessage: string;
   loading: boolean;
+  currentPage: number;
+  totalPages: number;
+  loadingMore: boolean;
+  submitPostClicked: boolean;
 }
 
 interface AnnouncementResponse {

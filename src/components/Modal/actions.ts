@@ -7,9 +7,10 @@ const setAnnouncementData = (payload: {}) => {
   };
 };
 
-const requestAnnouncements = () => {
+const requestAnnouncements = (payload: {}) => {
   return {
     type: ActionsTypes.REQUEST_ANNOUNCEMENTS,
+    payload,
   };
 };
 
@@ -34,10 +35,42 @@ const setLoadingAnnouncement = (payload: boolean) => {
   };
 };
 
+const setCurrentPage = (payload: number) => {
+  return {
+    type: ActionsTypes.SET_CURRENT_PAGE,
+    payload,
+  };
+};
+
+const setLoadingMore = (payload: boolean) => {
+  return {
+    type: ActionsTypes.SET_LOADING_MORE,
+    payload,
+  };
+};
+
+const emptyAnnouncementData = (payload: []) => {
+  return {
+    type: ActionsTypes.EMPTY_ANNOUCNEMENT_DATA,
+    payload,
+  };
+};
+
+const setSubmitPostClicked = (payload: boolean) => {
+  return {
+    type: ActionsTypes.SET_SUBMIT_POST_CLICKED,
+    payload,
+  };
+};
+
 export {
   requestAnnouncements,
   requestAnnouncementSuccess,
   requestAnnouncementError,
   setAnnouncementData,
   setLoadingAnnouncement,
+  setCurrentPage,
+  setLoadingMore,
+  emptyAnnouncementData,
+  setSubmitPostClicked,
 };

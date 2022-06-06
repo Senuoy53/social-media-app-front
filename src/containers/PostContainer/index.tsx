@@ -1,6 +1,5 @@
 import PostContainerWrapper from "./PostContainerWrapper";
-import { Favorite, FavoriteBorder, Share } from "@mui/icons-material";
-import { Card, CardActions, Checkbox, IconButton } from "@mui/material";
+import { Card } from "@mui/material";
 import PostHeader from "../../components/PostHeader";
 import PostBody from "../../components/PostBody";
 import PostShowInfo from "../../containers/PostShowInfo";
@@ -11,6 +10,8 @@ import { makeSelectLoading, makeSelectPostComment, makeSelectRerender } from "..
 import { useDispatch, useSelector } from "react-redux";
 import { requestPostComment } from "../FeedContainer/actions";
 import { ReactChild, ReactFragment, useEffect, useState } from "react";
+import { forwardRef } from "react";
+import { TypeReferenceType } from "typescript";
 
 
 const postCommentState = createStructuredSelector({
@@ -19,49 +20,54 @@ const postCommentState = createStructuredSelector({
   loading: makeSelectLoading()
 });
 
-const PostContainer = ({
-  avatar,
-  title,
-  subheader,
-  desc,
-  img,
-  postId
-}: PostContainerProps) => {
+const PostContainer = forwardRef<any, any>(
+  (
+    // avatar,
+    // title,
+    // subheader,
+    // desc,
+    // img,
+    // postReactionsDb,
+    // currentUser,
+    // currentPost,
+    props,
+    ref
+  ) => {
+    
+    const dispatch = useDispatch();
+    const {postComment, rerender, loading}:any = useSelector(postCommentState);
 
-  const dispatch = useDispatch();
-  const {postComment, rerender, loading}:any = useSelector(postCommentState);
+    useEffect(() => {
+      dispatch(requestPostComment({"postId":postId}));
+    }, []);
 
-  useEffect(() => {
-    dispatch(requestPostComment({"postId":postId}));
-  }, []);
+
+    let seenCommentIds: string[] = []
+
+    const loadMoreComment = () => {
+      dispatch(requestPostComment({"postId":postId, "seenCommentIds":seenCommentIds}));
+    }
   
-
-  let seenCommentIds: string[] = []
-
-  const loadMoreComment = () => {
-    dispatch(requestPostComment({"postId":postId, "seenCommentIds":seenCommentIds}));
-  }
-  
-  return (
-    <PostContainerWrapper>
+   return (
+    <PostContainerWrapper ref={ref}>
       {/* JSON.stringify(postComment) */}
       <Card sx={{ margin: 0 }}>
-      {postId}
+      {props.currentPost}
         {/* Post Header */}
-        <PostHeader avatar={avatar} title={title} subheader={subheader} />
+        <PostHeader avatar={props.avatar} title={props.title} subheader={props.subheader} />
         {/* Post Body */}
-        <PostBody desc={desc} img={img} />
+        <PostBody desc={props.desc} img={props.img} />
         {/* Show post info */}
         {
-          postComment.hasOwnProperty(postId) ? <PostShowInfo postId={postId} commentCount={postComment[postId].total}/>
-                                          : <PostShowInfo postId={postId}/>
+          postComment.hasOwnProperty(props.currentPost) ? <PostShowInfo postId={props.currentPost} commentCount={postComment[props.currentPost].total}/>
+                                          : <PostShowInfo postId={props.currentPost}/>
         }
         {/* Post comment */}
         <div id="CommentsContainer">
           {
-            postComment.hasOwnProperty(postId) 
+            postComment.hasOwnProperty(props.currentPost) 
               && (
-                postComment[postId].comments.map((comment:any,index:number) =>{
+                postComment[props.currentPost].comments.map((comment:any,index:number) =>{
                                                   seenCommentIds.push(comment._id)
                                                   return(
                                                   <CommentsContainer commentObj={comment}/>
@@ -69,18 +75,17 @@ const PostContainer = ({
                                                 }))
           }
         {
-            postComment.hasOwnProperty(postId) && 
-              (seenCommentIds.length < postComment[postId].total) &&
+            postComment.hasOwnProperty(props.currentPost) && 
+              (seenCommentIds.length < postComment[props.currentPost].total) &&
               (<h4 className='loadMoreButton' onClick={loadMoreComment}>load more comment ...</h4>)
         }
-        {loading.isLoading && loading.idOfLoadingPostComment == postId  && <h3>Loading</h3>}
+        {loading.isLoading && loading.idOfLoadingPostComment == props.currentPost  && <h3>Loading</h3>}
         </div>
         {/* Post input box  */}
         <PostInputBox />
       </Card>
     </PostContainerWrapper>
   );
-};
 
 export default PostContainer;
 

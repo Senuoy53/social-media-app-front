@@ -22,7 +22,11 @@ import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
-import { setAnnouncementData } from "./actions";
+import {
+  emptyAnnouncementData,
+  setAnnouncementData,
+  setSubmitPostClicked,
+} from "./actions";
 import ButtonCustom from "../ButtonCustom";
 import { ButtonField } from "../../utils/constants";
 
@@ -155,6 +159,12 @@ const Modal = ({ toggleModal, categories, user }: any) => {
     if (selectedFile != undefined) {
       url = await uploadImageToFirebase(selectedFile);
     }
+
+    // Empty the announcement state
+    dispatch(emptyAnnouncementData([]));
+
+    // change SubmitPostClicked to true
+    dispatch(setSubmitPostClicked(true));
 
     // Call the action to setAnnouncementData to backEnd/DB
     dispatch(

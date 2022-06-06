@@ -28,11 +28,17 @@ import axios from "axios";
 
 import Icon from "@mui/material/Icon";
 
+import { emptyAnnouncementData, setSubmitPostClicked } from "../Modal/actions";
+import { useDispatch } from "react-redux";
+
 const Navbar = () => {
   // UseSates
   const [anchorEl, setAnchorEl] = useState(null);
   // const open = Boolean(anchorEl);
   const [open, setOpen] = useState(false);
+
+  // useDispatch
+  const dispatch = useDispatch();
 
   // Get user from localstorage
   let jwt = localStorage.getItem("jwt");
@@ -52,7 +58,6 @@ const Navbar = () => {
         },
       });
       setNavbarInfos(data);
-      console.log("navbar data", data);
     }
   };
 
@@ -92,6 +97,12 @@ const Navbar = () => {
         .then((res) => {
           // console.log("singout res", res);
           localStorage.removeItem("jwt");
+
+          // Empty the announcement state
+          dispatch(emptyAnnouncementData([]));
+          // change SubmitPostClicked to true
+          dispatch(setSubmitPostClicked(false));
+
           history("/signin");
         })
         .catch((err) => {
@@ -164,52 +175,20 @@ const Navbar = () => {
           <div className="navMenu">
             {navbarInfos.map((item: any, index: number) =>
               item.hasLink ? (
-                <NavLink to={item.link} className="navBox">
+                <NavLink key={index} to={item.link} className="navBox">
                   {/* <Home className="navIcon" /> */}
-                  <Icon
-                    baseClassName="material-icons-two-tone"
-                    className="navIcon"
-                    style={{
-                      color: "red",
-                    }}
-                  >
-                    home
-                  </Icon>
+                  <Icon className="navIcon">{item.icon}</Icon>
 
                   <div className="navText">{item.label}</div>
                 </NavLink>
               ) : (
-                <NavLink to="/signin" className="navBox">
-                  <Home className="navIcon" />
+                <div className="navBox">
+                  <Icon className="navIcon">{item.icon}</Icon>
 
                   <div className="navText">{item.label}</div>
-                </NavLink>
+                </div>
               )
             )}
-
-            {/* <NavLink to="/" className="navBox">
-              <Home className="navIcon" />
-
-              <div className="navText">Home</div>
-            </NavLink>
-
-            <NavLink to="/signin" className="navBox">
-              <Group className="navIcon" />
-
-              <div className="navText">Friends</div>
-            </NavLink>
-
-            <NavLink to="/signin" className="navBox">
-              <Notifications className="navIcon" />
-
-              <div className="navText">Notifications</div>
-            </NavLink>
-
-            <NavLink to="/signin" className="navBox">
-              <Chat className="navIcon" />
-
-              <div className="navText">Chat App</div>
-            </NavLink> */}
           </div>
 
           {/* Icons */}
