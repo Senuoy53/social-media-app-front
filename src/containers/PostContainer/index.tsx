@@ -73,7 +73,7 @@ const PostContainer = ({
               (seenCommentIds.length < postComment[postId].total) &&
               (<h4 className='loadMoreButton' onClick={loadMoreComment}>load more comment ...</h4>)
         }
-        {loading.isLoading && <h3>Loading</h3>}
+        {loading.isLoading && loading.idOfLoadingPostComment == postId  && <h3>Loading</h3>}
         </div>
         {/* Post input box  */}
         <PostInputBox />
