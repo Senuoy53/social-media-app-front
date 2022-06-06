@@ -5,13 +5,14 @@ const CommentHeaderWrapper = styled.div`
   display: flex;
   align-items: center;
   ${mobile({
-    fontSize: "12px",
+    fontSize: "1em",
   })}
 
   #CommentName {
     margin-right: 3px;
     color: ${({ theme }) => theme.colors.Black};
     font-weight: bold;
+    font-size: 1em;
   }
 
   #CommentDate {

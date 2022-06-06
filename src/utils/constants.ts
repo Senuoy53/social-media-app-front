@@ -10,6 +10,13 @@ export enum ButtonField {
   POST = "Post",
 }
 
+
+export enum CommentMsg {
+  REPLY="Reply",
+  EDIT='Edit',
+  DELETE="Delete"
+}
+
 export enum LaodingAnnouncementVaribales {
   PAGE = 1,
   LIMIT = 3,

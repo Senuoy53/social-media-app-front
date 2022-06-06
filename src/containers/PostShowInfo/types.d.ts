@@ -12,10 +12,12 @@ interface ReactionButtonProps {
   onClick: (e: any) => void;
 }
 
+
 interface PostShowInfoProps {
   postReactionsDb: any;
   currentUser: any;
   currentPost: string;
+  commentCount?: number;
 }
 
 interface ReactionResponse {

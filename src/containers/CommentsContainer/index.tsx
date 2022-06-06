@@ -17,12 +17,14 @@ import {
   makeSelectCommentReactionCounter,
 } from "./selectors";
 
+import {CommentMsg} from '../../utils/constants'
+
 const commentsState = createStructuredSelector({
   commentReaction: makeSelectCommentReaction(),
   commentReactionCounter: makeSelectCommentReactionCounter(),
 });
 
-const CommentsContainer = () => {
+const CommentsContainer = ({commentObj}:any) => {
   // Selectors
   const { commentReaction, commentReactionCounter } =
     useSelector(commentsState);
@@ -48,10 +50,11 @@ const CommentsContainer = () => {
 
   return (
     <CommentsContainerWrapper>
+      
       <div className="com-leftSide">
         <Avatar
           aria-label="recipe"
-          src="https://images.pexels.com/photos/846741/pexels-photo-846741.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+          src={commentObj.userId.profilePicture}
           sx={{
             width: { xs: "20px", sm: "30px" },
             height: { xs: "20px", sm: "30px" },
@@ -60,19 +63,19 @@ const CommentsContainer = () => {
       </div>
       <div className="com-rightSide">
         {/* Comment Header */}
-        <CommentHeader />
+        <CommentHeader fname={commentObj.userId.fname} lname={commentObj.userId.lname} date={commentObj.updatedAt} />
         {/* Comment Body */}
-        <div id="commentBody">First Comment</div>
+        <div id="commentBody">{commentObj.comment}</div>
         {/* Comment Bottom */}
         <div id="comBottomContainer">
           {/* Reaction Button */}
           <ReactionButton reaction={commentReaction} onClick={handleClick} />
           {/* Reply button */}
-          <div className="CommentButton">Reply</div>
+          <div className="CommentButton">{CommentMsg.REPLY}</div>
           {/* Edit button */}
-          <div className="CommentButton">Edit</div>
+          <div className="CommentButton">{CommentMsg.EDIT}</div>
           {/* Delete button */}
-          <div className="CommentButton">Delete</div>
+          <div className="CommentButton">{CommentMsg.DELETE}</div>
           {/* Reaction Counter */}
           {commentReactionCounter > 0 && (
             <ShowReactionCounter id="commentReactionCount">

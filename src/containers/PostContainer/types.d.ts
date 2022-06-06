@@ -9,3 +9,11 @@ interface PostContainerProps {
   currentPost: string;
   // ref?: any;
 }
+
+interface PostCommentType{
+  [key: string]:{
+      total: number,
+      comments:string[],
+  }
+}
+

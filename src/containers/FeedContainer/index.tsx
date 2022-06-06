@@ -20,8 +20,10 @@ import {
   setSubmitPostClicked,
 } from "../../components/Modal/actions";
 import LoadingComponent from "../../components/LoadingComponent";
+
 import { Alert } from "@mui/material";
 import { LaodingAnnouncementVaribales } from "../../utils/constants";
+
 
 // CheckId selectors
 const announcementState = createStructuredSelector({
@@ -43,6 +45,7 @@ const FeedContainer = () => {
   // useDispatch
   const dispatch = useDispatch();
   // Selectors
+
   const {
     errorMessage,
     announcements,
@@ -67,12 +70,14 @@ const FeedContainer = () => {
       dispatch(setLoadingMore(true));
       dispatch(requestAnnouncements({ page: 2, limit: docLimit }));
 
+
       // change SubmitPostClicked to true
       dispatch(setSubmitPostClicked(false));
       //  }
     } else {
       // increment testPage by 1 to
       setTestPage(testPage + 1);
+
 
       if (testPage <= totalPages) {
         if (testPage === 1) {
@@ -104,10 +109,10 @@ const FeedContainer = () => {
     [loading]
   );
 
+
   return (
     <FeedContainerWrapper>
       <Post />
-
       <div className="postsContainer">
         {/* {errorMessage && (
           <Alert sx={{ mt: 2 }} severity="warning">

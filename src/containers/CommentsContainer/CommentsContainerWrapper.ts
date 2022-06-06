@@ -18,6 +18,7 @@ const CommentsContainerWrapper = styled.div`
 
     #commentBody {
       margin-top: 5px;
+      color: ${({ theme }) => theme.colors.Black}};
     }
 
     #comBottomContainer {

@@ -13,6 +13,7 @@ const Home = () => {
         <FeedContainer />
         <LeftBar />
       </div>
+      {/* <LazyComment/> */}
     </HomeWrapper>
   );
 };

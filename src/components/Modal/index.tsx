@@ -247,7 +247,7 @@ const Modal = ({ toggleModal, categories, user }: any) => {
                 <Avatar
                   alt="avatar"
                   src={user.profilePicture}
-                  sx={{ width: 66, height: 66, mr: 3 }}
+                  sx={{ width: 56, height: 56, mr: 2 }}
                 />
               </div>
 
