@@ -36,10 +36,18 @@ const makeSelectLoading = () =>
       _.get(PostCommentState, "loading", false)
   );
 
+const makeSelectRerender = () =>
+  createSelector(
+    selectFromPostCommentStateDomain,
+    (PostCommentState: PostCommentState): number =>
+      _.get(PostCommentState, "rerender", 0)
+  );
+
 
 export {
     makeSelectPostComment,
     makeSelectError,
     makeSelectErrorMessage,
     makeSelectLoading,
+    makeSelectRerender,
 };

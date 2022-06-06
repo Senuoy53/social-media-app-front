@@ -15,4 +15,5 @@ interface CommmentCountResponse {
 
 interface PostShowInfoProp {
   postId: string;
+  commentCount?: number;
 }

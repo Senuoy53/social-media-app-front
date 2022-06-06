@@ -12,9 +12,7 @@ const PostContainerWrapper = styled.div`
 
   #CommentsContainer {
     margin: 20px 16px 20px;
-    height: 200px;
-    overflow-y: scroll;
-
+    
     ::-webkit-scrollbar {
       width: 0.7rem;
     }
@@ -26,6 +24,14 @@ const PostContainerWrapper = styled.div`
     ::-webkit-scrollbar-thumb {
       background-color: #c4c4c4;
       border-radius: 50px;
+    }
+
+    .loadMoreButton{
+      color: ${({ theme }) => theme.colors.Black}};
+    }
+    .loadMoreButton:hover {
+      text-decoration: underline;
+      cursor: pointer;
     }
   }
 `;

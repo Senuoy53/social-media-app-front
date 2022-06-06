@@ -29,14 +29,17 @@ function* postCommentSaga() {
 
 
 
-function* requestPostComment(payload:string) {
+function* requestPostComment(payload:any) {
   if (typeof window.localStorage !== "undefined") {
     let jwt = localStorage.getItem("jwt");
     let accessToken = JSON.parse(jwt!).accessToken;
 
     const options = {
       method: "POST",
-      url: `${BACK_URL_API}/comment/getCommentByPostId/${payload}`,
+      url: `${BACK_URL_API}/comment/getCommentByPostId/${payload.postId}`,
+      data: {
+        "seenIds":payload.seenCommentIds
+      },
       headers: {
         //"Content-type": "application/json",
         authorization: `Bearer ${accessToken}`,

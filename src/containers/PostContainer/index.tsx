@@ -7,14 +7,15 @@ import PostShowInfo from "../../containers/PostShowInfo";
 import PostInputBox from "../../components/PostInputBox";
 import CommentsContainer from "../CommentsContainer";
 import { createStructuredSelector } from "reselect";
-import { makeSelectPostComment } from "../FeedContainer/selectors";
+import { makeSelectPostComment, makeSelectRerender } from "../FeedContainer/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { requestPostComment } from "../FeedContainer/actions";
-import { useEffect } from "react";
+import { ReactChild, ReactFragment, useEffect, useState } from "react";
 
 
 const postCommentState = createStructuredSelector({
   postComment: makeSelectPostComment(),
+  rerender: makeSelectRerender()
 });
 
 const PostContainer = ({
@@ -27,29 +28,60 @@ const PostContainer = ({
 }: PostContainerProps) => {
 
   const dispatch = useDispatch();
-  const {postComment} = useSelector(postCommentState);
+  const {postComment, rerender}:any = useSelector(postCommentState);
+  //const [test,setTest] = useState(false)
 
   useEffect(() => {
-    dispatch(requestPostComment(postId));
+    dispatch(requestPostComment({"postId":postId}));
   }, []);
+  
 
+  let seenCommentIds: string[] = []
+
+  const loadMoreComment = () => {
+    dispatch(requestPostComment({"postId":postId, "seenCommentIds":seenCommentIds}));
+  }
+  
   return (
     <PostContainerWrapper>
-      {<h4>{JSON.stringify(postComment)}</h4>} 
+      {/* JSON.stringify(postComment) */}
       <Card sx={{ margin: 0 }}>
+      {postId}
         {/* Post Header */}
-        {postId}
         <PostHeader avatar={avatar} title={title} subheader={subheader} />
         {/* Post Body */}
         <PostBody desc={desc} img={img} />
         {/* Show post info */}
-        <PostShowInfo postId={postId}/>
+        {
+          postComment.hasOwnProperty(postId) ? <PostShowInfo postId={postId} commentCount={postComment[postId].total}/>
+                                          : <PostShowInfo postId={postId}/>
+        }
+        
         {/* Comments Container */}
+        {/* <div id="CommentsContainer">
+          <CommentsContainer />
+          <CommentsContainer />
+          <CommentsContainer />
+        </div> */}
+        {/* <button onClick={()=>{setTest(!test)}}>RERENDER</button> */}
         <div id="CommentsContainer">
-          <CommentsContainer />
-          <CommentsContainer />
-          <CommentsContainer />
+          {
+            postComment.hasOwnProperty(postId) 
+              && (
+                postComment[postId].comments.map((comment:any,index:number) =>{
+                                                  seenCommentIds.push(comment._id)
+                                                  return(
+                                                  <CommentsContainer commentObj={comment}/>
+                                                  )
+                                                }))
+          }
+        {
+            postComment.hasOwnProperty(postId) && 
+              (seenCommentIds.length < postComment[postId].total) &&
+              (<h4 className='loadMoreButton' onClick={loadMoreComment}>load more comment ...</h4>)
+        }
         </div>
+
 
         {/* Post input box  */}
         <PostInputBox />
@@ -59,3 +91,5 @@ const PostContainer = ({
 };
 
 export default PostContainer;
+
+

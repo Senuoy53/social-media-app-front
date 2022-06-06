@@ -2,7 +2,7 @@ import { ActionsTypes } from "./constants";
 
 
 
-const requestPostComment = (payload: string) => {
+const requestPostComment = (payload: any) => {
   return {
     type: ActionsTypes.REQUEST_POST_COMMENT,
     payload

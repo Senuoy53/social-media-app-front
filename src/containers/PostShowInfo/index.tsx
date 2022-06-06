@@ -15,7 +15,7 @@ const postShowInfoState = createStructuredSelector({
   postReactionCounter: makeSelectPostReactionCounter()
 });
 
-const PostShowInfo = ({postId}:PostShowInfoProp) => {
+const PostShowInfo = ({postId, commentCount=0}:PostShowInfoProp) => {
   // Selectors
   const { postReaction, postReactionCounter} = useSelector(postShowInfoState);
 
@@ -51,7 +51,7 @@ const PostShowInfo = ({postId}:PostShowInfoProp) => {
           </ShowReactionCounter>
         )}
       </div>
-      <CommentCounter count='9' />
+      <CommentCounter count={commentCount} />
     </PostShowInfoWrapper>
   );
 };
