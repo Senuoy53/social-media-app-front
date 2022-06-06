@@ -63,8 +63,8 @@ const CommentsContainer = ({commentObj}:any) => {
       </div>
       <div className="com-rightSide">
         {/* Comment Header */}
-        <CommentHeader fname={commentObj.userId.fname} lname={commentObj.userId.lname} date={commentObj.updatedAt} />
-        {/* Comment Body */}
+        {/* <CommentHeader fname={commentObj.userId.fname} lname={commentObj.userId.lname} date={commentObj.updatedAt} /> */}
+        {/* Comment Body */} 
         <div id="commentBody">{commentObj.comment}</div>
         {/* Comment Bottom */}
         <div id="comBottomContainer">

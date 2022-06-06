@@ -1,7 +1,6 @@
 
 import {useEffect, useState} from 'react'
-import { useDispatch, useSelector } from "react-redux";
-import { createStructuredSelector } from "reselect";
+import { useDispatch } from "react-redux";
 import ReactionButton from "../../components/ReactionButton";
 import ReactionsCount from "../../components/ReactionsCount";
 import PostShowInfoWrapper from "./PostShowInfoWrapper";
@@ -9,7 +8,7 @@ import PostShowInfoWrapper from "./PostShowInfoWrapper";
 
 import ShowReactionCounter from "../../components/ShowReactionCounter";
 import CommentCounter from "../../components/CommentCounter";
-import { makeSelectPostReaction, makeSelectPostReactionCounter } from './selectors';
+
 
 import {
   requestAddReaction,

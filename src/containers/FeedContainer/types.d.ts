@@ -18,5 +18,5 @@ interface ActionInterface {
 
 interface PostCommentResponse{
     data: any,
-    statut: number,
+    status: number,
 }
