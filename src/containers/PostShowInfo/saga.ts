@@ -6,6 +6,12 @@ import { makeRequest } from "../../utils/request";
 //import { AnnouncementResponse } from "./types";
 import { Action } from "../../utils/types";
 
+
+function* postShowInfoSaga() {
+  yield takeLatest(ActionsTypes.REQUEST_ADD_REACTION, RequestAddReaction);
+  yield takeLatest(ActionsTypes.REQUEST_UPDATE_REACTION, RequestUpdateReaction);
+  yield takeLatest(ActionsTypes.REQUEST_REMOVE_REACTION, RequestRemoveReaction);
+}
 // Request to update a reaction in db
 function* RequestUpdateReaction(action: Action) {
   // Check if localStorage is empty
@@ -67,4 +73,8 @@ function* RequestRemoveReaction(action: Action) {
 }
 
 export default postShowInfoSaga;
+
+function* RequestAddReaction(REQUEST_ADD_REACTION: ActionsTypes, RequestAddReaction: any) {
+  throw new Error("Function not implemented.");
+}
 

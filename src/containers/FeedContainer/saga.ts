@@ -9,13 +9,6 @@ import {
 import { makeRequest } from "../../utils/request";
 import { Channel } from "redux-saga";
 
-/* function* postCommentSaga() {
-  yield takeLatest(
-    ActionsTypes.REQUEST_POST_COMMENT,
-    requestPostComment
-  );
-} */
-
 function* postCommentSaga() {
   // 1- Create a channel for request actions
   const requestChan = (yield actionChannel(ActionsTypes.REQUEST_POST_COMMENT)) as Channel<ActionInterface>;
@@ -26,8 +19,6 @@ function* postCommentSaga() {
     yield call(requestPostComment, payload)
   }
 }
-
-
 
 function* requestPostComment(payload:any) {
   if (typeof window.localStorage !== "undefined") {
@@ -46,7 +37,7 @@ function* requestPostComment(payload:any) {
       },
     };
 
-    const response: CommmentCountResponse = yield call(makeRequest, options);
+    const response: PostCommentResponse = yield call(makeRequest, options);
     const { data, status } = response;
 
     if ((status >= 400 && status < 600) || data.error) {

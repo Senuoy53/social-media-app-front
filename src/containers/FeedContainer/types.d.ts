@@ -15,3 +15,8 @@ interface ActionInterface {
     type: "REQUEST_POST_COMMENT"
     payload: ActionPayload // whichever
   }
+
+interface PostCommentResponse{
+    data: any,
+    statut: number,
+}

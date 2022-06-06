@@ -38,14 +38,14 @@ const PostContainer = forwardRef<any, any>(
     const {postComment, rerender, loading}:any = useSelector(postCommentState);
 
     useEffect(() => {
-      dispatch(requestPostComment({"postId":postId}));
+      dispatch(requestPostComment({"postId":props.currentPost}));
     }, []);
 
 
     let seenCommentIds: string[] = []
 
     const loadMoreComment = () => {
-      dispatch(requestPostComment({"postId":postId, "seenCommentIds":seenCommentIds}));
+      dispatch(requestPostComment({"postId":props.currentPost, "seenCommentIds":seenCommentIds}));
     }
   
    return (
@@ -86,6 +86,8 @@ const PostContainer = forwardRef<any, any>(
       </Card>
     </PostContainerWrapper>
   );
+
+      })
 
 export default PostContainer;
 
