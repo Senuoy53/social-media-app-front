@@ -23,7 +23,7 @@ const requestPostCommentError = (payload: String) => {
   };
 };
 
-const setLoadingPostComment = (payload: Boolean) => {
+const setLoadingPostComment = (payload: any) => {
   return {
     type: ActionsTypes.SET_LOADING_POST_COMMENT,
     payload,

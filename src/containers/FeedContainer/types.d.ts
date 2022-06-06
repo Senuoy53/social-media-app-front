@@ -5,7 +5,9 @@ interface PostCommentState{
     }}
     error: boolean;
     errorMessage: string;
-    loading: boolean;
+    loading: { isLoading: boolean,
+               idOfLoadingPostComment: String
+              };
     rerender: number;
 }
 

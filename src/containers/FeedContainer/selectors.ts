@@ -33,7 +33,9 @@ const makeSelectLoading = () =>
   createSelector(
     selectFromPostCommentStateDomain,
     (PostCommentState: PostCommentState): boolean =>
-      _.get(PostCommentState, "loading", false)
+      _.get(PostCommentState, "loading", { isLoading: false,
+        idOfLoadingPostComment: ""
+       })
   );
 
 const makeSelectRerender = () =>

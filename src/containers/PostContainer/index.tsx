@@ -7,7 +7,7 @@ import PostShowInfo from "../../containers/PostShowInfo";
 import PostInputBox from "../../components/PostInputBox";
 import CommentsContainer from "../CommentsContainer";
 import { createStructuredSelector } from "reselect";
-import { makeSelectPostComment, makeSelectRerender } from "../FeedContainer/selectors";
+import { makeSelectLoading, makeSelectPostComment, makeSelectRerender } from "../FeedContainer/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { requestPostComment } from "../FeedContainer/actions";
 import { ReactChild, ReactFragment, useEffect, useState } from "react";
@@ -15,7 +15,8 @@ import { ReactChild, ReactFragment, useEffect, useState } from "react";
 
 const postCommentState = createStructuredSelector({
   postComment: makeSelectPostComment(),
-  rerender: makeSelectRerender()
+  rerender: makeSelectRerender(),
+  loading: makeSelectLoading()
 });
 
 const PostContainer = ({
@@ -28,8 +29,7 @@ const PostContainer = ({
 }: PostContainerProps) => {
 
   const dispatch = useDispatch();
-  const {postComment, rerender}:any = useSelector(postCommentState);
-  //const [test,setTest] = useState(false)
+  const {postComment, rerender, loading}:any = useSelector(postCommentState);
 
   useEffect(() => {
     dispatch(requestPostComment({"postId":postId}));
@@ -56,14 +56,7 @@ const PostContainer = ({
           postComment.hasOwnProperty(postId) ? <PostShowInfo postId={postId} commentCount={postComment[postId].total}/>
                                           : <PostShowInfo postId={postId}/>
         }
-        
-        {/* Comments Container */}
-        {/* <div id="CommentsContainer">
-          <CommentsContainer />
-          <CommentsContainer />
-          <CommentsContainer />
-        </div> */}
-        {/* <button onClick={()=>{setTest(!test)}}>RERENDER</button> */}
+        {/* Post comment */}
         <div id="CommentsContainer">
           {
             postComment.hasOwnProperty(postId) 
@@ -80,9 +73,8 @@ const PostContainer = ({
               (seenCommentIds.length < postComment[postId].total) &&
               (<h4 className='loadMoreButton' onClick={loadMoreComment}>load more comment ...</h4>)
         }
+        {loading.isLoading && <h3>Loading</h3>}
         </div>
-
-
         {/* Post input box  */}
         <PostInputBox />
       </Card>

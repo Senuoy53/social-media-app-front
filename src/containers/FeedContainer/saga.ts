@@ -4,7 +4,7 @@ import { BACK_URL_API } from "../../variables";
 import {
   requestPostCommentSuccess,
   requestPostCommentError,
-  setLoadingPostComment
+  setLoadingPostComment,
 } from "./actions";
 import { makeRequest } from "../../utils/request";
 import { Channel } from "redux-saga";
@@ -53,10 +53,15 @@ function* requestPostComment(payload:any) {
       yield put(requestPostCommentError(data.error));
     } else {
       // set loading to true
-      //yield put(requestPostCommentError(""));
+      yield put(setLoadingPostComment({ isLoading: true,
+                                        idOfLoadingPostComment: payload.postId
+                                      }));
+      //request data
       yield put(requestPostCommentSuccess(data));
       // set loading to false after downloading data from back
-      //yield put(setLoadingPostComment(false));
+      yield put(setLoadingPostComment({ isLoading: false,
+                                        idOfLoadingPostComment: ''
+                                      }));
     }
   }
 }

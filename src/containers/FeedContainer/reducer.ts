@@ -9,8 +9,9 @@ const initialState: PostCommentState = {
                     }},
   error: false,
   errorMessage: "",
-  loading: false,
-  
+  loading: { isLoading: false,
+             idOfLoadingPostComment: ""
+            }
 };
 
 
@@ -21,13 +22,14 @@ const postCommentReducer = (state = initialState, action: Action) => {
       if(state.postComment.hasOwnProperty(postId) && action.payload[postId].comments[0]._id !== state.postComment[postId].comments[0]._id){
         let newState = { ...state}
         newState.postComment[postId].comments = [...newState.postComment[postId].comments, ...action.payload[postId].comments]
-        console.log('rerender')
-        return {...newState, rerender: state.rerender + 1}
+        return {...newState,
+                rerender: state.rerender + 1}
       }else{
-        console.log('here', state)
         return {
           ...state,
-          postComment: {...state.postComment, ...action.payload},
+          postComment: {...state.postComment,
+                        ...action.payload
+                        },            
         };
       }
     case ActionsTypes.REQUEST_POST_COMMENT_ERROR:
@@ -35,11 +37,13 @@ const postCommentReducer = (state = initialState, action: Action) => {
         ...state,
         error: true,
         errorMessage: action.payload,
+        
       };
     case ActionsTypes.SET_LOADING_POST_COMMENT:
       return {
         ...state,
-        loading: action.payload
+        loading: action.payload,
+        rerender: state.rerender + 1
       };
 
     default:
