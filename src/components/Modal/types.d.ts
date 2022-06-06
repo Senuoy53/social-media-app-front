@@ -6,6 +6,7 @@ interface AnnouncementState {
   currentPage: number;
   totalPages: number;
   loadingMore: boolean;
+  submitPostClicked: boolean;
 }
 
 interface AnnouncementResponse {

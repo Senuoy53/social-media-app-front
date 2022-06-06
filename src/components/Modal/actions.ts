@@ -56,6 +56,13 @@ const emptyAnnouncementData = (payload: []) => {
   };
 };
 
+const setSubmitPostClicked = (payload: boolean) => {
+  return {
+    type: ActionsTypes.SET_SUBMIT_POST_CLICKED,
+    payload,
+  };
+};
+
 export {
   requestAnnouncements,
   requestAnnouncementSuccess,
@@ -65,4 +72,5 @@ export {
   setCurrentPage,
   setLoadingMore,
   emptyAnnouncementData,
+  setSubmitPostClicked,
 };
