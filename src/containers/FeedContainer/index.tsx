@@ -54,7 +54,6 @@ const FeedContainer = () => {
           announcements &&
           announcements.map((item: any, index: number) =>
             {
-              if(index>=33 && index<=39){
                 return (<>{(item.anIsAnonymous) ? (
                   <PostContainer
                     key={index}
@@ -75,10 +74,6 @@ const FeedContainer = () => {
                   />
                 )}</>)
               }
-              return (
-                <h1></h1>
-              )
-            }
           )
         )}
       </div>
