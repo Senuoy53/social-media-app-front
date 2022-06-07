@@ -283,7 +283,7 @@ const Modal = ({ toggleModal, categories, user }: any) => {
                 </div>
               </div>
               <div className="button-right-side">
-                <Tooltip title="Post as annonymous will hide your avatar and username, other users can still see, comment, react to the post without">
+                <Tooltip title="Post as annonymous will hide your avatar and username, other users can still see, comment, react to the post">
                   <IconButton onClick={handleAnonymClick}>
                     {isAnonym ? (
                       <FontAwesomeIcon

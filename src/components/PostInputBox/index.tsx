@@ -43,7 +43,7 @@ const PostInputBox = ({handleClickPostNewComment}:any) => {
 
   return (
     <PostInputBoxWrapper>
-      <Tooltip title="Comment as annonymous will hide your avatar and username, other users can still see, comment, react to the post without">
+      <Tooltip title="Comment as annonymous will hide your avatar and username, other users can still see, comment, react to the post">
         <IconButton id="comAnonymous" onClick={handleAnonymClick}>
           {isAnonym ? (
             <FontAwesomeIcon icon={faUserSecret} color="black" />
