@@ -7,7 +7,7 @@ import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { CommentInputFields } from "./constants";
 
-const PostInputBox = () => {
+const PostInputBox = ({handleClickPostNewComment}:any) => {
   const [values, setValues] = useState({
     isAnonym: false,
     commentInput: "",
@@ -33,9 +33,6 @@ const PostInputBox = () => {
     });
   };
 
-  // handleClick
-  const handleClick = () => {};
-
   return (
     <PostInputBoxWrapper>
       <Tooltip title="Anonymous">
@@ -56,7 +53,7 @@ const PostInputBox = () => {
       />
       <ButtonCustom
         className={`btn-2 ${values.commentInput ? "active" : "inactive"}`}
-        onClick={handleClick}
+        onClick={()=>handleClickPostNewComment(values)}
       >
         {ButtonField.POST}
       </ButtonCustom>

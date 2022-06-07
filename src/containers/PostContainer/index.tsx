@@ -25,14 +25,6 @@ const postCommentState = createStructuredSelector({
 
 const PostContainer = forwardRef<any, any>(
   (
-    // avatar,
-    // title,
-    // subheader,
-    // desc,
-    // img,
-    // postReactionsDb,
-    // currentUser,
-    // currentPost,
     props,
     ref
   ) => {
@@ -55,9 +47,34 @@ const PostContainer = forwardRef<any, any>(
       );
     };
 
+    const [newComments, setNewComments] = useState([] as any[])
+
+    
+
+    const handleClickPostNewComment = (values: any)=> {
+      console.log(values)
+      if (typeof window.localStorage !== "undefined") {
+        let jwt = JSON.parse(localStorage.getItem("jwt")!);
+        let newCommentToPush = {
+                                'userId':{
+                                  '_id': jwt.user._id,
+                                  'fname': jwt.user.fname,
+                                  'lname': jwt.user.fname,
+                                  'profilePicture': jwt.user.profilePicture,
+                                },
+                                comment: values.commentInput,
+                                updatedAt: new Date()
+                              }
+        setNewComments([...newComments, newCommentToPush])
+      }else{
+        return
+      }
+    };
+
     return (
       <PostContainerWrapper ref={ref}>
         {/* JSON.stringify(postComment) */}
+        
         <Card sx={{ margin: 0 }}>
           {props.currentPost}
           {/* Post Header */}
@@ -85,6 +102,9 @@ const PostContainer = forwardRef<any, any>(
           )}
           {/* Post comment */}
           <div id="CommentsContainer">
+            {newComments.length > 0 &&
+               newComments.map((comment:any,index:number)=>
+                                  <CommentsContainer commentObj={comment} />)}
             {postComment.hasOwnProperty(props.currentPost) &&
               postComment[props.currentPost].comments.map(
                 (comment: any, index: number) => {
@@ -104,7 +124,7 @@ const PostContainer = forwardRef<any, any>(
               )}
           </div>
           {/* Post input box  */}
-          <PostInputBox />
+          <PostInputBox handleClickPostNewComment={handleClickPostNewComment}/>
         </Card>
       </PostContainerWrapper>
     );
