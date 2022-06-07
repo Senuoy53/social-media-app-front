@@ -1,7 +1,8 @@
+import { CenterFocusStrong } from "@mui/icons-material";
 import styled from "styled-components";
 import { mobile } from "../../styles/responsive";
 
-const HomeWrapper = styled.div`
+const HomeWrapper = styled.div<any>`
   min-height: 100vh;
   background-color: #f3f3f3;
 
@@ -13,8 +14,50 @@ const HomeWrapper = styled.div`
     max-width: 1400px;
 
     ${mobile({
-      // padding: "0px 1%",
+      // marginTop: "70px",
     })}
+  }
+
+  .onlineColleaguesButton {
+    /* position: sticky; */
+    position: absolute;
+    top: 70px;
+    /* left: 800px; */
+    right: 0;
+    width: 55px;
+    height: 50px;
+    background-color: ${({ theme }) => theme.colors.BlueBg};
+    z-index: 1000;
+    border-top-left-radius: 12px;
+    cursor: pointer;
+
+    :hover .blueBar {
+      background-color: ${({ theme }) => theme.colors.White};
+    }
+
+    display: none;
+    ${mobile({
+      display: "flex",
+      alignItems: "center",
+    })}
+
+    .blueBar {
+      top: 100px;
+      width: 10px;
+      height: 50px;
+      border-top-left-radius: 12px;
+      background-color: ${({ ocButton, theme }) =>
+        ocButton ? theme.colors.White : theme.colors.LightBlueBg};
+    }
+
+    .ocIcon {
+      color: ${({ theme }) => theme.colors.White};
+      margin: 0 auto;
+    }
+
+    .icon {
+      font-size: 25px;
+    }
   }
 `;
 
