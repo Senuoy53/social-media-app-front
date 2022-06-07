@@ -80,7 +80,6 @@ const PostContainer = forwardRef<any, any>(
         {/* JSON.stringify(postComment) */}
         
         <Card sx={{ margin: 0 }}>
-          {props.currentPost}
           {/* Post Header */}
           <PostHeader
             avatar={props.avatar}
