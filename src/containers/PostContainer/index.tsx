@@ -16,6 +16,7 @@ import { requestPostComment } from "../FeedContainer/actions";
 import { ReactChild, ReactFragment, useEffect, useState } from "react";
 import { forwardRef } from "react";
 import { TypeReferenceType } from "typescript";
+import { postNewComment } from "./actions";
 
 const postCommentState = createStructuredSelector({
   postComment: makeSelectPostComment(),
@@ -52,14 +53,17 @@ const PostContainer = forwardRef<any, any>(
     
 
     const handleClickPostNewComment = (values: any)=> {
-      console.log(values)
+      dispatch(postNewComment({
+        'postId': props.currentPost,
+        'comment': values.commentInput
+      }))
       if (typeof window.localStorage !== "undefined") {
         let jwt = JSON.parse(localStorage.getItem("jwt")!);
         let newCommentToPush = {
                                 'userId':{
                                   '_id': jwt.user._id,
                                   'fname': jwt.user.fname,
-                                  'lname': jwt.user.fname,
+                                  'lname': jwt.user.lname,
                                   'profilePicture': jwt.user.profilePicture,
                                 },
                                 comment: values.commentInput,
@@ -104,12 +108,12 @@ const PostContainer = forwardRef<any, any>(
           <div id="CommentsContainer">
             {newComments.length > 0 &&
                newComments.map((comment:any,index:number)=>
-                                  <CommentsContainer commentObj={comment} />)}
+                                  <CommentsContainer index={index} commentObj={comment} />)}
             {postComment.hasOwnProperty(props.currentPost) &&
               postComment[props.currentPost].comments.map(
                 (comment: any, index: number) => {
                   seenCommentIds.push(comment._id);
-                  return <CommentsContainer commentObj={comment} />;
+                  return <CommentsContainer index={index} commentObj={comment} />;
                 }
               )}
             {postComment.hasOwnProperty(props.currentPost) &&

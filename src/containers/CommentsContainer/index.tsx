@@ -24,7 +24,7 @@ const commentsState = createStructuredSelector({
   commentReactionCounter: makeSelectCommentReactionCounter(),
 });
 
-const CommentsContainer = ({commentObj}:any) => {
+const CommentsContainer = ({index,commentObj}:any) => {
   // Selectors
   const { commentReaction, commentReactionCounter } =
     useSelector(commentsState);
@@ -50,8 +50,7 @@ const CommentsContainer = ({commentObj}:any) => {
 
   return (
     <CommentsContainerWrapper>
-      
-      <div className="com-leftSide">
+      <div className="com-leftSide" key={index}>
         <Avatar
           aria-label="recipe"
           src={commentObj.userId.profilePicture}

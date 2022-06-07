@@ -17,3 +17,10 @@ interface PostCommentType{
   }
 }
 
+interface PostNewCommentState {
+};
+
+interface PostNewCommentResponse {
+  data: any;
+  status: number;
+}
