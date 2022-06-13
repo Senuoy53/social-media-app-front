@@ -49,7 +49,7 @@ const RightBarWrapper = styled.section<any>`
     list-style: none;
 
     max-height: 400px;
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   .onlineColleagues {

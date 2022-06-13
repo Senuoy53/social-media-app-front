@@ -32,8 +32,6 @@ const RightBar = ({ ocButton }: RightBarProps) => {
 
   console.log("ocButton : ", ocButton);
 
-  // const socket = io("http://localhost:8000");
-
   // console.log("onlineColleagues", onlineColleagues);
 
   return (
@@ -43,7 +41,7 @@ const RightBar = ({ ocButton }: RightBarProps) => {
         <h4 className="ocTitle">Online Colleagues</h4>
         <ul className="ocList">
           {/* onlineColleagues list */}
-          {/* {onlineColleagues &&
+          {onlineColleagues &&
             onlineColleagues?.map((item: any, index: number) => (
               <OnlineColleagues
                 key={index}
@@ -52,9 +50,9 @@ const RightBar = ({ ocButton }: RightBarProps) => {
                 lname={item.lname}
                 profilePicture={item.profilePicture}
               ></OnlineColleagues>
-            ))} */}
+            ))}
 
-          <OnlineColleagues
+          {/* <OnlineColleagues
             key={1}
             className="onlineColleagues"
             fname={user.fname}
@@ -156,7 +154,7 @@ const RightBar = ({ ocButton }: RightBarProps) => {
             fname="Ayoub"
             lname="Bouzidi"
             // profilePicture={item.profilePicture}
-          />
+          /> */}
         </ul>
       </div>
     </RightBarWrapper>
