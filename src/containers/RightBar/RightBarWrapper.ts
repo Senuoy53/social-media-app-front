@@ -14,6 +14,7 @@ const RightBarWrapper = styled.section<any>`
   max-height: 466px;
   background-color: ${({ theme }) => theme.colors.White};
   border-radius: 4px;
+  z-index: 1000;
 
   @media only screen and (max-width: 767px) {
     display: ${({ ocButton }) => (ocButton ? "block" : "none")};

@@ -59,7 +59,7 @@ const PostContainer = forwardRef<any, any>(
       <PostContainerWrapper ref={ref}>
         {/* JSON.stringify(postComment) */}
         <Card sx={{ margin: 0 }}>
-          {props.currentPost}
+          {/* {props.currentPost} */}
           {/* Post Header */}
           <PostHeader
             avatar={props.avatar}

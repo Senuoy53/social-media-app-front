@@ -75,6 +75,14 @@ const NavbarWrapper = styled.div`
         })};
       }
     }
+
+    .navEvent {
+      display: none;
+
+      ${mobile({
+        display: "flex",
+      })}
+    }
   }
 
   .logo-container {
