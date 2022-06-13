@@ -9,9 +9,15 @@ const PostHeader = ({ avatar, title, subheader }: PostHeaderProps) => {
       <CardHeader
         titleTypographyProps={{
           textTransform: "capitalize",
-          fontSize: '1em',
+          fontSize: "1em",
         }}
-        avatar={<Avatar aria-label="recipe" src={avatar}></Avatar>}
+        avatar={
+          <Avatar
+            aria-label="recipe"
+            src={avatar}
+            style={{ zIndex: 0 }}
+          ></Avatar>
+        }
         action={
           <IconButton aria-label="settings">
             <MoreVert />

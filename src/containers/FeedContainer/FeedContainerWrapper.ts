@@ -3,9 +3,10 @@ import { mobile } from "../../styles/responsive";
 
 const FeedContainerWrapper = styled.section`
   margin: 64px 20px 0;
-  flex: 60%;
+  flex: 50%;
 
   ${mobile({
+    flex: "100%",
     margin: "64px 0 0",
   })}
 

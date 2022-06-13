@@ -1,0 +1,3 @@
+interface NavBarState {
+  evBtnClicked: boolean;
+}

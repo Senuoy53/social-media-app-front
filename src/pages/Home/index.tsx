@@ -5,15 +5,37 @@ import RightBar from "../../containers/RightBar";
 import HomeWrapper from "./HomeWrapper";
 import Icon from "@mui/material/Icon";
 import { Groups } from "@mui/icons-material";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const Home = () => {
   const [ocButton, setOcButton] = useState(false);
+
+  const [y, setY] = useState<number | undefined>(
+    document?.scrollingElement?.scrollHeight
+  );
 
   // HandleClick
   const handleClick = () => {
     setOcButton(!ocButton);
   };
+
+  const handleNavigation = useCallback(
+    (e: any) => {
+      if (y && (y > window.scrollY || y < window.scrollY)) {
+        setOcButton(false);
+      }
+      setY(window.scrollY);
+    },
+    [y]
+  );
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleNavigation);
+
+    return () => {
+      window.removeEventListener("scroll", handleNavigation);
+    };
+  }, [handleNavigation]);
 
   return (
     <HomeWrapper ocButton={ocButton}>

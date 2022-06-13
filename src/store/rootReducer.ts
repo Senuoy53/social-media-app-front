@@ -6,7 +6,8 @@ import postShowInfoReducer from "../containers/PostShowInfo/reducer";
 import commentsReducer from "../containers/CommentsContainer/reducer";
 import announcementReducer from "../components/Modal/reducer";
 import postCommentReducer from "../containers/FeedContainer/reducer";
-import postContainerReducer from "../containers/PostContainer/reducer";
+import NavBarReducer from "../components/Navbar/reducer";
+
 
 const rootReducer = combineReducers({
   signInState: signInReducer,
@@ -17,6 +18,8 @@ const rootReducer = combineReducers({
   announcementState: announcementReducer,
   postCommentState: postCommentReducer,
   postContainerState: postContainerReducer,
+  navBarState: NavBarReducer,
+
 });
 
 export default rootReducer;

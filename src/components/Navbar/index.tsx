@@ -1,4 +1,11 @@
-import { Group, Logout, Home, Notifications, Chat } from "@mui/icons-material";
+import {
+  Group,
+  Logout,
+  Home,
+  Notifications,
+  Chat,
+  CalendarMonth,
+} from "@mui/icons-material";
 import {
   AppBar,
   Avatar,
@@ -29,7 +36,14 @@ import axios from "axios";
 import Icon from "@mui/material/Icon";
 
 import { emptyAnnouncementData, setSubmitPostClicked } from "../Modal/actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setEvBtnClicked } from "./actions";
+import { createStructuredSelector } from "reselect";
+import { makeSelectEvBtnClicked } from "./selectors";
+
+const navBarState = createStructuredSelector({
+  evBtnClicked: makeSelectEvBtnClicked(),
+});
 
 const Navbar = () => {
   // UseSates
@@ -39,6 +53,8 @@ const Navbar = () => {
 
   // useDispatch
   const dispatch = useDispatch();
+  // Selectors
+  const { evBtnClicked } = useSelector(navBarState);
 
   // Get user from localstorage
   let jwt = localStorage.getItem("jwt");
@@ -111,6 +127,11 @@ const Navbar = () => {
     }
   };
 
+  // clickEventBtn
+  const clickEventBtn = () => {
+    dispatch(setEvBtnClicked(!evBtnClicked));
+  };
+
   // Styles
   const StyledToolbar = styled(Toolbar)({
     // display: "flex",
@@ -181,10 +202,19 @@ const Navbar = () => {
 
                   <div className="navText">{item.label}</div>
                 </NavLink>
+              ) : item.icon === "calendar_month" ? (
+                <div
+                  key={index}
+                  className="navBox navEvent"
+                  onClick={clickEventBtn}
+                >
+                  <Icon className="navIcon">{item.icon}</Icon>
+                  <div className="navText">{item.label}</div>
+                </div>
               ) : (
+                // <></>
                 <div key={index} className="navBox">
                   <Icon className="navIcon">{item.icon}</Icon>
-
                   <div className="navText">{item.label}</div>
                 </div>
               )
