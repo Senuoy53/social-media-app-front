@@ -7,7 +7,7 @@ import { faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { CommentInputFields } from "./constants";
 
-const PostInputBox = () => {
+const PostInputBox = ({handleClickPostNewComment}:any) => {
   const [values, setValues] = useState({
     isAnonym: false,
     commentInput: "",
@@ -33,12 +33,17 @@ const PostInputBox = () => {
     });
   };
 
-  // handleClick
-  const handleClick = () => {};
+  const handleClick = () => {
+    handleClickPostNewComment(values)
+    setValues({
+      isAnonym: false,
+      commentInput: "",
+    })
+  }
 
   return (
     <PostInputBoxWrapper>
-      <Tooltip title="Anonymous">
+      <Tooltip title="Comment as annonymous will hide your avatar and username, other users can still see, comment, react to the post">
         <IconButton id="comAnonymous" onClick={handleAnonymClick}>
           {isAnonym ? (
             <FontAwesomeIcon icon={faUserSecret} color="black" />
@@ -56,7 +61,7 @@ const PostInputBox = () => {
       />
       <ButtonCustom
         className={`btn-2 ${values.commentInput ? "active" : "inactive"}`}
-        onClick={handleClick}
+        onClick={()=>handleClick()}
       >
         {ButtonField.POST}
       </ButtonCustom>
