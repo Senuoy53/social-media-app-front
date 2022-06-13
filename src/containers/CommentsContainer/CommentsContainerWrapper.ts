@@ -18,22 +18,22 @@ const CommentsContainerWrapper = styled.div`
 
     #commentBody {
       margin-top: 5px;
-      color: ${({ theme }) => theme.colors.Black}};
+      color: ${({ theme }) => theme.colors.Black};
     }
+  }
 
-    #comBottomContainer {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      margin-top: 5px;
+  #comBottomContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 5px;
 
-      .CommentButton {
-        font-weight: lighter;
-        cursor: pointer;
+    .CommentButton {
+      font-weight: lighter;
+      cursor: pointer;
 
-        &:hover {
-          text-decoration: underline;
-        }
+      &:hover {
+        text-decoration: underline;
       }
     }
   }

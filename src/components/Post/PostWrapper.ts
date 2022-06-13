@@ -17,6 +17,10 @@ const PostWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    ${mobile({
+      marginTop: "60px",
+    })}
   }
 
   .btn-2 {

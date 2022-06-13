@@ -1,0 +1,3 @@
+interface RightBarProps {
+  ocButton: boolean;
+}

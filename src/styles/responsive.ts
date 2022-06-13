@@ -8,6 +8,22 @@ export const desktop = (props: any) => {
   `;
 };
 
+export const tablette1050 = (props: any) => {
+  return css`
+    @media screen and (min-width: 860px) and (max-width: 1050px) {
+      ${props}
+    }
+  `;
+};
+
+export const tablette860 = (props: any) => {
+  return css`
+    @media screen and (min-width: 768px) and (max-width: 860px) {
+      ${props}
+    }
+  `;
+};
+
 export const tablette = (props: any) => {
   return css`
     @media screen and (min-width: 768px) {
