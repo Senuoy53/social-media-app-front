@@ -180,7 +180,7 @@ const Navbar = () => {
         position="fixed"
         sx={{
           backgroundColor: "#121A38",
-          maxWidth: "1400px",
+          maxWidth: "1440px",
           left: "50%",
           transform: "translateX(-50%)",
         }}
