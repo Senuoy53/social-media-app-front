@@ -1,27 +1,28 @@
 import { ActionsTypes } from "./constants";
 
-const requestAddReaction = (payload: {}) => {
+const requestAddAnnouncementReaction = (payload: {}) => {
   return {
-    type: ActionsTypes.REQUEST_ADD_REACTION,
+    type: ActionsTypes.REQUEST_ADD_ANNOUNCEMENT_REACTION,
     payload,
   };
 };
 
-const requestUpdateReaction = (payload: {}) => {
+const requestUpdateAnnouncementReaction = (payload: {}) => {
   return {
-    type: ActionsTypes.REQUEST_UPDATE_REACTION,
+    type: ActionsTypes.REQUEST_UPDATE_ANNOUNCEMENT_REACTION,
     payload,
   };
 };
 
-const requestRemoveReaction = (payload: {}) => {
+const requestRemoveAnnouncementReaction = (payload: {}) => {
   return {
-    type: ActionsTypes.REQUEST_REMOVE_REACTION,
+    type: ActionsTypes.REQUEST_REMOVE_ANNOUNCEMENT_REACTION,
     payload,
   };
 };
 
-
-
-export { requestAddReaction, requestUpdateReaction, requestRemoveReaction };
-
+export {
+  requestAddAnnouncementReaction,
+  requestUpdateAnnouncementReaction,
+  requestRemoveAnnouncementReaction,
+};

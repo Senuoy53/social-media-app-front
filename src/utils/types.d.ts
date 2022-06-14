@@ -30,4 +30,9 @@ interface GlobalState {
   navBarState: NavBarState;
 }
 
-export { Action, User, GlobalState };
+interface ReactionResponse {
+  data: any;
+  status: number;
+}
+
+export { Action, User, GlobalState, ReactionResponse };

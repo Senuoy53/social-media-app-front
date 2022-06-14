@@ -1,26 +1,28 @@
 import { ActionsTypes } from "./constants";
 
-const setCommentReaction = (payload: string) => {
+const requestAddCommentReaction = (payload: {}) => {
   return {
-    type: ActionsTypes.SET_COMMENT_REACTION,
+    type: ActionsTypes.REQUEST_ADD_COMMENT_REACTION,
     payload,
   };
 };
 
-const commentReactionCountPlus = () => {
+const requestUpdateCommentReaction = (payload: {}) => {
   return {
-    type: ActionsTypes.COMMENT_REACTION_COUNT_PLUS,
+    type: ActionsTypes.REQUEST_UPDATE_COMMENT_REACTION,
+    payload,
   };
 };
 
-const commentReactionCountMinus = () => {
+const requestRemoveCommentReaction = (payload: {}) => {
   return {
-    type: ActionsTypes.COMMENT_REACTION_COUNT_MINUS,
+    type: ActionsTypes.REQUEST_REMOVE_COMMENT_REACTION,
+    payload,
   };
 };
 
 export {
-  commentReactionCountPlus,
-  commentReactionCountMinus,
-  setCommentReaction,
+  requestAddCommentReaction,
+  requestUpdateCommentReaction,
+  requestRemoveCommentReaction,
 };

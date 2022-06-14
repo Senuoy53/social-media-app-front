@@ -11,11 +11,11 @@ const LeftBarWrapper = styled.section<any>`
   top: 80px;
   flex: 30%;
   max-height: 400px;
-  z-index: 1001;
 
   @media only screen and (max-width: 767px) {
     position: initial;
     flex: 0%;
+    z-index: 1000;
   }
 
   .eventsContainer {
