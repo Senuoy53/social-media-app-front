@@ -11,7 +11,7 @@ const HomeWrapper = styled.div<any>`
     display: flex;
     padding: 0px 3%;
     margin-top: 15px;
-    max-width: 1400px;
+    max-width: 1440px;
 
     ${mobile({
       // marginTop: "70px",
