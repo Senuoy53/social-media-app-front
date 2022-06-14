@@ -3,16 +3,25 @@ import { ActionsTypes } from "./constants";
 import { BACK_URL_API } from "../../variables";
 import { makeRequest } from "../../utils/request";
 //import { AnnouncementResponse } from "./types";
-import { Action } from "../../utils/types";
+import { Action, ReactionResponse } from "../../utils/types";
 
 function* postShowInfoSaga() {
-  yield takeLatest(ActionsTypes.REQUEST_ADD_REACTION, RequestAddReaction);
-  yield takeLatest(ActionsTypes.REQUEST_UPDATE_REACTION, RequestUpdateReaction);
-  yield takeLatest(ActionsTypes.REQUEST_REMOVE_REACTION, RequestRemoveReaction);
+  yield takeLatest(
+    ActionsTypes.REQUEST_ADD_ANNOUNCEMENT_REACTION,
+    RequestAddAnnouncementReaction
+  );
+  yield takeLatest(
+    ActionsTypes.REQUEST_UPDATE_ANNOUNCEMENT_REACTION,
+    RequestUpdateAnnouncementReaction
+  );
+  yield takeLatest(
+    ActionsTypes.REQUEST_REMOVE_ANNOUNCEMENT_REACTION,
+    RequestRemoveAnnouncementReaction
+  );
 }
 
 // Request to add a reaction to db
-function* RequestAddReaction(action: Action) {
+function* RequestAddAnnouncementReaction(action: Action) {
   // Check if localStorage is empty if (typeof window.localStorage !== "undefined") {
   let jwt = localStorage.getItem("jwt");
   let accessToken = JSON.parse(jwt!).accessToken;
@@ -35,7 +44,7 @@ function* RequestAddReaction(action: Action) {
 }
 
 // Request to update a reaction in db
-function* RequestUpdateReaction(action: Action) {
+function* RequestUpdateAnnouncementReaction(action: Action) {
   // Check if localStorage is empty
 
   if (typeof window.localStorage !== "undefined") {
@@ -65,7 +74,7 @@ function* RequestUpdateReaction(action: Action) {
 }
 
 // Request to update a reaction in db
-function* RequestRemoveReaction(action: Action) {
+function* RequestRemoveAnnouncementReaction(action: Action) {
   // Check if localStorage is empty
   console.log("i'm in saga remove reaction");
   if (typeof window.localStorage !== "undefined") {

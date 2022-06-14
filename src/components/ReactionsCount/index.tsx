@@ -7,7 +7,7 @@ import sad from "../../assets/img/svg-icon/facebook-reaction-sad.svg";
 import angry from "../../assets/img/svg-icon/facebook-angry.svg";
 import { useEffect, useState } from "react";
 
-const ReactionsCount = ({ reactions }: ReactionCountProps) => {
+const ReactionsCount = ({ className, reactions }: ReactionCountProps) => {
   const [filterReactions, setFilterReactions] = useState<any[]>([]);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const ReactionsCount = ({ reactions }: ReactionCountProps) => {
   }, [reactions]);
 
   return (
-    <ReactionsCountWrapper>
+    <ReactionsCountWrapper className={className}>
       <ul>
         {filterReactions &&
           filterReactions.map((reaction: string, index: number) => {

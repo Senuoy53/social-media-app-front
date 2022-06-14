@@ -37,6 +37,19 @@ const CommentsContainerWrapper = styled.div`
       }
     }
   }
+
+  .cmReactionCount {
+    ${mobile({
+      fontSize: "15px",
+    })}
+
+    ul li {
+      ${mobile({
+        width: "15px",
+        height: "15px",
+      })}
+    }
+  }
 `;
 
 export default CommentsContainerWrapper;

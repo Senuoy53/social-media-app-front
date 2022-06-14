@@ -14,7 +14,6 @@ const RightBarWrapper = styled.section<any>`
   max-height: 466px;
   background-color: ${({ theme }) => theme.colors.White};
   border-radius: 4px;
-  z-index: 1000;
 
   @media only screen and (max-width: 767px) {
     display: ${({ ocButton }) => (ocButton ? "block" : "none")};
@@ -22,6 +21,7 @@ const RightBarWrapper = styled.section<any>`
     top: 70px;
     right: 40px;
     min-width: 250px;
+    z-index: 1000;
   }
 
   .onlineColleaguesContainerBox {
