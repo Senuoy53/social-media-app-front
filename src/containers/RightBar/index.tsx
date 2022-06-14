@@ -3,6 +3,9 @@ import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import OnlineColleagues from "../../components/onlineColleagues";
 
+// Connecting to the io server
+const socket = io("http://localhost:8000");
+
 const RightBar = ({ ocButton }: RightBarProps) => {
   let jwt: string | null = "";
   let user: any = "";
@@ -15,22 +18,21 @@ const RightBar = ({ ocButton }: RightBarProps) => {
   // useState
   const [onlineColleagues, setOnlineColleagues] = useState<any[]>([]);
 
-  useEffect(() => {
-    // Connecting to the io server
-    const socket = io("http://localhost:8000");
 
-    //
+  useEffect(() => {
     console.log("user useeffect :", user);
     socket.emit("addUser", user);
-
-    // Get the onlineUsersList from the server
-    socket.on("sendOnlineUsersList", (onlineUsersList: any) => {
-      console.log("onlineUsersList", onlineUsersList);
-      setOnlineColleagues(onlineUsersList);
-    });
   }, []);
 
-  console.log("ocButton : ", ocButton);
+  useEffect(() => {
+    socket.on("sendOnlineUsersList", (onlineUsersList: any) => {
+      console.log("onlineUsersList", onlineUsersList);
+      setOnlineColleagues(onlineUsersList['array']);
+    });
+    console.log(socket)
+  }, [socket]);
+
+  //console.log("ocButton : ", ocButton);
 
   // console.log("onlineColleagues", onlineColleagues);
 
