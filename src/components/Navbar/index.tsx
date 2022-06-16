@@ -311,7 +311,7 @@ const Navbar = () => {
               />
               <Box sx={{ textTransform: "capitalize" }} className="user">
                 {user.fname + " " + user.lname}
-                <Box sx={{ color: "#7493CA" }}> See you profile</Box>
+                <Box sx={{ color: "#7493CA" }}> See your profile</Box>
               </Box>
             </MenuItem>
             <Divider />

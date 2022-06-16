@@ -24,10 +24,10 @@ const RightBar = ({ ocButton }: RightBarProps) => {
     socket.emit("addUser", user);
 
     // Get the onlineUsersList from the server
-    socket.on("sendOnlineUsersList", (onlineUsersList: any) => {
-      console.log("onlineUsersList", onlineUsersList);
-      setOnlineColleagues(onlineUsersList);
-    });
+    // socket.on("sendOnlineUsersList", (onlineUsersList: any) => {
+    //   console.log("onlineUsersList", onlineUsersList);
+    //   setOnlineColleagues(onlineUsersList);
+    // });
   }, []);
 
   console.log("ocButton : ", ocButton);

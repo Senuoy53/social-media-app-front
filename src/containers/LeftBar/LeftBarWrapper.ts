@@ -7,10 +7,11 @@ import {
 } from "../../styles/responsive";
 
 const LeftBarWrapper = styled.section<any>`
-  position: sticky;
-  top: 80px;
+  /* position: sticky;
+  top: 80px; */
+  margin-top: 65px;
   flex: 30%;
-  max-height: 400px;
+  /* max-height: 400px; */
 
   @media only screen and (max-width: 767px) {
     position: initial;
@@ -18,10 +19,70 @@ const LeftBarWrapper = styled.section<any>`
     z-index: 1000;
   }
 
+  .userProfileContainer {
+    padding: 16px;
+    background-color: ${({ theme }) => theme.colors.White};
+    border-radius: 4px;
+    margin-bottom: 20px;
+
+    ${mobile({
+      display: "none",
+    })}
+
+    .topContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 10px;
+
+      .profileImg {
+        width: 100px;
+        height: 100px;
+        border-radius: 20px;
+        margin-bottom: 10px;
+      }
+
+      .userName {
+        margin-bottom: 5px;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 16px;
+        line-height: 1.43;
+        letter-spacing: 0.01071em;
+        text-transform: capitalize;
+      }
+    }
+
+    .bottomContainer {
+      .profileTitle {
+        margin-bottom: 5px;
+      }
+      .profileInfos {
+        margin-left: 10px;
+        .profileInfosBox {
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+          line-height: 1.43;
+          letter-spacing: 0.01071em;
+
+          .profileIcon {
+            margin-right: 4px;
+            font-size: 14px;
+          }
+          .profileText {
+          }
+        }
+      }
+    }
+  }
+
   .eventsContainer {
     padding: 16px;
     background-color: ${({ theme }) => theme.colors.White};
     border-radius: 4px;
+
+    position: sticky;
+    top: 80px;
 
     @media only screen and (max-width: 767px) {
       width: 95%;
