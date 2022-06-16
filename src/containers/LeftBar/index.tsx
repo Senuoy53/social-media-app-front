@@ -5,7 +5,7 @@ import { makeSelectEvBtnClicked } from "../../components/Navbar/selectors";
 import { useDispatch, useSelector } from "react-redux";
 import { eventsData } from "./mock";
 import EventComponent from "../../components/EventComponent";
-import { EventTitle } from "./constants";
+import { ButtonField, EventTitle, userProfileTexts } from "./constants";
 import { useCallback, useEffect, useState } from "react";
 import { setEvBtnClicked } from "../../components/Navbar/actions";
 import ButtonCustom from "../../components/ButtonCustom";
@@ -24,8 +24,6 @@ const LeftBar = () => {
     jwt = localStorage.getItem("jwt");
     user = JSON.parse(jwt!).user;
   }
-
-  console.log("user.dateOfBirth", user.dateOfBirth);
 
   // Selectors
   const { evBtnClicked } = useSelector(navBarState);
@@ -71,19 +69,18 @@ const LeftBar = () => {
 
           <div className="userName">{user.fname + " " + user.lname}</div>
           <ButtonCustom className="btn-2" onClick={handleClick}>
-            {/* {ButtonField.POST} */}
-            Edit Profile
+            {ButtonField.EditProfile}
           </ButtonCustom>
         </div>
         <div className="bottomContainer">
-          <h4 className="profileTitle">About</h4>
+          <h4 className="profileTitle">{userProfileTexts.profileTitle}</h4>
           <div className="profileInfos">
             <div className="profileInfosBox">
               <Work className="profileIcon" />
               {user.jobTitle ? (
                 <div className="profileText">{user.jobTitle}</div>
               ) : (
-                <div className="profileText">Job title :</div>
+                <div className="profileText">{userProfileTexts.jobtitle}</div>
               )}
             </div>
             <div className="profileInfosBox">
@@ -92,18 +89,18 @@ const LeftBar = () => {
                 (user.gender == "Male" ? (
                   <>
                     <Male className="profileIcon" />
-                    <div className="profileText">Male</div>
+                    <div className="profileText">{user.gender}</div>
                   </>
                 ) : (
                   <>
                     <Female className="profileIcon" />
-                    <div className="profileText">Female</div>
+                    <div className="profileText">{user.gender}</div>
                   </>
                 ))
               ) : (
                 <>
                   <Male className="profileIcon" />
-                  <div className="profileText">Gender :</div>
+                  <div className="profileText">{userProfileTexts.gender}</div>
                 </>
               )}
             </div>
@@ -112,11 +109,13 @@ const LeftBar = () => {
               <Cake className="profileIcon" />
               {user.dateOfBirth ? (
                 <div className="profileText">
-                  Born on{" "}
+                  {userProfileTexts.BornOn}
                   <Moment format="MMM, DD, YYYY">{user.dateOfBirth}</Moment>
                 </div>
               ) : (
-                <div className="profileText">Date of birth : </div>
+                <div className="profileText">
+                  {userProfileTexts.DateOfBirth}
+                </div>
               )}
             </div>
           </div>

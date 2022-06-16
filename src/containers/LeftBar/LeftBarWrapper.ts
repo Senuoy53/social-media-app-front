@@ -25,10 +25,6 @@ const LeftBarWrapper = styled.section<any>`
     border-radius: 4px;
     margin-bottom: 20px;
 
-    /* position: sticky;
-    top: 80px;
-    max-height: 300px; */
-
     ${mobile({
       display: "none",
     })}
@@ -86,7 +82,6 @@ const LeftBarWrapper = styled.section<any>`
     border-radius: 4px;
 
     position: sticky;
-    /* top: 375px; */
     top: 80px;
 
     @media only screen and (max-width: 767px) {
