@@ -63,6 +63,9 @@ const Navbar = () => {
 
   const [navbarInfos, setNavbarInfos] = useState([]);
 
+  // UseNavigate
+  const history = useNavigate();
+
   // get Navbar Data from backend
   const getNavbarInfos = async () => {
     if (typeof window.localStorage !== "undefined") {
@@ -89,8 +92,6 @@ const Navbar = () => {
     setAnchorEl(null);
     setOpen(false);
   };
-
-  const history = useNavigate();
 
   // Signout
   const signout = () => {
@@ -130,6 +131,11 @@ const Navbar = () => {
   // clickEventBtn
   const clickEventBtn = () => {
     dispatch(setEvBtnClicked(!evBtnClicked));
+  };
+
+  // editProfil;
+  const editProfil = () => {
+    history("/generalaccountpage");
   };
 
   // Styles
@@ -300,7 +306,7 @@ const Navbar = () => {
             // anchorPosition={{ top: 64, left: 1220 }}
           >
             {/* {/* <MenuItem sx={{ color: "#7493CA" }}> */}
-            <MenuItem>
+            <MenuItem onClick={editProfil}>
               <Avatar
                 sx={{
                   width: { xs: "30px", sm: "40px" },

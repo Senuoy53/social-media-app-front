@@ -11,6 +11,7 @@ import { setEvBtnClicked } from "../../components/Navbar/actions";
 import ButtonCustom from "../../components/ButtonCustom";
 import Moment from "react-moment";
 import DefaultProfilePicture from "../../assets/img/profil.jpg";
+import { useNavigate } from "react-router-dom";
 
 const navBarState = createStructuredSelector({
   evBtnClicked: makeSelectEvBtnClicked(),
@@ -30,6 +31,9 @@ const LeftBar = () => {
 
   // useDispatch
   const dispatch = useDispatch();
+
+  // UseNavigate
+  const history = useNavigate();
 
   const [y, setY] = useState<number | undefined>(
     document?.scrollingElement?.scrollHeight
@@ -53,8 +57,10 @@ const LeftBar = () => {
     };
   }, [handleNavigation]);
 
-  // SubmitPost
-  const handleClick = () => {};
+  // handleClick
+  const handleClick = () => {
+    history("/generalaccountpage");
+  };
 
   return (
     <LeftBarWrapper evBtnClicked={evBtnClicked}>
