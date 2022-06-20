@@ -55,3 +55,11 @@ export const mobile400 = (props: any) => {
     }
   `;
 };
+
+export const mobile360 = (props: any) => {
+  return css`
+    @media only screen and (max-width: 360px) {
+      ${props}
+    }
+  `;
+};

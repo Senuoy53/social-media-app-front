@@ -19,6 +19,10 @@ const GeneralAccountPageWrapper = styled.div`
     padding: 0px 3%;
     margin-top: 15px;
     max-width: 1440px;
+
+    ${mobile({
+      padding: "0px 1%",
+    })}
   }
 `;
 

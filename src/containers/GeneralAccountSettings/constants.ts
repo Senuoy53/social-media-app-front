@@ -1,8 +1,10 @@
-export enum ActionsTypes {}
-// REQUEST_SIGN_UP = "REQUEST_SIGN_UP",
-// REQUEST_SIGN_UP_SUCCESS = "REQUEST_SIGN_UP_SUCCESS",
-// REQUEST_SIGN_UP_ERROR = "REQUEST_SIGN_UP_ERROR",
-// SET_SIGN_UP_SUCCESS = "SET_SIGN_UP_SUCCESS",
+export enum ActionsTypes {
+  REQUEST_UPDATE_USER = "REQUEST_UPDATE_USER",
+  REQUEST_UPDATE_USER_SUCCESS = "REQUEST_UPDATE_USER_SUCCESS",
+  REQUEST_UPDATE_USER_ERROR = "REQUEST_UPDATE_USER_ERROR",
+  SET_LOADING_USER = "SET_LOADING_USER",
+  SET_UPDATED_USER_SUCCESS = "SET_UPDATED_USER_SUCCESS",
+}
 
 export enum FnameFields {
   id = "fname",
@@ -57,6 +59,15 @@ export enum JobTitleFields {
   label = "JobTitle",
   variant = "outlined",
   className = "input",
+  size = "small",
+}
+
+export enum KeyboardDatePickerFields {
+  variant = "inline",
+  inputVariant = "outlined",
+  id = "dateofbirth",
+  label = "DateofBirth",
+  format = "MM/dd/yyyy",
   size = "small",
 }
 

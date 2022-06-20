@@ -28,6 +28,7 @@ interface GlobalState {
   announcementState: AnnouncementState;
   postCommentState: PostCommentState;
   navBarState: NavBarState;
+  generalAccountSettingsState: GeneralAccountSettingsState;
 }
 
 interface ReactionResponse {

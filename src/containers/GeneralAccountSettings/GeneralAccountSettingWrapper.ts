@@ -1,12 +1,22 @@
 import styled from "styled-components";
-import { mobile } from "../../styles/responsive";
+import {
+  mobile,
+  mobile360,
+  mobile400,
+  tablette860,
+} from "../../styles/responsive";
 import { theme } from "../../styles/global-styles";
 
 const GeneralAccountSettingWrapper = styled.section`
-  margin: 64px 20px 0;
+  margin: 64px 20px 0px 20px;
   flex: 100%;
 
+  ${mobile({
+    margin: "64px 5px",
+  })}
+
   .generalAccountContainer {
+    margin-bottom: 15px;
     background-color: ${({ theme }) => theme.colors.White};
     padding: 10px;
 
@@ -16,21 +26,30 @@ const GeneralAccountSettingWrapper = styled.section`
 
     .btn-2 {
       border-radius: 5px;
+      background-color: ${({ theme }) => theme.colors.BlueBg};
+      color: ${({ theme }) => theme.colors.White};
+      ${tablette860({
+        fontSize: "12px",
+      })}
+    }
+
+    .button-container {
+      align-self: flex-end;
+      margin-top: 10px;
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
     }
 
     .updateBtn {
-      margin-top: 10px;
-      margin-bottom: 30px;
-      width: 40%;
       align-self: flex-end;
     }
 
     .generalAccountBox {
       display: flex;
-      /* align-items: center; */
+
       margin-top: 40px;
 
-      /* background-color: red; */
       ${mobile({
         flexWrap: "wrap",
       })}
@@ -74,6 +93,10 @@ const GeneralAccountSettingWrapper = styled.section`
           margin-top: 10px;
           display: flex;
 
+          ${mobile360({
+            flexDirection: "column",
+          })}
+
           .img-upload {
             padding: 5px 15px;
             text-transform: capitalize;
@@ -95,6 +118,18 @@ const GeneralAccountSettingWrapper = styled.section`
             &:hover {
               background-color: ${({ theme }) => theme.colors.HoverBlueBg};
             }
+
+            ${tablette860({
+              fontSize: "12px",
+              padding: "5px 12px",
+              marginRight: "3px",
+            })}
+
+            ${mobile360({
+              marginBottom: "5px",
+              marginRight: "0px",
+              padding: "3px 30px",
+            })}
           }
         }
       }
@@ -151,15 +186,47 @@ const GeneralAccountSettingWrapper = styled.section`
             .labelText {
               flex: 1;
               align-self: flex-start;
+
+              ${mobile({
+                fontSize: "14px",
+              })}
+
+              ${mobile400({
+                fontSize: "12px",
+              })}
             }
 
             .textField-box {
               margin-left: 20px;
 
+              .box {
+                min-width: 275px;
+              }
+
               .box2 {
                 width: 210px;
               }
             }
+          }
+        }
+
+        .loading {
+          margin-right: 20px;
+          height: 20px;
+          width: 20px;
+          border: 3px solid ${({ theme }) => theme.colors.BlueBg};
+          border-radius: 50%;
+          border-right: 3px solid transparent;
+          animation: spin 2s linear infinite;
+          -webkit-animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
           }
         }
       }
