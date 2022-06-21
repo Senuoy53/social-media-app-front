@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import GeneralAccountPage from "../../pages/GeneralAccountPage";
 import Home from "../../pages/Home";
 import SignInPage from "../../pages/SignInPage";
 import SignUpPage from "../../pages/SignUpPage";
@@ -15,6 +16,14 @@ const Router = () => {
           element={
             <PrivateRoute>
               <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/generalaccountpage"
+          element={
+            <PrivateRoute>
+              <GeneralAccountPage />
             </PrivateRoute>
           }
         />

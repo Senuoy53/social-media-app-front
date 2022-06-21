@@ -8,6 +8,7 @@ import announcementReducer from "../components/Modal/reducer";
 import postCommentReducer from "../containers/FeedContainer/reducer";
 import NavBarReducer from "../components/Navbar/reducer";
 import postContainerReducer from "../containers/PostContainer/reducer";
+import generalAccountSettingsReducer from "../containers/GeneralAccountSettings/reducer";
 
 const rootReducer = combineReducers({
   signInState: signInReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   postCommentState: postCommentReducer,
   postContainerState: postContainerReducer,
   navBarState: NavBarReducer,
+  generalAccountSettingsState: generalAccountSettingsReducer,
 });
 
 export default rootReducer;

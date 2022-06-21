@@ -112,7 +112,7 @@ const ModalWrapper = styled.div`
     margin: 10px;
   }
 
-  #alert {
+  .alert {
     padding: 0px 16px;
     margin-top: 0;
   }

@@ -8,7 +8,6 @@ import {
   InputLabel,
   OutlinedInput,
   TextField,
-  Alert,
 } from "@mui/material";
 import SignUpWrapper from "./SignUpWrapper";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -45,6 +44,8 @@ import {
   makeSelectUser,
 } from "./selectors";
 import { createStructuredSelector } from "reselect";
+import ErrorsCustom from "../../components/ErrorsCustom";
+import AlertComponent from "../../components/AlertComponent";
 
 // SignUp selectors
 const signUpState = createStructuredSelector({
@@ -126,7 +127,9 @@ const SignUp = ({
                 ...FnameRequires,
               })}
             />
-            {errors.fname && <p className="errors">{errors.fname.message}</p>}
+            {errors.fname && (
+              <ErrorsCustom>{errors.fname.message}</ErrorsCustom>
+            )}
           </div>
           {/* Lname */}
           <div className="input-container">
@@ -137,7 +140,10 @@ const SignUp = ({
                 ...LnameRequirers,
               })}
             />
-            {errors.lname && <p className="errors">{errors.lname.message}</p>}
+
+            {errors.lname && (
+              <ErrorsCustom>{errors.lname.message}</ErrorsCustom>
+            )}
           </div>
           {/* Email */}
           <div className="input-container">
@@ -148,7 +154,7 @@ const SignUp = ({
                 value: checkedEmail,
               })}
             />
-            {errorMessage && <p className="errors">{errorMessage}</p>}
+            {errorMessage && <ErrorsCustom>{errorMessage}</ErrorsCustom>}
           </div>
           {/* Password */}
           <div className="input-container">
@@ -175,7 +181,7 @@ const SignUp = ({
             </FormControl>
 
             {errors.password && (
-              <p className="errors">{errors.password.message}</p>
+              <ErrorsCustom>{errors.password.message}</ErrorsCustom>
             )}
           </div>
           {/* Confirm Password */}
@@ -210,12 +216,12 @@ const SignUp = ({
               />
             </FormControl>
             {errors.confirmPassword && (
-              <p className="errors">{errors.confirmPassword.message}</p>
+              <ErrorsCustom>{errors.confirmPassword.message}</ErrorsCustom>
             )}
             {signUpSuccess && (
-              <Alert sx={{ mt: 2 }} severity="success">
+              <AlertComponent sx={{ mt: 2 }} severity="success">
                 {SignupSuccessMessage.Message}
-              </Alert>
+              </AlertComponent>
             )}
           </div>
         </div>

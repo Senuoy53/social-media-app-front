@@ -19,6 +19,7 @@ import {
   makeSelectErrorMessage,
 } from "./selectors";
 import SignUp from "../SignUp";
+import ErrorsCustom from "../../components/ErrorsCustom";
 
 // CheckId selectors
 const checkIdState = createStructuredSelector({
@@ -98,8 +99,8 @@ const CheckId = () => {
                   value={formValues.userID}
                   onChange={handleChange}
                 />
-                {formErrors && <p className="errors">{formErrors.userID}</p>}
-                {errorMessage && <p className="errors">{errorMessage}</p>}
+                {formErrors && <ErrorsCustom>{formErrors.userID}</ErrorsCustom>}
+                {errorMessage && <ErrorsCustom>{errorMessage}</ErrorsCustom>}
               </div>
             </div>
 
