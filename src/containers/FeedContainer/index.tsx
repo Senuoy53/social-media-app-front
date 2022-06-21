@@ -86,6 +86,8 @@ const FeedContainer = () => {
     }
   }, [pageNumber, docLimit]);
 
+  console.log(announcements)
+
   // UserRef equal to createRef in typescript
   const observer = createRef<HTMLDivElement>();
 

@@ -9,7 +9,7 @@ import {
 const LeftBarWrapper = styled.section<any>`
   position: sticky;
   top: 80px;
-  flex: 30%;
+  flex: 25%;
   max-height: 400px;
   z-index: 1001;
 
@@ -58,9 +58,9 @@ const LeftBarWrapper = styled.section<any>`
 
       border-radius: 5px;
       padding: 5px;
-      box-shadow: 12px 2px 34px -12px rgba(0, 0, 0, 0.76);
-      -webkit-box-shadow: 12px 9px 34px -12px rgba(0, 0, 0, 0.76);
-      -moz-box-shadow: 12px 9px 34px -12px rgba(0, 0, 0, 0.76);
+      box-shadow: 12px 2px 34px -12px rgba(0, 0, 0, 0.2);
+      -webkit-box-shadow: 12px 9px 34px -12px rgba(0, 0, 0, 0.2);
+      -moz-box-shadow: 12px 9px 34px -12px rgba(0, 0, 0, 0.2);
       z-index: 1001;
 
       ${tablette({
@@ -84,6 +84,7 @@ const LeftBarWrapper = styled.section<any>`
 
       .evImg {
         width: 100%;
+        height: 100%;
         border-radius: 10px;
 
         ${tablette({
@@ -131,7 +132,7 @@ const LeftBarWrapper = styled.section<any>`
       }
 
       .eventTitle {
-        font-weight: 500;
+        font-weight: 400;
       }
 
       .eventLocation {
