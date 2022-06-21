@@ -12,19 +12,16 @@ import ButtonCustom from "../../components/ButtonCustom";
 import Moment from "react-moment";
 import DefaultProfilePicture from "../../assets/img/profil.jpg";
 import { useNavigate } from "react-router-dom";
+import { getCurrentUserFromLocalStorage } from "../../utils/app-utils";
 
 const navBarState = createStructuredSelector({
   evBtnClicked: makeSelectEvBtnClicked(),
 });
 
 const LeftBar = () => {
-  let jwt: string | null = "";
   let user: any = "";
   // Get user from localstorage
-  if (typeof window.localStorage !== "undefined") {
-    jwt = localStorage.getItem("jwt");
-    user = JSON.parse(jwt!).user;
-  }
+  user = getCurrentUserFromLocalStorage();
 
   // Selectors
   const { evBtnClicked } = useSelector(navBarState);

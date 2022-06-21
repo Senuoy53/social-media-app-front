@@ -1,36 +1,10 @@
 import { useEffect, useState } from "react";
-import ButtonCustom from "../../components/ButtonCustom";
 import GeneralAccountSettingWrapper from "./GeneralAccountSettingWrapper";
 import DefaultProfilePicture from "../../assets/img/profil.jpg";
-// Password confirmation error
-import { useForm } from "react-hook-form";
-import {
-  Alert,
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from "@mui/material";
-import {
-  EmailFields,
-  FnameFields,
-  FnameRequires,
-  JobTitleFields,
-  KeyboardDatePickerFields,
-  LnameFields,
-  LnameRequirers,
-} from "./constants";
 
-import DateFnsUtils from "@date-io/date-fns";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker,
-} from "@material-ui/pickers";
+import { ButtonFields, GeneralAccountTexts } from "./constants";
 
 import { MaterialUiPickersDate } from "@material-ui/pickers/typings/date";
-import MessageInfoComp from "../../components/MessageInfoComp";
 import {
   requestUpdateUser,
   requestUpdateUserError,
@@ -39,20 +13,20 @@ import {
 } from "./actions";
 import { useDispatch, useSelector } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { makeSelectSigninResData } from "../SignIn/selectors";
 import { collections } from "../../utils/constants";
 
-import { firebaseConfig } from "../../variables";
-import { initializeApp } from "firebase/app";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import {
   makeSelectErrorMessage,
   makeSelectLoadingUser,
   makeSelectUpdatedUserSuccess,
 } from "./selectors";
+import {
+  getCurrentUserFromLocalStorage,
+  uploadImageToFirebase,
+} from "../../utils/app-utils";
 
-//firebase iniialisation
-const app = initializeApp(firebaseConfig);
+import LeftGeneralAccount from "../LeftGeneralAccount";
+import RightGeneralAccount from "../RightGeneralAccount";
 
 // CheckId selectors
 const generalAccountSettingsState = createStructuredSelector({
@@ -75,13 +49,9 @@ const GeneralAccountSetting = () => {
   // useDispatch
   const dispatch = useDispatch();
 
-  let jwt: string | null = "";
   let currentUser: any = "";
-  // Get user from localstorage
-  if (typeof window.localStorage !== "undefined") {
-    jwt = localStorage.getItem("jwt");
-    currentUser = JSON.parse(jwt!).user;
-  }
+  // getCurrentUserFromLocalStorage function
+  currentUser = getCurrentUserFromLocalStorage();
 
   // console.log("currentUser:", currentUser);
 
@@ -92,28 +62,15 @@ const GeneralAccountSetting = () => {
 
   const [gender, setGender] = useState(currentUser?.gender);
 
-  // Password confirmation error
-  // Handleform events
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({
-    mode: "onTouched",
-  });
-
   // image handler
   const imageHandler = (e: any) => {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
-        // console.log(reader.result);
         // set setPictureClicked to true
         setPictureClicked(true);
         setProfileImg(reader.result as string);
         setImageFile(e.target.files[0]);
-        // console.log(e.target.files[0]);
       }
     };
     reader.readAsDataURL(e.target.files[0]);
@@ -123,7 +80,6 @@ const GeneralAccountSetting = () => {
   const emptyImageBox = (e: any) => {
     //  to stop loading the page
     // e.preventDefault();
-    // console.log("emty the mage box");
     // set setPictureClicked to true
     setPictureClicked(true);
     setProfileImg(DefaultProfilePicture);
@@ -133,32 +89,6 @@ const GeneralAccountSetting = () => {
   // handleGenderChange
   const handleGenderChange = (e: any) => {
     setGender(e.target.value);
-  };
-
-  // uploadImageToFirebase function
-  const uploadImageToFirebase = async (image: any) => {
-    let URL;
-    try {
-      const storage = getStorage();
-      const fileName = `${collections.users}/${currentUser._id}/profilePicture`;
-      const storageRef = ref(storage, fileName);
-
-      await uploadBytes(storageRef, image).then(() => {
-        console.log("image uploaded successfully to firebase");
-      });
-      await getDownloadURL(ref(storage, fileName)).then((url) => {
-        console.log("getDownloadURL success");
-        // console.log(url);
-        URL = url;
-      });
-    } catch (error) {
-      console.error(
-        "There was an error uploading a file to Cloud Storage:",
-        error
-      );
-      URL = "";
-    }
-    return URL;
   };
 
   //   clickUpdate
@@ -197,12 +127,6 @@ const GeneralAccountSetting = () => {
           })
         );
       } else if (!imageFile && profileImg !== DefaultProfilePicture) {
-        // console.log(
-        //   "imagefile null : ",
-        //   "profile img !==profil  : ",
-        //   imageFile,
-        //   profileImg
-        // );
         // set setPictureClicked to false
         setPictureClicked(false);
 
@@ -221,8 +145,9 @@ const GeneralAccountSetting = () => {
         // set setPictureClicked to false
         setPictureClicked(false);
         // upload photo to firebase storage
-        let url = await uploadImageToFirebase(imageFile);
-        console.log(url);
+        const fileName = `${collections.users}/${currentUser._id}/profilePicture`;
+        let url = await uploadImageToFirebase(imageFile, fileName);
+        // console.log(url);
         dispatch(
           requestUpdateUser({
             userId: currentUser._id,
@@ -240,214 +165,48 @@ const GeneralAccountSetting = () => {
 
   // Get the profilePicture if exists
   useEffect(() => {
-    //
+    // Get the profilePicture if exists in database
     if (currentUser?.profilePicture) {
       setProfileImg(currentUser.profilePicture);
     }
+
+    // set updatedUserSuccess to false
+    dispatch(setUpdatedUserSuccess(false));
+    // set errorMessage to null
+    dispatch(requestUpdateUserError(""));
   }, []);
 
   return (
     <GeneralAccountSettingWrapper>
       <div className="generalAccountContainer">
-        <h3 className="containerTitle">General Account Setting</h3>
+        <h3 className="containerTitle">{GeneralAccountTexts.containerTitle}</h3>
         <div className="generalAccountBox">
           <div className="gaLeft">
-            <h4 className="gaTitle">Profile picture</h4>
-
-            <div className="img-holder">
-              <img
-                src={profileImg}
-                alt=""
-                id="img-profil"
-                className="img-profil"
-              />
-            </div>
-            <input
-              type="file"
-              name="photo"
-              id="input-upload"
-              accept="image/*"
+            <LeftGeneralAccount
+              LeftTitle={GeneralAccountTexts.LeftTitle}
+              profileImg={profileImg}
+              ButtonFields1={ButtonFields.CHOOSE_A_PICTURE}
+              ButtonFields2={ButtonFields.NO_PICTURE}
               onChange={imageHandler}
+              onClick={emptyImageBox}
             />
-            <div className="img-label">
-              <label htmlFor="input-upload" className="img-upload">
-                Choose a picture
-              </label>
-              <ButtonCustom className="btn-2" onClick={emptyImageBox}>
-                No picture
-              </ButtonCustom>
-            </div>
           </div>
           {/* MiddleLine */}
           <div className="middleLine"></div>
           <div className="gaRight">
-            <h4 className="gaTitle">Basic Info</h4>
-            <form onSubmit={handleSubmit(clickUpdate)} className="gaForm">
-              <div className="input-container">
-                {/* Fname */}
-                <div className="input-box">
-                  <label htmlFor="" className="labelText">
-                    Fname :<span className="required">*</span>
-                  </label>
-                  <div className="textField-box">
-                    <TextField
-                      {...FnameFields}
-                      {...register("fname", {
-                        value: currentUser.fname,
-                        ...FnameRequires,
-                      })}
-                      className="box"
-                    />
-                    {errors.fname && (
-                      <p className="errors">{errors.fname.message}</p>
-                    )}
-                  </div>
-                </div>
-
-                {/* Lname */}
-                <div className="input-box">
-                  <label htmlFor="" className="labelText">
-                    Lname :<span className="required">*</span>
-                  </label>
-                  <div className="textField-box">
-                    <TextField
-                      {...LnameFields}
-                      {...register("lname", {
-                        value: currentUser.lname,
-                        ...LnameRequirers,
-                      })}
-                      className="box"
-                    />
-                    {errors.lname && (
-                      <p className="errors">{errors.lname.message}</p>
-                    )}
-                  </div>
-                </div>
-
-                {/* Email */}
-                <div className="input-box">
-                  <label htmlFor="" className="labelText">
-                    Email :
-                  </label>
-                  <div className="textField-box">
-                    <TextField
-                      {...EmailFields}
-                      disabled
-                      {...register("email", {
-                        value: currentUser.email,
-                      })}
-                      className="box"
-                    />
-
-                    {/* {errorMessage && <p className="errors">{errorMessage}</p>} */}
-                  </div>
-                </div>
-
-                {/* JobTitle */}
-                <div className="input-box">
-                  <label htmlFor="" className="labelText">
-                    Job title :
-                  </label>
-                  <div className="textField-box">
-                    <TextField
-                      {...JobTitleFields}
-                      {...register("jobTitle", {
-                        value: currentUser.jobTitle,
-                      })}
-                      className="box"
-                    />
-                  </div>
-                </div>
-
-                {/* Gnder */}
-                <div className="input-box">
-                  <label htmlFor="" className="labelText">
-                    Gender :
-                  </label>
-                  <div className="textField-box">
-                    <FormControl size="small" className="box box2">
-                      <InputLabel id="demo-select-small">Gender</InputLabel>
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="gender"
-                        // value="gender"
-                        value={gender}
-                        label="gender"
-                        // value={user.gender}
-                        onChange={handleGenderChange}
-                        // {...register("gender", {
-                        //   // value: currentUser.gender,
-                        // })}
-                      >
-                        <MenuItem value="Male">Male</MenuItem>
-                        <MenuItem value="Female">Female</MenuItem>
-                      </Select>
-                    </FormControl>
-                  </div>
-                </div>
-
-                {/* Date of birth */}
-                <div className="input-box">
-                  <label htmlFor="" className="labelText">
-                    Date of birth :
-                  </label>
-                  <div className="textField-box">
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                      <KeyboardDatePicker
-                        autoOk
-                        {...KeyboardDatePickerFields}
-                        value={selectedDate}
-                        InputAdornmentProps={{ position: "start" }}
-                        onChange={(date) => handleDateChange(date)}
-                        className="box box2"
-                      />
-                    </MuiPickersUtilsProvider>
-                  </div>
-                </div>
-              </div>
-              <div className="button-container">
-                {loadingUser && <div className="loading"></div>}
-
-                <Button
-                  variant="contained"
-                  className="btn-2 updateBtn"
-                  type="submit"
-                >
-                  Update
-                </Button>
-              </div>
-              {updatedUserSuccess && (
-                <Alert
-                  sx={{
-                    padding: "2px 3px",
-                    marginTop: "-20px",
-                    marginBottom: "3px",
-                  }}
-                  severity="success"
-                >
-                  User updated
-                </Alert>
-              )}
-
-              {errorMessage && (
-                <Alert
-                  sx={{
-                    padding: "2px 3px",
-                    marginTop: "-20px",
-                    marginBottom: "3px",
-                  }}
-                  severity="warning"
-                >
-                  {errorMessage}
-                </Alert>
-              )}
-
-              <MessageInfoComp
-                part1="Want to change password ?"
-                to="/"
-                part2="Edit Password"
-              />
-            </form>
+            <RightGeneralAccount
+              RightTitle={GeneralAccountTexts.RightTitle}
+              currentUser={currentUser}
+              selectedDate={selectedDate}
+              gender={gender}
+              loadingUser={loadingUser}
+              updatedUserSuccess={updatedUserSuccess}
+              errorMessage={errorMessage}
+              ButtonField={ButtonFields.UPDATE}
+              onSubmit={clickUpdate}
+              handleGenderChange={handleGenderChange}
+              handleDateChange={handleDateChange}
+            />
           </div>
         </div>
       </div>

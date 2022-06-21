@@ -29,6 +29,7 @@ import {
 } from "./actions";
 import ButtonCustom from "../ButtonCustom";
 import { ButtonField } from "../../utils/constants";
+import AlertComponent from "../AlertComponent";
 
 //firebase iniialisation
 const app = initializeApp(firebaseConfig);
@@ -238,9 +239,13 @@ const Modal = ({ toggleModal, categories, user }: any) => {
           <div className="top-bar-buttom">&nbsp;</div>
           <div className="content">
             {error && (
-              <Alert sx={{ mt: 2 }} severity="warning" id="alert">
+              <AlertComponent
+                sx={{ mt: 2 }}
+                severity="warning"
+                className="alert"
+              >
                 Category and Description are required
-              </Alert>
+              </AlertComponent>
             )}
             <div className="custom-text-area">
               <div className="avatar">

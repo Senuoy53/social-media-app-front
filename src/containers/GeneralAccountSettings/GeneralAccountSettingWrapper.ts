@@ -41,6 +41,12 @@ const GeneralAccountSettingWrapper = styled.section`
       align-items: center;
     }
 
+    .alert {
+      padding: 2px 3px;
+      margin-top: -20px;
+      margin-bottom: 3px;
+    }
+
     .updateBtn {
       align-self: flex-end;
     }
@@ -163,11 +169,6 @@ const GeneralAccountSettingWrapper = styled.section`
         .gaForm {
           display: flex;
           flex-direction: column;
-        }
-
-        .errors {
-          font-size: 12px;
-          color: ${({ theme }) => theme.colors.ErrorColor};
         }
 
         .input-container {

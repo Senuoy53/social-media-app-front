@@ -2,15 +2,12 @@ import RightBarWrapper from "./RightBarWrapper";
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import OnlineColleagues from "../../components/onlineColleagues";
+import { getCurrentUserFromLocalStorage } from "../../utils/app-utils";
 
 const RightBar = ({ ocButton }: RightBarProps) => {
-  let jwt: string | null = "";
   let user: any = "";
   // Get user from localstorage
-  if (typeof window.localStorage !== "undefined") {
-    jwt = localStorage.getItem("jwt");
-    user = JSON.parse(jwt!).user;
-  }
+  user = getCurrentUserFromLocalStorage();
 
   // useState
   const [onlineColleagues, setOnlineColleagues] = useState<any[]>([]);
