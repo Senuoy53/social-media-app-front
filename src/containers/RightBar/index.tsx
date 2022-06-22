@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import OnlineColleagues from "../../components/onlineColleagues";
 import { getCurrentUserFromLocalStorage } from "../../utils/app-utils";
 
+// Connecting to the io server
+const socket = io("http://localhost:8000");
+
 const RightBar = ({ ocButton }: RightBarProps) => {
   let user: any = "";
   // Get user from localstorage
@@ -13,21 +16,17 @@ const RightBar = ({ ocButton }: RightBarProps) => {
   const [onlineColleagues, setOnlineColleagues] = useState<any[]>([]);
 
   useEffect(() => {
-    // Connecting to the io server
-    const socket = io("http://localhost:8000");
-
-    //
     console.log("user useeffect :", user);
     socket.emit("addUser", user);
-
-    // Get the onlineUsersList from the server
-    // socket.on("sendOnlineUsersList", (onlineUsersList: any) => {
-    //   console.log("onlineUsersList", onlineUsersList);
-    //   setOnlineColleagues(onlineUsersList);
-    // });
   }, []);
 
-  console.log("ocButton : ", ocButton);
+  useEffect(() => {
+    socket.on("sendOnlineUsersList", (onlineUsersList: any) => {
+      console.log("onlineUsersList", onlineUsersList);
+      setOnlineColleagues(onlineUsersList["array"]);
+    });
+    console.log(socket);
+  }, [socket]);
 
   // console.log("onlineColleagues", onlineColleagues);
 
