@@ -5,8 +5,9 @@ import signinSaga from "../containers/SignIn/saga";
 import signUpSaga from "../containers/SignUp/saga";
 import postCommentSaga from "../containers/FeedContainer/saga";
 import postShowInfoSaga from "../containers/PostShowInfo/saga";
-import postContainerSaga from "../containers/PostContainer/saga"
-
+import postContainerSaga from "../containers/PostContainer/saga";
+import CommentContainerSaga from "../containers/CommentsContainer/saga";
+import GeneralAccountSettingsSaga from "../containers/GeneralAccountSettings/saga";
 
 function* rootSaga() {
   yield fork(signinSaga);
@@ -16,6 +17,8 @@ function* rootSaga() {
   yield fork(postCommentSaga);
   yield fork(postShowInfoSaga);
   yield fork(postContainerSaga);
+  yield fork(CommentContainerSaga);
+  yield fork(GeneralAccountSettingsSaga);
 }
 
 export default rootSaga;

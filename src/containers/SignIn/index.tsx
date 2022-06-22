@@ -41,6 +41,8 @@ import { ButtonField } from "../../utils/constants";
 
 import { outlineType } from "../../utils/app-utils";
 import MessageInfoComp from "../../components/MessageInfoComp";
+import ErrorsCustom from "../../components/ErrorsCustom";
+import AlertComponent from "../../components/AlertComponent";
 
 const signInState = createStructuredSelector({
   errorMessage: makeSelectErrorMessage(),
@@ -146,8 +148,11 @@ const SignIn = () => {
               value={formValues.email}
               onChange={handleChange}
             />
-            {formErrors.email && <p className="errors">{formErrors.email}</p>}
-            {errorMessage && <p className="errors">{errorMessage}</p>}
+            {formErrors.email && (
+              <ErrorsCustom>{formErrors.email}</ErrorsCustom>
+            )}
+
+            {errorMessage && <ErrorsCustom>{errorMessage}</ErrorsCustom>}
           </div>
 
           <div className="input-container">
@@ -175,12 +180,13 @@ const SignIn = () => {
             </FormControl>
 
             {!verificationError && formErrors.password && (
-              <p className="errors">{formErrors.password}</p>
+              <ErrorsCustom>{formErrors.password}</ErrorsCustom>
             )}
+
             {verificationError && (
-              <Alert sx={{ mt: 2 }} severity="warning">
+              <AlertComponent sx={{ mt: 2 }} severity="warning">
                 {VerificationError.MESSAGE}
-              </Alert>
+              </AlertComponent>
             )}
           </div>
         </div>

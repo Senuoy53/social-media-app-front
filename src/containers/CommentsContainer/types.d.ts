@@ -1,4 +1,1 @@
-interface CommentsState {
-  commentReaction: string;
-  commentReactionCounter: number;
-}
+interface CommentsState {}

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { mobile } from "../../styles/responsive";
 
 const HomeWrapper = styled.div<any>`
-  min-height: 100vh;
+  min-height: 97vh;
   background-color: #f3f3f3;
 
   .main {

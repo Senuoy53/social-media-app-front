@@ -28,6 +28,12 @@ interface GlobalState {
   announcementState: AnnouncementState;
   postCommentState: PostCommentState;
   navBarState: NavBarState;
+  generalAccountSettingsState: GeneralAccountSettingsState;
 }
 
-export { Action, User, GlobalState };
+interface ReactionResponse {
+  data: any;
+  status: number;
+}
+
+export { Action, User, GlobalState, ReactionResponse };

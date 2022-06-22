@@ -1,26 +1,23 @@
-
-import {useEffect, useState} from 'react'
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import ReactionButton from "../../components/ReactionButton";
 import ReactionsCount from "../../components/ReactionsCount";
 import PostShowInfoWrapper from "./PostShowInfoWrapper";
 
-
 import ShowReactionCounter from "../../components/ShowReactionCounter";
 import CommentCounter from "../../components/CommentCounter";
 
-
 import {
-  requestAddReaction,
-  requestUpdateReaction,
-  requestRemoveReaction,
+  requestAddAnnouncementReaction,
+  requestUpdateAnnouncementReaction,
+  requestRemoveAnnouncementReaction,
 } from "./actions";
 
 const PostShowInfo = ({
   postReactionsDb,
   currentUser,
   currentPost,
-  commentCount=0,
+  commentCount = 0,
 }: PostShowInfoProps) => {
   // useDispatch
   const dispatch = useDispatch();
@@ -73,7 +70,7 @@ const PostShowInfo = ({
 
       // === disptach addReaction request ===
       dispatch(
-        requestAddReaction({
+        requestAddAnnouncementReaction({
           postId: currentPost,
           reaction: "like",
         })
@@ -102,7 +99,7 @@ const PostShowInfo = ({
 
       // === disptach addReaction request ===
       dispatch(
-        requestAddReaction({
+        requestAddAnnouncementReaction({
           postId: currentPost,
           reaction: e.target.id,
         })
@@ -129,7 +126,7 @@ const PostShowInfo = ({
 
       // === disptach removeReaction request ===
       dispatch(
-        requestRemoveReaction({
+        requestRemoveAnnouncementReaction({
           userId: currentUser._id,
           postId: currentPost,
         })
@@ -155,7 +152,7 @@ const PostShowInfo = ({
 
       // === disptach updateReaction request ===
       dispatch(
-        requestUpdateReaction({
+        requestUpdateAnnouncementReaction({
           userId: currentUser._id,
           postId: currentPost,
           reaction: e.target.id,

@@ -21,8 +21,9 @@ import {
 } from "../../components/Modal/actions";
 import LoadingComponent from "../../components/LoadingComponent";
 
-import { Alert } from "@mui/material";
 import { LaodingAnnouncementVaribales } from "../../utils/constants";
+import AlertComponent from "../../components/AlertComponent";
+import { getCurrentUserFromLocalStorage } from "../../utils/app-utils";
 
 // CheckId selectors
 const announcementState = createStructuredSelector({
@@ -56,9 +57,7 @@ const FeedContainer = () => {
   } = useSelector(announcementState);
 
   // Get user from localstorage
-  let jwt = localStorage.getItem("jwt");
-
-  let currentUser = JSON.parse(jwt!).user;
+  let currentUser = getCurrentUserFromLocalStorage();
 
   useEffect(() => {
     if (submitPostClicked) {
@@ -112,16 +111,10 @@ const FeedContainer = () => {
     <FeedContainerWrapper>
       <Post />
       <div className="postsContainer">
-        {/* {errorMessage && (
-          <Alert sx={{ mt: 2 }} severity="warning">
-            {errorMessage}
-          </Alert>
-        )} */}
-
         {errorMessage ? (
-          <Alert sx={{ mt: 2 }} severity="warning">
+          <AlertComponent sx={{ mt: 2 }} severity="warning">
             {errorMessage}
-          </Alert>
+          </AlertComponent>
         ) : loading ? (
           <LoadingComponent
             className="loadingPosts"
