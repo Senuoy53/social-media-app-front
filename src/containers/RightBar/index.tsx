@@ -16,16 +16,16 @@ const RightBar = ({ ocButton }: RightBarProps) => {
   const [onlineColleagues, setOnlineColleagues] = useState<any[]>([]);
 
   useEffect(() => {
-    console.log("user useeffect :", user);
+    // console.log("user useeffect :", user);
     socket.emit("addUser", user);
   }, []);
 
   useEffect(() => {
     socket.on("sendOnlineUsersList", (onlineUsersList: any) => {
-      console.log("onlineUsersList", onlineUsersList);
+      // console.log("onlineUsersList", onlineUsersList);
       setOnlineColleagues(onlineUsersList["array"]);
     });
-    console.log(socket);
+    // console.log(socket);
   }, [socket]);
 
   // console.log("onlineColleagues", onlineColleagues);

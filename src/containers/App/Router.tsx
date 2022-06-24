@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AccountSecurityPage from "../../pages/AccountSecurityPage";
 import GeneralAccountPage from "../../pages/GeneralAccountPage";
 import Home from "../../pages/Home";
 import SignInPage from "../../pages/SignInPage";
@@ -24,6 +25,14 @@ const Router = () => {
           element={
             <PrivateRoute>
               <GeneralAccountPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/accountsecuritypage"
+          element={
+            <PrivateRoute>
+              <AccountSecurityPage />
             </PrivateRoute>
           }
         />

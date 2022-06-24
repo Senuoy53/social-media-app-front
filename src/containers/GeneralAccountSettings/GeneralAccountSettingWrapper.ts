@@ -3,6 +3,7 @@ import {
   mobile,
   mobile360,
   mobile400,
+  tablette,
   tablette860,
 } from "../../styles/responsive";
 import { theme } from "../../styles/global-styles";
@@ -22,6 +23,16 @@ const GeneralAccountSettingWrapper = styled.section`
 
     .containerTitle {
       text-align: center;
+      font-size: 2rem;
+      font-weight: 400;
+
+      ${tablette({
+        fontSize: "1.8rem",
+      })}
+
+      ${mobile({
+        fontSize: "1.5rem",
+      })}
     }
 
     .btn-2 {
@@ -61,8 +72,9 @@ const GeneralAccountSettingWrapper = styled.section`
       })}
 
       .gaTitle {
-        margin-bottom: 10px;
-        font-weight: 400;
+        margin-bottom: 40px;
+        font-weight: 500;
+        color: ${({ theme }) => theme.colors.BlueBg};
       }
 
       .gaLeft {
