@@ -198,7 +198,7 @@ const RightGeneralAccount = ({
 
         <MessageInfoComp
           part1={MessageInfoCompTexts.PART1}
-          to="/"
+          to="/accountsecuritypage"
           part2={MessageInfoCompTexts.PART2}
         />
       </form>

@@ -27,7 +27,7 @@ function* RequestUpdateUser(action: Action) {
 
     const options = {
       method: "PUT",
-      url: `${BACK_URL_API}/users/${action.payload.userId}`,
+      url: `${BACK_URL_API}/v1/users/${action.payload.userId}`,
       headers: {
         "Content-type": "application/json",
         authorization: `Bearer ${accessToken}`,

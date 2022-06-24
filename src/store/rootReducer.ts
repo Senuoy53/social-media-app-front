@@ -9,6 +9,7 @@ import postCommentReducer from "../containers/FeedContainer/reducer";
 import NavBarReducer from "../components/Navbar/reducer";
 import postContainerReducer from "../containers/PostContainer/reducer";
 import generalAccountSettingsReducer from "../containers/GeneralAccountSettings/reducer";
+import accountSecuritySettingsReducer from "../containers/AccountSecuritySettings/reducer";
 
 const rootReducer = combineReducers({
   signInState: signInReducer,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   postContainerState: postContainerReducer,
   navBarState: NavBarReducer,
   generalAccountSettingsState: generalAccountSettingsReducer,
+  accountSecuritySettingsState: accountSecuritySettingsReducer,
 });
 
 export default rootReducer;

@@ -29,6 +29,7 @@ interface GlobalState {
   postCommentState: PostCommentState;
   navBarState: NavBarState;
   generalAccountSettingsState: GeneralAccountSettingsState;
+  accountSecuritySettingsState: AccountSecuritySettingsState;
 }
 
 interface ReactionResponse {
