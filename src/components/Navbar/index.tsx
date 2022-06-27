@@ -26,7 +26,7 @@ import Divider from "@mui/material/Divider";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { axiosAuthApi } from "../../utils/request";
-import { BACK_URL } from "../../variables";
+import { API_URL } from "../../variables";
 import NavbarWrapper from "./NavbarWrapper";
 
 import logo from "../../assets/img/logo-nttdata-white.svg";
@@ -71,7 +71,7 @@ const Navbar = () => {
     if (typeof window.localStorage !== "undefined") {
       let accessToken = JSON.parse(jwt!).accessToken;
 
-      const { data } = await axios.get(`${BACK_URL}/navbarinfos`, {
+      const { data } = await axios.get(`${API_URL}/navlinks`, {
         headers: {
           authorization: "Bearer " + accessToken,
         },

@@ -1,6 +1,6 @@
 import { takeLatest, call, put, select } from "redux-saga/effects";
 import { ActionsTypes } from "./constants";
-import { BACK_URL_API } from "../../variables";
+import { API_URL } from "../../variables";
 import {
   requestAnnouncementError,
   requestAnnouncements,
@@ -31,7 +31,7 @@ function* requestSetAnnouncementData(action: Action) {
 
     const options = {
       method: "POST",
-      url: `${BACK_URL_API}/announcements/create`,
+      url: `${API_URL}/announcements/`,
       headers: {
         "Content-type": "application/json",
         authorization: `Bearer ${accessToken}`,
@@ -67,7 +67,7 @@ function* requestAllAnnouncements(action: Action) {
 
     const options = {
       method: "GET",
-      url: `${BACK_URL_API}/announcements`,
+      url: `${API_URL}/announcements`,
       headers: {
         "Content-type": "application/json",
         authorization: `Bearer ${accessToken}`,

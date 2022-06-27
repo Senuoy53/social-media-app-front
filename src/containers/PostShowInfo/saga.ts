@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 import { ActionsTypes } from "./constants";
-import { BACK_URL_API } from "../../variables";
+import { API_URL } from "../../variables";
 import { makeRequest } from "../../utils/request";
 //import { AnnouncementResponse } from "./types";
 import { Action, ReactionResponse } from "../../utils/types";
@@ -27,7 +27,7 @@ function* RequestAddAnnouncementReaction(action: Action) {
   let accessToken = JSON.parse(jwt!).accessToken;
   const options = {
     method: "POST",
-    url: `${BACK_URL_API}/reaction/addreaction`,
+    url: `${API_URL}/reactions/`,
     headers: {
       "Content-type": "application/json",
       authorization: `Bearer ${accessToken}`,
@@ -53,7 +53,7 @@ function* RequestUpdateAnnouncementReaction(action: Action) {
 
     const options = {
       method: "PUT",
-      url: `${BACK_URL_API}/reaction/update/`,
+      url: `${API_URL}/reactions`,
       headers: {
         "Content-type": "application/json",
         authorization: `Bearer ${accessToken}`,
@@ -83,7 +83,7 @@ function* RequestRemoveAnnouncementReaction(action: Action) {
 
     const options = {
       method: "DELETE",
-      url: `${BACK_URL_API}/reaction/remove/`,
+      url: `${API_URL}/reactions`,
       headers: {
         "Content-type": "application/json",
         authorization: `Bearer ${accessToken}`,

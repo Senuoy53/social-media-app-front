@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 import { ActionsTypes } from "./constants";
-import { BACK_URL_API } from "../../variables";
+import { API_URL} from "../../variables";
 import { makeRequest } from "../../utils/request";
 import { Action } from "../../utils/types";
 
@@ -13,7 +13,7 @@ function* postNewComment(action: Action) {
   let accessToken = JSON.parse(jwt!).accessToken;
   const options = {
     method: "POST",
-    url: `${BACK_URL_API}/comment/create`,
+    url: `${API_URL}/comments/`,
     headers: {
       "Content-type": "application/json",
       authorization: `Bearer ${accessToken}`,
