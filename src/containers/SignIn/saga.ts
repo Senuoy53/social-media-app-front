@@ -1,6 +1,6 @@
 import { takeLatest, call, put, select } from "redux-saga/effects";
 import { ActionsTypes } from "./constants";
-import { BACK_URL } from "../../variables";
+import { API_URL } from "../../variables";
 import {
   requestSigninError,
   requestSigninSuccess,
@@ -19,7 +19,7 @@ function* RequestSignIn(action: Action) {
   const { email, password, history } = action.payload;
   const options = {
     method: "POST",
-    url: `${BACK_URL}/signin`,
+    url: `${API_URL}/auth/signin`,
     header: {
       "Content-type": "application/json",
     },

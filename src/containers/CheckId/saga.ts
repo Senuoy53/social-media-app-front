@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { makeRequest } from "../../utils/request";
 import { Action, User } from "../../utils/types";
-import { BACK_URL } from "../../variables";
+import {API_URL} from "../../variables";
 import {
   requestCheckIdError,
   requestCheckIdSuccess,
@@ -18,7 +18,7 @@ function* RequestCheckId(action: Action) {
   const { id } = action.payload;
   const options = {
     method: "GET",
-    url: `${BACK_URL}/checkSimUser/${id}`,
+    url: `${API_URL}/auth/checkSimUser/${id}`,
   };
 
   const response: CheckIdResponse = yield call(makeRequest, options);

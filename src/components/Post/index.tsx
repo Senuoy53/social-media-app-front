@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import PostWrapper from "./PostWrapper";
 //import './index.css'
 import Modal from "../Modal";
-import { BACK_URL_API } from "../../variables";
+import { API_URL } from "../../variables";
 import axios from "axios";
 
 import Card from "@mui/material/Card";
@@ -34,7 +34,7 @@ const Post = () => {
       let jwt = localStorage.getItem("jwt");
       let accessToken = JSON.parse(jwt!).accessToken;
 
-      const { data } = await axios.get(`${BACK_URL_API}/categories`, {
+      const { data } = await axios.get(`${API_URL}/categories`, {
         headers: {
           authorization: "Bearer " + accessToken,
         },

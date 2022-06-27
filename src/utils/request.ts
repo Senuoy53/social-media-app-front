@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BACK_URL, BACK_URL_API } from "../variables";
+import { API_URL } from "../variables";
 
 const makeRequest = async (options: any) => {
   try {
@@ -10,11 +10,11 @@ const makeRequest = async (options: any) => {
 };
 
 const axiosAuthApi = axios.create({
-  baseURL: `${BACK_URL}`,
+  baseURL: `${API_URL}/auth`,
 });
 
 const axiosApi = axios.create({
-  baseURL: `${BACK_URL_API}`,
+  baseURL: `${API_URL}`,
 });
 
 export { makeRequest, axiosAuthApi, axiosApi };

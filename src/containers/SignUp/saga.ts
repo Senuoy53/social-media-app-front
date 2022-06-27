@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { makeRequest } from "../../utils/request";
 import { Action, User } from "../../utils/types";
-import { BACK_URL } from "../../variables";
+import { API_URL } from "../../variables";
 import {
   requestSignUpError,
   requestSignUpSuccess,
@@ -17,7 +17,7 @@ function* signUpSaga() {
 function* RequestSignUp(action: Action) {
   const options = {
     method: "POST",
-    url: `${BACK_URL}/signup`,
+    url: `${API_URL}/auth/signup`,
     header: {
       "Content-type": "application/json",
     },

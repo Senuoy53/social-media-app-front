@@ -1,5 +1,4 @@
-const BACK_URL = process.env.REACT_APP_BACK_URL;
-const BACK_URL_API = process.env.REACT_APP_BACK_URL_API;
+const API_URL= process.env.REACT_APP_API_URL;
 
 
 const firebaseConfig = {
@@ -12,4 +11,4 @@ const firebaseConfig = {
     measurementId: process.env.REACT_APP_MEASUREMENT_ID
   };
 
-export { BACK_URL, BACK_URL_API, firebaseConfig };
+export { API_URL, firebaseConfig };

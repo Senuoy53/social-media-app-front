@@ -1,6 +1,6 @@
 import { takeLatest, call, put, take, takeLeading, delay, fork, actionChannel } from "redux-saga/effects";
 import { ActionsTypes } from "./constants";
-import { BACK_URL_API } from "../../variables";
+import { API_URL } from "../../variables";
 import {
   requestPostCommentSuccess,
   requestPostCommentError,
@@ -27,7 +27,7 @@ function* requestPostComment(payload:any) {
 
     const options = {
       method: "POST",
-      url: `${BACK_URL_API}/comment/getCommentByPostId/${payload.postId}`,
+      url: `${API_URL}/comments/${payload.postId}`,
       data: {
         "seenIds":payload.seenCommentIds
       },
