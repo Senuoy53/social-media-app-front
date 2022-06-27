@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { makeRequest } from "../../utils/request";
 import { Action } from "../../utils/types";
-import { BACK_URL_API } from "../../variables";
+import { API_URL} from "../../variables";
 import { requestRenewPasswordError, setRenewPasswordSuccess } from "./actions";
 import { ActionsTypes } from "./constants";
 import { RenewPasswordResponse } from "./types";
@@ -21,7 +21,7 @@ function* RequestRenewPassword(action: Action) {
 
     const options = {
       method: "PUT",
-      url: `${BACK_URL_API}/v1/users/password/${action.payload.userId}`,
+      url: `${API_URL}/v1/users/password/${action.payload.userId}`,
       headers: {
         "Content-type": "application/json",
         authorization: `Bearer ${accessToken}`,
