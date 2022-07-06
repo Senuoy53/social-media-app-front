@@ -2,7 +2,7 @@ import { call, put, takeLatest } from "redux-saga/effects";
 import { authenticate } from "../../utils/app-utils";
 import { makeRequest } from "../../utils/request";
 import { Action, User } from "../../utils/types";
-import { BACK_URL, BACK_URL_API } from "../../variables";
+import { API_URL } from "../../variables";
 import {
   requestUpdateUserError,
   setLoadingUser,
@@ -27,7 +27,7 @@ function* RequestUpdateUser(action: Action) {
 
     const options = {
       method: "PUT",
-      url: `${BACK_URL_API}/v1/users/${action.payload.userId}`,
+      url: `${API_URL}/v1/users/${action.payload.userId}`,
       headers: {
         "Content-type": "application/json",
         authorization: `Bearer ${accessToken}`,

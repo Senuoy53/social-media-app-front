@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 import { ActionsTypes } from "./constants";
-import { BACK_URL_API } from "../../variables";
+import { API_URL } from "../../variables";
 import { makeRequest } from "../../utils/request";
 import { Action, ReactionResponse } from "../../utils/types";
 
@@ -29,7 +29,7 @@ function* RequestAddCommentReaction(action: Action) {
 
     const options = {
       method: "POST",
-      url: `${BACK_URL_API}/reactionc/addreaction`,
+      url: `${API_URL}/reactionsc/`,
       headers: {
         "Content-type": "application/json",
         authorization: `Bearer ${accessToken}`,
@@ -57,7 +57,7 @@ function* RequestUpdateCommentReaction(action: Action) {
 
     const options = {
       method: "PUT",
-      url: `${BACK_URL_API}/reactionc/update/`,
+      url: `${API_URL}/reactionsc/`,
       headers: {
         "Content-type": "application/json",
         authorization: `Bearer ${accessToken}`,
@@ -87,7 +87,7 @@ function* RequestRemoveCommentReaction(action: Action) {
 
     const options = {
       method: "DELETE",
-      url: `${BACK_URL_API}/reactionc/remove/`,
+      url: `${API_URL}/reactionsc/`,
       headers: {
         "Content-type": "application/json",
         authorization: `Bearer ${accessToken}`,
